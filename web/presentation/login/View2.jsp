@@ -27,7 +27,7 @@
 						<h2>Iniciar sesión</h2>
 					</div>
 					<div class="row">
-						<form method="post" name="Inicio" action="/Cursos/presentation/login/login" class="form-group">
+						<form method="post" name="Inicio" action="/Sistema-Web-CursosLibres/presentation/Login/login" class="form-group">
 							<div class="row">
 								<input type="text" name="cedulaFld" value="<%=form.get("cedulaFld")[0]%>" title="<%=title("cedulaFld",errores)%>" class="form_input <%=erroneo("cedulaFld",errores)%>" placeholder="ID">
 							</div>
