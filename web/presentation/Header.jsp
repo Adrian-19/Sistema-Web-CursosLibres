@@ -17,16 +17,23 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-              <a class="navbar-brand" href="#">CursosLibres</a>
+                
+              <a class="navbar-brand" href="/Sistema-Web-CursosLibres/presentation/Index.jsp">CursosLibres</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    
+                    <!-- Pestaña de Login -->
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Login/show">Login</a>
                   </li>
+                  
+                  
+                  
                   <li class="nav-item">
+<<<<<<< HEAD
                     <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/login/show">Login</a>
                   </li>
                  <% if (usuario!=null){ %>                      
@@ -54,15 +61,25 @@
                 
                 
                 <% } %>
+=======
+                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Login ">Registrarse</a>
+                  </li>      
+                  
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/VerCursos/View.jsp">Cursos</a>
+                  </li>
+                  
+>>>>>>> 2427c5a1502acb2a98d3c4a75fd3d67733ce198b
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown
+                      Otras opciones
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                     <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/teacherRegistration/View.jsp">Registrar Profesor</a></li> 
+                     <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/View.jsp">Registrar Cursos</a></li>
+
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/Grupos/View.jsp">Ver Grupos</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">
