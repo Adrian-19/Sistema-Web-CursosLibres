@@ -3,5 +3,5 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="/Tanteando/css/bootstrap.min.css">
-<link rel="stylesheet" href = "/Tanteando/css/style.css">
+<link rel="stylesheet" href="/Sistema-Web-CursosLibres/css/bootstrap.min.css">
+<link rel="stylesheet" href = "/Sistema-Web-CursosLibres/css/style.css">
