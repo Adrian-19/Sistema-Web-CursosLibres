@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="cursos.logic.Usuario"%>
+<% Usuario usuario=  (Usuario) session.getAttribute("usuario");  %>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -24,8 +27,33 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" href="#">Login</a>
+                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/login/show">Login</a>
                   </li>
+                 <% if (usuario!=null){ %>                      
+                <li class="nav-item">
+                  <a class="nav-link active"  href="#">User:<%=usuario.getCedula()%></a>
+                </li> 
+                <li class="nav-item">
+                  <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/login/logout">Logout</a>
+                </li>                
+                <% if (usuario.getTipo()==0){ %>  
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Registro
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/teacherRegistration/show">Registro Profesores</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </li>
+                
+                
+                <% } %>
+                
+                
+                <% } %>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Dropdown
