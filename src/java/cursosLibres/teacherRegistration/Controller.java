@@ -57,7 +57,7 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession(true);
         session.removeAttribute("usuario");
         session.invalidate();
-        return "/presentation/index.jsp";
+        return "/presentation/Index.jsp";
     }
 
 

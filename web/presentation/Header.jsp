@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="cursos.logic.Usuario"%>
+<%@page import="cursosLibres.logic.Usuario"%>
 <% Usuario usuario=  (Usuario) session.getAttribute("usuario");  %>
 
 <!DOCTYPE html>
@@ -25,15 +25,10 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     
-                    <!-- Pestaña de Login -->
-                  <li class="nav-item">
-                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Login/show">Login</a>
-                  </li>
-                  
-                  
+
                   
                   <li class="nav-item">
-<<<<<<< HEAD
+
                     <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/login/show">Login</a>
                   </li>
                  <% if (usuario!=null){ %>                      
@@ -50,6 +45,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/teacherRegistration/show">Registro Profesores</a></li>
+                      <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/View.jsp">Registrar Cursos</a></li>
                       <li><a class="dropdown-item" href="#">Another action</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -61,15 +57,14 @@
                 
                 
                 <% } %>
-=======
-                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Login ">Registrarse</a>
+
+                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/login/showRegister">Registrarse</a>
                   </li>      
                   
                   <li class="nav-item">
                     <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/VerCursos/View.jsp">Cursos</a>
                   </li>
                   
->>>>>>> 2427c5a1502acb2a98d3c4a75fd3d67733ce198b
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Otras opciones

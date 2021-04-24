@@ -7,10 +7,7 @@ package cursosLibres.login;
 
 import cursosLibres.logic.Usuario;
 
-/**
- *
- * @author emanuelle
- */
+
 public class Model {
     Usuario current;
 

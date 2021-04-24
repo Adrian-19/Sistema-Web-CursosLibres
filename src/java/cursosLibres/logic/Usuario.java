@@ -5,10 +5,7 @@
  */
 package cursosLibres.logic;
 
-/**
- *
- * @author emanuelle
- */
+
 import java.util.Objects;
 
 public class Usuario  implements java.io.Serializable {
@@ -95,6 +92,7 @@ public class Usuario  implements java.io.Serializable {
         }
         return true;
     }
-
+    
+    
 
 }

@@ -5,6 +5,7 @@
  */
 package cursosLibres.login;
 
+import cursosLibres.logic.Usuario;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,10 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author jsanchez
- */
+
+
 @WebServlet(name = "LoginController", urlPatterns = {"/presentation/login/show", "/presentation/login/login", "/presentation/login/logout", "/presentation/login/register","/presentation/login/showRegister"})
 public class Controller extends HttpServlet {
 
@@ -95,13 +94,13 @@ public class Controller extends HttpServlet {
             String viewUrl = "";
             switch (real.getTipo()) {
                 case 2:
-                    viewUrl = "/presentation/index.jsp";
+                    viewUrl = "/presentation/Index.jsp";
                     break;
                 case 1:
-                    viewUrl = "/presentation/index.jsp";
+                    viewUrl = "/presentation/Index.jsp";
                     break;
                 case 0:
-                    viewUrl = "/presentation/index.jsp";
+                    viewUrl = "/presentation/Index.jsp";
                 break;
             }
             return viewUrl;
@@ -123,7 +122,7 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession(true);
         session.removeAttribute("usuario");
         session.invalidate();
-        return "/presentation/index.jsp";
+        return "/presentation/Index.jsp";
     }
 
     public String show(HttpServletRequest request) {
@@ -223,7 +222,7 @@ public class Controller extends HttpServlet {
     private String registerAction(HttpServletRequest request) {
    
         Model model = (Model) request.getAttribute("model");
-        cursos.logic.Model domainModel = cursos.logic.Model.instance();
+        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
         HttpSession session = request.getSession(true);
         try {
             if(!domainModel.existeUsuario(model.getCurrent().getCedula())){
@@ -234,7 +233,7 @@ public class Controller extends HttpServlet {
             Usuario nuevo = new Usuario(cedula,clave,2,correo,telefono);
             domainModel.agregarUsuario(nuevo);
             session.setAttribute("usuario", domainModel.usuarioFind(cedula,clave));
-            return "/presentation/index.jsp";
+            return "/presentation/Index.jsp";
             }else{
             Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
