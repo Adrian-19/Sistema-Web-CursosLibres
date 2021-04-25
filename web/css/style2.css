@@ -31,9 +31,6 @@ and open the template in the editor.
 	justify-content: center;
 	color: #fff;
 }
-.fa-android{
-	font-size:3em;
-}
 
 .row > h2{
 	color:#0066ff;
@@ -65,7 +62,7 @@ form{
 	box-shadow: 0 0 5px rgba(0,80,80,.4); 
 	border-radius: 4px;
 }
-.btn{
+.btnRL{
 	transition: all .5s ease;
 	width: 70%;
 	border-radius: 30px;
@@ -76,7 +73,7 @@ form{
 	margin-top: 1.5em;
 	margin-bottom: 1em;
 }
-.btn:hover, .btn:focus{
+.btnRL:hover, .btnRL:focus{
 	background-color: #0066ff;
 	color:#fff;
 }

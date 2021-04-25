@@ -1,18 +1,18 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
-<%@page import="cursos.presentation.teacherRegistration.Model"%>
+<%@page import="cursosLibres.teacherRegistration.Model"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <%@ include file="/presentation/head.jsp" %>
+    <%@ include file="/presentation/Head.jsp" %>
 
     <title>Login Page</title>
 </head>
 <body>
-    <%@ include file="/presentation/header.jsp" %>
+    <%@ include file="/presentation/Header.jsp" %>
     <% Model model = (Model) request.getAttribute("model"); %>
     <%List<Usuario> usuarios = model.getUsuarios();%>
     <% Map<String, String> errores = (Map<String, String>) request.getAttribute("errores"); %>
@@ -29,7 +29,7 @@
                         <h2>Registrar Profesor</h2>
                     </div>
                     <div class="row">
-                        <form method="post" name="RegistroPro" action="/Cursos/presentation/teacherRegistration/register" class="form-group">
+                        <form method="post" name="RegistroPro" action="/Sistema-Web-CursosLibres/presentation/teacherRegistration/register" class="form-group">
                             <div class="row">
                                 <input type="text" name="cedulaProFld" value="<%=form.get("cedulaProFld")[0]%>" title="<%=title("cedulaProFld", errores)%>" class="form_input <%=erroneo("cedulaProFld", errores)%>" placeholder="ID">
                             </div>
@@ -48,7 +48,7 @@
 
 
                             <div class="row">
-                                <input type="submit" value="Registrar" class="btn">
+                                <input type="submit" value="Registrar" class="btn btnRL">
                             </div>
                         </form>
                     </div>

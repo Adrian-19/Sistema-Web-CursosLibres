@@ -5,30 +5,37 @@
  */
 package cursosLibres.logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author adria
  */
-public class Profesor {
+public class Estudiante {
+    
     String id;
     String nombre;
     int telefono;
-    String especialidad;
+    String correo;
+    List<Matricula> historial;
 
-    public Profesor(String id, String nombre, int telefono, String especialidad) {
+    public Estudiante(String id, String nombre, int telefono, String correo, List<Matricula> historial) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.especialidad = especialidad;
+        this.correo = correo;
+        this.historial = historial;
     }
-    
-    public Profesor() {
+
+    public Estudiante() {
         this.id = "";
         this.nombre = "";
         this.telefono = 0;
-        this.especialidad = "";
+        this.correo = "";
+        this.historial = new ArrayList<>();
     }
-
+    
     public String getId() {
         return id;
     }
@@ -53,13 +60,23 @@ public class Profesor {
         this.telefono = telefono;
     }
 
-    public String getEspecialidad() {
-        return especialidad;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
+
+    public List<Matricula> getHistorial() {
+        return historial;
+    }
+
+    public void setHistorial(List<Matricula> historial) {
+        this.historial = historial;
+    }
+
+    
     
     
 }

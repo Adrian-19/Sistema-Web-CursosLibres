@@ -1,17 +1,17 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
-<%@page import="cursos.presentation.login.Model"%>
+<%@page import="cursosLibres.login.Model"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <head>
        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%@ include file="/presentation/head.jsp" %>
+        <%@ include file="/presentation/Head.jsp" %>
       
 	<title>Login Page</title>
 </head>
 <body>
-      <%@ include file="/presentation/header.jsp" %>
+      <%@ include file="/presentation/Header.jsp" %>
         <% Model model= (Model) request.getAttribute("model"); %>
         <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
         <% Map<String,String[]> form = (errores==null)?this.getForm(model):request.getParameterMap();%>
@@ -27,7 +27,7 @@
 						<h2>Iniciar sesión</h2>
 					</div>
 					<div class="row">
-						<form method="post" name="Inicio" action="/Sistema-Web-CursosLibres/presentation/Login/login" class="form-group">
+						<form method="post" name="Inicio" action="/Sistema-Web-CursosLibres/presentation/login/login" class="form-group">
 							<div class="row">
 								<input type="text" name="cedulaFld" value="<%=form.get("cedulaFld")[0]%>" title="<%=title("cedulaFld",errores)%>" class="form_input <%=erroneo("cedulaFld",errores)%>" placeholder="ID">
 							</div>
@@ -35,12 +35,12 @@
 								<input type="password" name="claveFld" value="<%=form.get("claveFld")[0]%>"  title="<%=title("claveFld",errores)%>" class="form_input <%=erroneo("claveFld",errores)%>" placeholder="Contraseña">
 							</div>
 							<div class="row">
-								<input type="submit" value="INICIO" class="btn">
+								<input type="submit" value="INICIO" class="btn btnRL">
 							</div>
 						</form>
 					</div>
 					<div class="row">
-						<p>¿No tienes cuenta? <a href="/Cursos/presentation/login/showRegister">Registrate aqui</a></p>
+						<p>¿No tienes cuenta? <a href="/Sistema-Web-CursosLibres/presentation/login/showRegister">Registrate aqui</a></p>
 					</div>
 				</div>
 			</div>

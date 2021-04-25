@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="cursosLibres.logic.Usuario"%>
+<% Usuario usuario=  (Usuario) session.getAttribute("usuario");  %>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -22,21 +25,63 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     
-                    <!-- Pestaña de Login -->
+
+                  <%if(usuario == null){%> <!-- Si no hay un usuario logeado, puede hacer login -->
                   <li class="nav-item">
-                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Login/show">Login</a>
+                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/login/show">Login</a>
                   </li>
-                  
-                  
-                  
-                  <li class="nav-item">
-                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Login ">Registrarse</a>
-                  </li>      
-                  
-                  <li class="nav-item">
-                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/VerCursos/View.jsp">Cursos</a>
+                  <%}%>
+                 <% if (usuario!=null){ %>  <!-- Si hay un usuario logeado, puede hacer logout -->                 
+                <li class="nav-item">
+                  <a class="nav-link active"  href="#">User:<%=usuario.getCedula()%></a>
+                </li>
+                
+                <li class="nav-item">
+                  <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/login/logout">Logout</a>
+                </li>
+                <!-- Despliegue de funcionalidades del administrador -->                
+                <% if (usuario.getTipo()==0){ %>  <!-- Administrador es un usuario de tipo 0? -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Registro
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/teacherRegistration/show">Registro Profesores</a></li>
+                      <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/View.jsp">Registrar Cursos</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
                   </li>
-                  
+                <% } %>
+                
+                <!-- Despliegue de funcionalidades del profesor -->
+                <% if (usuario.getTipo()==1) {%> <!-- Profesor es un usuario de tipo 1? -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Gestión
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <!-- Por separado o en una sola pagina? -->
+                      <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/GruposDeProfesor/View.jsp">Ver mis grupos</a></li>
+                      <li><a class="dropdown-item" href="#">Ver mis cursos</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </li>
+                <%}%>
+                
+                <% } %>
+                
+
+                  <%if (usuario == null){%> <!-- Si no hay un usuario logeado, puede registrarse -->
+                  <li>
+                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/login/showRegister">Registrarse</a>
+                  </li>  
+                  <%}%>
+
+                  <!-- Dropdown adicional... Se utilizara para algo en especifico? -->
+                  <!--
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Otras opciones
@@ -49,8 +94,9 @@
                       <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/Grupos/View.jsp">Ver Grupos</a></li>
                     </ul>
                   </li>
+                -->
                   <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Grupos/View.jsp" tabindex="-1">Grupos</a>
                   </li>
                 </ul>
               </div>
