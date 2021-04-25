@@ -87,12 +87,14 @@ public class Controller extends HttpServlet {
 
         Model model = (Model) request.getAttribute("model");
         cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        //cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
         HttpSession session = request.getSession(true);
         try {
             Usuario real = domainModel.usuarioFind(model.getCurrent().getCedula(), model.getCurrent().getClave());
+            //service.add(real);
             session.setAttribute("usuario", real);
             String viewUrl = "";
-            switch (real.getTipo()) {
+            switch (real.getTipo()) { // Para que es esto?
                 case 2:
                     viewUrl = "/presentation/Index.jsp";
                     break;
@@ -133,8 +135,6 @@ public class Controller extends HttpServlet {
         Model model = (Model) request.getAttribute("model");
         model.getCurrent().setCedula("");
         model.getCurrent().setClave("");
-        model.getCurrent().setCorreo("");
-        model.getCurrent().setTelefono("");
         return "/presentation/login/View2.jsp";
     }
 
@@ -215,8 +215,6 @@ public class Controller extends HttpServlet {
 
         model.getCurrent().setCedula(request.getParameter("cedulaFld"));
         model.getCurrent().setClave(request.getParameter("claveFld"));
-        model.getCurrent().setTelefono(request.getParameter("telefonoFld"));
-        model.getCurrent().setCorreo(request.getParameter("correoFld"));
     }
 
     private String registerAction(HttpServletRequest request) {
@@ -227,10 +225,8 @@ public class Controller extends HttpServlet {
         try {
             if(!domainModel.existeUsuario(model.getCurrent().getCedula())){
             String cedula =   model.getCurrent().getCedula();
-            String telefono = model.getCurrent().getTelefono();
-            String correo = model.getCurrent().getCorreo();
             String clave = model.getCurrent().getClave(); 
-            Usuario nuevo = new Usuario(cedula,clave,2,correo,telefono);
+            Usuario nuevo = new Usuario(cedula,clave,2);
             domainModel.agregarUsuario(nuevo);
             session.setAttribute("usuario", domainModel.usuarioFind(cedula,clave));
             return "/presentation/Index.jsp";
@@ -257,8 +253,6 @@ public class Controller extends HttpServlet {
         Model model = (Model) request.getAttribute("model");
         model.getCurrent().setCedula("");
         model.getCurrent().setClave("");
-        model.getCurrent().setCorreo("");
-        model.getCurrent().setTelefono("");
         return "/presentation/login/viewRegister.jsp";
     }
 

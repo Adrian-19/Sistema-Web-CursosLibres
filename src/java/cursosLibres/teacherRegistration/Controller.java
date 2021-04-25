@@ -141,8 +141,6 @@ public class Controller extends HttpServlet {
 
         model.getProfesor().setCedula(request.getParameter("cedulaProFld"));
         model.getProfesor().setClave(request.getParameter("claveProFld"));
-        model.getProfesor().setTelefono(request.getParameter("telefonoProFld"));
-        model.getProfesor().setCorreo(request.getParameter("correoProFld"));
     }
 
     private String registerAction(HttpServletRequest request) {
@@ -154,10 +152,8 @@ public class Controller extends HttpServlet {
 
             if(!domainModel.existeUsuario(model.getProfesor().getCedula())){
             String cedula =   model.getProfesor().getCedula();
-            String telefono = model.getProfesor().getTelefono();
-            String correo = model.getProfesor().getCorreo();
             String clave = model.getProfesor().getClave(); 
-            Usuario nuevo = new Usuario(cedula,clave,1,correo,telefono);
+            Usuario nuevo = new Usuario(cedula,clave,1);
             domainModel.agregarUsuario(nuevo);
             List<Usuario> list = domainModel.teachersFind();
             model.setUsuarios(list);
@@ -193,8 +189,6 @@ public class Controller extends HttpServlet {
             model.setUsuarios(list);
             model.getProfesor().setCedula("");
             model.getProfesor().setClave("");
-            model.getProfesor().setCorreo("");
-            model.getProfesor().setTelefono("");
         
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);

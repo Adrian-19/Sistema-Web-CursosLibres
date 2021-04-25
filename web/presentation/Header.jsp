@@ -26,19 +26,21 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     
 
-                  
+                  <%if(usuario == null){%> <!-- Si no hay un usuario logeado, puede hacer login -->
                   <li class="nav-item">
-
                     <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/login/show">Login</a>
                   </li>
-                 <% if (usuario!=null){ %>                      
+                  <%}%>
+                 <% if (usuario!=null){ %>  <!-- Si hay un usuario logeado, puede hacer logout -->                 
                 <li class="nav-item">
                   <a class="nav-link active"  href="#">User:<%=usuario.getCedula()%></a>
-                </li> 
+                </li>
+                
                 <li class="nav-item">
                   <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/login/logout">Logout</a>
-                </li>                
-                <% if (usuario.getTipo()==0){ %>  
+                </li>
+                <!-- Despliegue de funcionalidades del administrador -->                
+                <% if (usuario.getTipo()==0){ %>  <!-- Administrador es un usuario de tipo 0? -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Registro
@@ -51,20 +53,35 @@
                       <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                   </li>
-                
-                
                 <% } %>
                 
-                
-                <% } %>
-
-                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/login/showRegister">Registrarse</a>
-                  </li>      
-                  
-                  <li class="nav-item">
-                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/VerCursos/View.jsp">Cursos</a>
+                <!-- Despliegue de funcionalidades del profesor -->
+                <% if (usuario.getTipo()==1) {%> <!-- Profesor es un usuario de tipo 1? -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Gestión
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <!-- Por separado o en una sola pagina? -->
+                      <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/GruposDeProfesor/View.jsp">Ver mis grupos</a></li>
+                      <li><a class="dropdown-item" href="#">Ver mis cursos</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
                   </li>
-                  
+                <%}%>
+                
+                <% } %>
+                
+
+                  <%if (usuario == null){%> <!-- Si no hay un usuario logeado, puede registrarse -->
+                  <li>
+                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/login/showRegister">Registrarse</a>
+                  </li>  
+                  <%}%>
+
+                  <!-- Dropdown adicional... Se utilizara para algo en especifico? -->
+                  <!--
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Otras opciones
@@ -77,8 +94,9 @@
                       <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/Grupos/View.jsp">Ver Grupos</a></li>
                     </ul>
                   </li>
+                -->
                   <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Grupos/View.jsp" tabindex="-1">Grupos</a>
                   </li>
                 </ul>
               </div>

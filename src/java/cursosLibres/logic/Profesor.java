@@ -13,14 +13,12 @@ public class Profesor {
     String id;
     String nombre;
     int telefono;
-    String correo;
     String especialidad;
 
-    public Profesor(String id, String nombre, int telefono, String correo, String especialidad) {
+    public Profesor(String id, String nombre, int telefono, String especialidad) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.correo = correo;
         this.especialidad = especialidad;
     }
     
@@ -28,7 +26,6 @@ public class Profesor {
         this.id = "";
         this.nombre = "";
         this.telefono = 0;
-        this.correo = "";
         this.especialidad = "";
     }
 
@@ -54,14 +51,6 @@ public class Profesor {
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
     }
 
     public String getEspecialidad() {

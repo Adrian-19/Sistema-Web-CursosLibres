@@ -10,14 +10,9 @@ import java.util.Objects;
 
 public class Usuario  implements java.io.Serializable {
 
-
      private String cedula;
      private String clave;
      private Integer tipo;
-     private String correo;
-     private String telefono;
-     
-
 
     public Usuario() {
     }
@@ -27,12 +22,10 @@ public class Usuario  implements java.io.Serializable {
         this.cedula = cedula;
     }
 
-    public Usuario(String cedula, String clave, Integer tipo, String correo, String telefono) {
+    public Usuario(String cedula, String clave, Integer tipo) {
         this.cedula = cedula;
         this.clave = clave;
         this.tipo = tipo;
-        this.correo = correo;
-        this.telefono = telefono;
     }
 
    
@@ -58,21 +51,6 @@ public class Usuario  implements java.io.Serializable {
         this.tipo = tipo;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
 
 
     @Override

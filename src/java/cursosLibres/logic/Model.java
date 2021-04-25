@@ -31,9 +31,9 @@ public class Model {
 
     private Model() {
         usuarios = new HashMap();
-        usuarios.put("111", new Usuario("111", "111", 0, "juan.@gmail.com", "123-123"));
-        usuarios.put("222", new Usuario("222", "222", 1, "maria.@gmail.com", "123-321"));
-        usuarios.put("333", new Usuario("333", "333", 2, "luis.@gmail.com", "123-444"));
+        usuarios.put("111", new Usuario("111", "111", 0));
+        usuarios.put("222", new Usuario("222", "222", 1));
+        usuarios.put("333", new Usuario("333", "333", 2));
 
         //HashMap<String,List<String>> favoritas;
         favoritas = new HashMap();
