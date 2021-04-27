@@ -24,6 +24,14 @@ public class Model {
     public void reset(){
         setCurrent(new Grupo()); 
     }
+    
+    public Grupo getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Grupo current) {
+        this.current = current;
+    }
 
    
 }

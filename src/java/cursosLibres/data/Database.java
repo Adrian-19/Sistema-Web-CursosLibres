@@ -58,12 +58,11 @@ public class Database {
             String database = prop.getProperty("database_name");
             System.out.println("11");
             String URL_conexion="jdbc:mysql://"+ server+":"+port+"/"+
-<<<<<<< HEAD
-                    database+"?user="+user+"&password="+password+"&serverTimezone=UTC&useSSL=False ";            
-=======
-                    database+"?user="+user+"&password="+password+"&serverTimezone=UTC&useSSL=false";  
+
+            database+"?user="+user+"&password="+password+"&serverTimezone=UTC&useSSL=False ";            
+
             System.out.println("12");
->>>>>>> a187b2ba38cc2c0b8795a7a8772a367b7f5e4a72
+
             Class.forName(driver).newInstance();
             return DriverManager.getConnection(URL_conexion);
         } catch (Exception e) {

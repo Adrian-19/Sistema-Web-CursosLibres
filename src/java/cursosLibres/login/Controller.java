@@ -89,15 +89,13 @@ public class Controller extends HttpServlet {
 
         Model model = (Model) request.getAttribute("model");
         cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
-        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+        //cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
         HttpSession session = request.getSession(true);
         try {
             Usuario real = domainModel.usuarioFind(model.getCurrent().getCedula(), model.getCurrent().getClave());
-<<<<<<< HEAD
-            service.add(real);
-=======
+
            // service.add(real);
->>>>>>> a187b2ba38cc2c0b8795a7a8772a367b7f5e4a72
+
             session.setAttribute("usuario", real);
 //            String viewUrl = "";
 //            switch (real.getTipo()) { // Para que es esto?
