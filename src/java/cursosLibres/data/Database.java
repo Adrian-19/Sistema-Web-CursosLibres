@@ -48,7 +48,7 @@ public class Database {
             String database = prop.getProperty("database_name");
             
             String URL_conexion="jdbc:mysql://"+ server+":"+port+"/"+
-                    database+"?user="+user+"&password="+password+"&serverTimezone=UTC";            
+                    database+"?user="+user+"&password="+password+"&serverTimezone=UTC&useSSL=False ";            
             Class.forName(driver).newInstance();
             return DriverManager.getConnection(URL_conexion);
         } catch (Exception e) {
