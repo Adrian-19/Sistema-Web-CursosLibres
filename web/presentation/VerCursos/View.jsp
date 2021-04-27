@@ -22,6 +22,7 @@
             <div class="text-center" class = "container" >
                 <h1>Descubra nuestros cursos</h1>
                 <h2>Encuentre lo que busca...</h2>
+                <h6>*pendiente barra de busqueda*</h6>
             </div>
         </div>
         
