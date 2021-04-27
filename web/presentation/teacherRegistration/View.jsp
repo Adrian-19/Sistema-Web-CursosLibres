@@ -43,11 +43,11 @@
                             <div class="row">
                                 <input type="text" name="telefonoProFld" value="<%=form.get("telefonoProFld")[0]%>"  title="<%=title("telefonoProFld", errores)%>" class="form_input <%=erroneo("telefonoProFld", errores)%>" placeholder="Telefono">
                             </div>
-                           <%--
+                           
                                <div class="row">
                                 <input type="text" name="correoProFld" value="<%=form.get("correoProFld")[0]%>"  title="<%=title("correoProFld", errores)%>" class="form_input <%=erroneo("correoProFld", errores)%>" placeholder="Correo">
                                </div>
-                            --%>
+                            
                             <div class="row">
                                 <input type="text" name="especProFld" value="<%=form.get("especProFld")[0]%>"  title="<%=title("especProFld", errores)%>" class="form_input <%=erroneo("especProFld", errores)%>" placeholder="Especialidades">
                             </div>
@@ -73,6 +73,7 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Especialidad</th>
+                     <th scope="col">Correo</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,6 +83,7 @@
                     <td><%=p.getNombre()%></td>
                     <td><%=p.getTelefono()%></td>
                     <td><%=p.getEspecialidad() %></td>
+                    <td><%=p.getCorreo() %></td>
                 </tr>            
                 <%}%>
                 
@@ -111,6 +113,7 @@
 
     private Map<String, String[]> getForm(Model model) {
         Map<String, String[]> values = new HashMap<String, String[]>();
+        values.put("correoProFld", new String[]{model.getProfesor().getCorreo()});
         values.put("cedulaProFld", new String[]{model.getUprofesor().getCedula()});
         values.put("claveProFld", new String[]{model.getUprofesor().getClave()});
         values.put("nombreProFld", new String[]{model.getProfesor().getNombre()});

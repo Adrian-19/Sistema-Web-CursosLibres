@@ -40,18 +40,15 @@ public class Model {
     private Model() {
         usuarios = new HashMap();
         usuarios.put("111", new Usuario("111", "111", 0));
-<<<<<<< HEAD
-        usuarios.put("222", new Usuario("222", "222", 2));
-        usuarios.put("333", new Usuario("333", "333", 3));
-=======
+
         usuarios.put("222", new Usuario("222", "222", 1));
         usuarios.put("333", new Usuario("333", "333", 1));
         usuarios.put("444", new Usuario("444", "444", 2));
-        usuarios.put("555", new Usuario("555", "555", 2));
->>>>>>> eb8f909a82caa9d45d0d68c37f3ae612d8752e9c
+        usuarios.put("555", new Usuario("555", "555", 3));
+
 
         profesores = new HashMap();
-        profesores.put("222", new Profesor("222", "Javier Antonio", "8876-7645", "Ingles"));
+        profesores.put("222", new Profesor("222", "Javier Antonio", "8876-7645", "Ingles","javier@gmail.com"));
  
         Matricula m1 = new Matricula("Mat01","Calculo",90.00);
         Matricula m2 = new Matricula("Mat02","Calculo I",90.00);
@@ -67,19 +64,19 @@ public class Model {
         
         
         estudiantes = new HashMap();
-        estudiantes.put("333", new Estudiante("333","Melany","8989-8989","melany@gmail.com",historial));
+        estudiantes.put("555", new Estudiante("555","Melany","8989-8989","melany@gmail.com",historial));
         //HashMap<String,List<String>> favoritas;
         favoritas = new HashMap();
         favoritas.put("111", Arrays.asList(new String[]{"2-111-11"}));
         favoritas.put("222", Arrays.asList(new String[]{"1-111-11", "1-222-22"}));
         
         profesorList = new ArrayList<>();
-        profesorList.add(new Profesor("222", "Mario", 1111111, "Artes", "mario@gmail.com"));
-        profesorList.add(new Profesor("333", "Pedro", 2222222, "Mate", "pedro@gmail.com"));
+        profesorList.add(new Profesor("222", "Mario", "1111111", "Artes", "mario@gmail.com"));
+        profesorList.add(new Profesor("333", "Pedro", "2222222", "Mate", "pedro@gmail.com"));
         
         estudianteList = new ArrayList<>();
-        estudianteList.add(new Estudiante("444", "Roberto", 3333333,"roberto@gmail.com",new ArrayList<>()));
-        estudianteList.add(new Estudiante("555", "Ashley", 4444444,"ashley@gmail.com",new ArrayList<>()));
+        estudianteList.add(new Estudiante("444", "Roberto", "3333333","roberto@gmail.com",new ArrayList<>()));
+        estudianteList.add(new Estudiante("555", "Ashley", "4444444","ashley@gmail.com",new ArrayList<>()));
         
         grupoListA = new ArrayList<>();
         grupoListA.add(new Grupo("1","12:00 - 1:30", profesorList.get(0), estudianteList));

@@ -109,9 +109,9 @@ public class Controller extends HttpServlet {
         if (request.getParameter("claveProFld").isEmpty()) {
             errores.put("claveProFld", "Clave requerida");
         }
-//        if (request.getParameter("correoProFld").isEmpty()) {
-//            errores.put("correoProFld", "Correo requerida");
-//        }
+        if (request.getParameter("correoProFld").isEmpty()) {
+            errores.put("correoProFld", "Correo requerida");
+        }
         if (request.getParameter("telefonoProFld").isEmpty()) {
             errores.put("telefonoProFld", "Telefono requerido");
         }
@@ -134,6 +134,7 @@ public class Controller extends HttpServlet {
         model.getProfesor().setNombre(request.getParameter("nombreProFld"));
         model.getProfesor().setTelefono(request.getParameter("telefonoProFld"));
         model.getProfesor().setEspecialidad(request.getParameter("especProFld"));
+        model.getProfesor().setCorreo(request.getParameter("correoProFld"));
         
         
     }
@@ -153,7 +154,8 @@ public class Controller extends HttpServlet {
             String telefono = model.getProfesor().getTelefono();
             String nombre = model.getProfesor().getNombre();
             String espec = model.getProfesor().getEspecialidad();
-            Profesor nueProfesor = new Profesor(cedula,nombre,telefono,espec);
+            String correo = model.getProfesor().getCorreo();
+            Profesor nueProfesor = new Profesor(cedula,nombre,telefono,espec,correo);
             domainModel.agregarProfesor(nueProfesor);
            
             List<Profesor> list = domainModel.teachersFind();
@@ -194,6 +196,7 @@ public class Controller extends HttpServlet {
             model.getProfesor().setNombre("");
             model.getProfesor().setTelefono("");
             model.getProfesor().setEspecialidad("");
+            model.getProfesor().setCorreo("");
         
             
         } catch (Exception ex) {

@@ -16,11 +16,9 @@ public class Profesor {
     String especialidad;
     String correo;
 
-<<<<<<< HEAD
-    public Profesor(String id, String nombre, String telefono, String especialidad) {
-=======
-    public Profesor(String id, String nombre, int telefono, String especialidad, String correo) {
->>>>>>> eb8f909a82caa9d45d0d68c37f3ae612d8752e9c
+
+    public Profesor(String id, String nombre, String telefono, String especialidad,String correo) {
+
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
