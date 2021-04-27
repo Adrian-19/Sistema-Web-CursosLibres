@@ -70,6 +70,11 @@
                     </ul>
                   </li>
                 <%}%>
+                <%if(usuario.getTipo() == 3){%> 
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Historial/show">Historial</a>
+                  </li>
+                <%}%>
                 
                 <% } %>
                 

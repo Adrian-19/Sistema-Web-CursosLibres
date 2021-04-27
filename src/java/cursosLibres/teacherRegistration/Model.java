@@ -6,13 +6,16 @@
 package cursosLibres.teacherRegistration;
 
 
+import cursosLibres.logic.Profesor;
 import cursosLibres.logic.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
-    List<Usuario> usuarios;
-    Usuario profesor;
+    List<Profesor> profesores;
+    Profesor profesor;
+    Usuario Uprofesor;
+    
 
 
     public Model() {
@@ -20,26 +23,37 @@ public class Model {
     }
 
     public void reset(){ 
-        List<Usuario> rows = new ArrayList<>();         
-        this.setUsuarios(rows);
-        setProfesor(new Usuario());   
-    }
-    
-    public void setUsuarios(List<Usuario> usuarios){
-        this.usuarios =usuarios;    
+        List<Profesor> rows = new ArrayList<>();         
+        this.setProfesores(rows);
+        setProfesor(new Profesor());   
+        setUprofesor(new Usuario());
     }
 
-     public List<Usuario> getUsuarios() {
-        return usuarios;
+    public List<Profesor> getProfesores() {
+        return profesores;
     }
-         
-    public Usuario getProfesor() {
+
+    public void setProfesores(List<Profesor> profesores) {
+        this.profesores = profesores;
+    }
+
+    public Profesor getProfesor() {
         return profesor;
     }
 
-    public void setProfesor(Usuario profesor) {
+    public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
+
+    public Usuario getUprofesor() {
+        return Uprofesor;
+    }
+
+    public void setUprofesor(Usuario Uprofesor) {
+        this.Uprofesor = Uprofesor;
+    }
+    
+
 
    
     

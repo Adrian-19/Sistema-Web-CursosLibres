@@ -12,10 +12,10 @@ package cursosLibres.logic;
 public class Profesor {
     String id;
     String nombre;
-    int telefono;
+    String telefono; //cambiar en la base de datos
     String especialidad;
 
-    public Profesor(String id, String nombre, int telefono, String especialidad) {
+    public Profesor(String id, String nombre, String telefono, String especialidad) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -25,7 +25,7 @@ public class Profesor {
     public Profesor() {
         this.id = "";
         this.nombre = "";
-        this.telefono = 0;
+        this.telefono = "";
         this.especialidad = "";
     }
 
@@ -45,11 +45,11 @@ public class Profesor {
         this.nombre = nombre;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

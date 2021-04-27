@@ -16,11 +16,11 @@ public class Estudiante {
     
     String id;
     String nombre;
-    int telefono;
+    String telefono; //cambiar en la base de datos
     String correo;
     List<Matricula> historial;
 
-    public Estudiante(String id, String nombre, int telefono, String correo, List<Matricula> historial) {
+    public Estudiante(String id, String nombre, String telefono, String correo, List<Matricula> historial) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -31,7 +31,7 @@ public class Estudiante {
     public Estudiante() {
         this.id = "";
         this.nombre = "";
-        this.telefono = 0;
+        this.telefono = "";
         this.correo = "";
         this.historial = new ArrayList<>();
     }
@@ -52,11 +52,11 @@ public class Estudiante {
         this.nombre = nombre;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

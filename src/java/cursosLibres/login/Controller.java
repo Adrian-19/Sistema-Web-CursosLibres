@@ -6,7 +6,9 @@
 package cursosLibres.login;
 
 import cursosLibres.logic.Usuario;
+import cursosLibres.logic.Estudiante;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -93,19 +95,19 @@ public class Controller extends HttpServlet {
             Usuario real = domainModel.usuarioFind(model.getCurrent().getCedula(), model.getCurrent().getClave());
             //service.add(real);
             session.setAttribute("usuario", real);
-            String viewUrl = "";
-            switch (real.getTipo()) { // Para que es esto?
-                case 2:
-                    viewUrl = "/presentation/Index.jsp";
-                    break;
-                case 1:
-                    viewUrl = "/presentation/Index.jsp";
-                    break;
-                case 0:
-                    viewUrl = "/presentation/Index.jsp";
-                break;
-            }
-            return viewUrl;
+//            String viewUrl = "";
+//            switch (real.getTipo()) { // Para que es esto?
+//                case 2:
+//                    viewUrl = "/presentation/Index.jsp";
+//                    break;
+//                case 1:
+//                    viewUrl = "/presentation/Index.jsp";
+//                    break;
+//                case 0:
+//                    viewUrl = "/presentation/Index.jsp";
+//                break;
+//            }
+            return "/presentation/Index.jsp";
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
@@ -202,10 +204,13 @@ public class Controller extends HttpServlet {
             errores.put("claveFld", "Clave requerida");
         }
         if (request.getParameter("correoFld").isEmpty()) {
-            errores.put("correoFld", "Clave requerida");
+            errores.put("correoFld", "Correo requerido");
         }
         if (request.getParameter("telefonoFld").isEmpty()) {
-            errores.put("telefonoFld", "Clave requerida");
+            errores.put("telefonoFld", "Telefono requerido");
+        }
+        if (request.getParameter("nombreFld").isEmpty()) {
+            errores.put("nombreFld", "Nombre requerido");
         }
 
         return errores;
@@ -215,25 +220,37 @@ public class Controller extends HttpServlet {
 
         model.getCurrent().setCedula(request.getParameter("cedulaFld"));
         model.getCurrent().setClave(request.getParameter("claveFld"));
+        
+        model.getEstudiante().setId(request.getParameter("cedulaFld"));
+        model.getEstudiante().setCorreo(request.getParameter("correoFld"));
+        model.getEstudiante().setNombre(request.getParameter("nombreFld"));
+        model.getEstudiante().setTelefono(request.getParameter("telefonoFld"));
     }
 
     private String registerAction(HttpServletRequest request) {
    
         Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();//cambiar por service
         HttpSession session = request.getSession(true);
         try {
             if(!domainModel.existeUsuario(model.getCurrent().getCedula())){
             String cedula =   model.getCurrent().getCedula();
             String clave = model.getCurrent().getClave(); 
-            Usuario nuevo = new Usuario(cedula,clave,2);
-            domainModel.agregarUsuario(nuevo);
+            Usuario nuevo = new Usuario(cedula,clave,3);
+            String telefono = model.getEstudiante().getTelefono();
+            String nombre = model.getEstudiante().getNombre();
+            String correo = model.getEstudiante().getCorreo();
+            Estudiante estudianteNue = new Estudiante(cedula,nombre,telefono,correo,new ArrayList<>());
+            
+            
+            domainModel.agregarEstudiante(estudianteNue); //
+            domainModel.agregarUsuario(nuevo);           //
             session.setAttribute("usuario", domainModel.usuarioFind(cedula,clave));
             return "/presentation/Index.jsp";
             }else{
             Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
-            errores.put("cedulaFld", "Usuario ya existe ");
+            errores.put("cedulaFld", "Este Usuario ya existe ");
             return "/presentation/login/viewRegister.jsp";
             }
             

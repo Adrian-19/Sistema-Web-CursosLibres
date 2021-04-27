@@ -40,7 +40,7 @@
 						</form>
 					</div>
 					<div class="row">
-						<p>¿No tienes cuenta? <a href="/Sistema-Web-CursosLibres/presentation/login/showRegister">Registrate aqui</a></p>
+						<p>¿No tienes cuenta? <a href="/Sistema-Web-CursosLibres/presentation/login/showRegister">Regístrate aquí</a></p>
 					</div>
 				</div>
 			</div>

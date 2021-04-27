@@ -2,6 +2,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="cursosLibres.teacherRegistration.Model"%>
+<%@page import="cursosLibres.logic.Profesor"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -14,7 +15,7 @@
 <body>
     <%@ include file="/presentation/Header.jsp" %>
     <% Model model = (Model) request.getAttribute("model"); %>
-    <%List<Usuario> usuarios = model.getUsuarios();%>
+    <%List<Profesor> profesores = model.getProfesores();%>
     <% Map<String, String> errores = (Map<String, String>) request.getAttribute("errores"); %>
     <% Map<String, String[]> form = (errores == null) ? this.getForm(model) : request.getParameterMap();%>
     <!-- Main Content -->
@@ -37,13 +38,18 @@
                                 <input type="password" name="claveProFld" value="<%=form.get("claveProFld")[0]%>"  title="<%=title("claveProFld", errores)%>" class="form_input <%=erroneo("claveProFld", errores)%>" placeholder="Contraseña">
                             </div>
                             <div class="row">
+                                <input type="text" name="nombreProFld" value="<%=form.get("nombreProFld")[0]%>"  title="<%=title("nombreProFld", errores)%>" class="form_input <%=erroneo("nombreProFld", errores)%>" placeholder="Nombre">
+                            </div>
+                            <div class="row">
                                 <input type="text" name="telefonoProFld" value="<%=form.get("telefonoProFld")[0]%>"  title="<%=title("telefonoProFld", errores)%>" class="form_input <%=erroneo("telefonoProFld", errores)%>" placeholder="Telefono">
                             </div>
+                           <%--
+                               <div class="row">
+                                <input type="text" name="correoProFld" value="<%=form.get("correoProFld")[0]%>"  title="<%=title("correoProFld", errores)%>" class="form_input <%=erroneo("correoProFld", errores)%>" placeholder="Correo">
+                               </div>
+                            --%>
                             <div class="row">
-                                <input type="text" name="correoProFld" value="<%=form.get("correoProFld")[0]%>"  title="<%=title("correoProFld", errores)%>" class="form_input <%=erroneo("claveProFld", errores)%>" placeholder="Correo">
-                            </div>
-                            <div class="row">
-                                <input type="text" name="especProFld" placeholder="Especialidades" class="form_input">
+                                <input type="text" name="especProFld" value="<%=form.get("especProFld")[0]%>"  title="<%=title("especProFld", errores)%>" class="form_input <%=erroneo("especProFld", errores)%>" placeholder="Especialidades">
                             </div>
 
 
@@ -64,18 +70,18 @@
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Clave</th>
+                    <th scope="col">Nombre</th>
                     <th scope="col">Telefono</th>
-                    <th scope="col">Correo</th>
+                    <th scope="col">Especialidad</th>
                 </tr>
             </thead>
             <tbody>
-               <% for(Usuario u:usuarios){%>
+               <% for(Profesor p:profesores){%>
                 <tr >
-                    <th scope="row"><%=u.getCedula()%></th>
-                    <td><%=u.getClave()%></td>
-                    <td><%=u.getTelefono()%></td>
-                    <td><%=u.getCorreo()%></td>
+                    <th scope="row"><%=p.getId()%></th>
+                    <td><%=p.getNombre()%></td>
+                    <td><%=p.getTelefono()%></td>
+                    <td><%=p.getEspecialidad() %></td>
                 </tr>            
                 <%}%>
                 
@@ -105,12 +111,14 @@
 
     private Map<String, String[]> getForm(Model model) {
         Map<String, String[]> values = new HashMap<String, String[]>();
-        values.put("cedulaProFld", new String[]{model.getProfesor().getCedula()});
-        values.put("claveProFld", new String[]{model.getProfesor().getClave()});
-        values.put("correoProFld", new String[]{model.getProfesor().getCorreo()});
+        values.put("cedulaProFld", new String[]{model.getUprofesor().getCedula()});
+        values.put("claveProFld", new String[]{model.getUprofesor().getClave()});
+        values.put("nombreProFld", new String[]{model.getProfesor().getNombre()});
         values.put("telefonoProFld", new String[]{model.getProfesor().getTelefono()});
+        values.put("especProFld", new String[]{model.getProfesor().getEspecialidad()});
         return values;
     }
 
 
-%>
+%>  
+<%--values.put("correoProFld", new String[]{model.getProfesor().getCorreo()});--%>
