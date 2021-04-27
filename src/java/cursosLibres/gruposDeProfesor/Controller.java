@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cursosLibres.grupos;
+package cursosLibres.gruposDeProfesor;
 
+import cursosLibres.logic.Profesor;
 import cursosLibres.logic.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,21 +20,22 @@ import javax.servlet.http.HttpSession;
  *
  * @author adria
  */
-@WebServlet(name = "GruposController", urlPatterns = {"/presentation/Grupos/show", "/presentation/Grupos/matricular"})
+@WebServlet(name = "ControllerGruposDeProfesor", urlPatterns = {"/presentation/GruposDeProfesor/show"})
 public class Controller extends HttpServlet {
 
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
         request.setAttribute("model", new Model());
         
         String viewUrl="";     
         switch (request.getServletPath()) {
-          case "/presentation/Grupos/show":
+          case "/presentation/GruposDeProfesor/show":
               viewUrl = this.show(request);
               break;
         }          
-        request.getRequestDispatcher(viewUrl).forward( request, response); 
+        request.getRequestDispatcher(viewUrl).forward( request, response);
     }
 
     public String show(HttpServletRequest request) {
@@ -41,14 +43,31 @@ public class Controller extends HttpServlet {
     }
     
     public String showAction(HttpServletRequest request) {
+        
         Model model = (Model) request.getAttribute("model");
         cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
-        
-        
-        // Preguntar cual curso fue seleccionado
-        
-        
-        return "";
+        // En login action de Login se guarda el Usuario logeado en en un HttpSession.
+        HttpSession session = request.getSession(true);
+        // Se obtiene el usuario guardado en la sesion y se almacena en "usuario"
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        Profesor profesor;
+        try {
+            // Busca el profesor de acuerdo con el usuario logeado
+            profesor = domainModel.profesorFind(usuario);
+        } catch (Exception ex) {
+            profesor=null;
+        }
+        try {
+            // Setea los grupos asociados con ese profesor.
+            // Osea, buscar en la tabla de grupos los que tienen el
+            // id del profesor seleccionado.
+            // select * from Grupos where idProfesor = <profesor.getCedula()>;
+            
+            model.setGrupos(domainModel.gruposFind(profesor));
+            return "/presentation/GruposDeProfesor/View.jsp";
+        } catch (Exception ex) {
+            return "";
+        }
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

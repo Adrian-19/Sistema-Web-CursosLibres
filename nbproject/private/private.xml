@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Grupo.java</file>
             <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/login/Model.java</file>
             <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Estudiante.java</file>
@@ -29,6 +30,24 @@
             <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Model.java</file>
             <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/login/Controller.java</file>
             <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/presentation/teacherRegistration/View.jsp</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Curso.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/web/presentation/GruposDeProfesor/View.jsp</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/data/Database.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/gruposDeProfesor/Controller.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Model.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/login/Controller.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/data/CursoDao.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/web/presentation/Header.jsp</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/login/Model.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/gruposDeProfesor/Model.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Service.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/data/UsuarioDao.java</file>
+=======
+            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/web/presentation/AbrirGrupos/View.jsp</file>
+>>>>>>> 3c3e8cf6c7127ce8e2588092e4cb95f909d54edb
+>>>>>>> eb8f909a82caa9d45d0d68c37f3ae612d8752e9c
         </group>
     </open-files>
 </project-private>

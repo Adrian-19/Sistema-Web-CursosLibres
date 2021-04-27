@@ -29,12 +29,26 @@ public class Model {
     HashMap<String, Profesor> profesores;
     HashMap<String, Estudiante> estudiantes;
     HashMap<String, List<String>> favoritas;
-
+    List<Curso> cursoList;
+    
+    List<Profesor> profesorList;
+    List<Estudiante> estudianteList;
+    
+    List<Grupo> grupoListA ;
+    List<Grupo> grupoListB ;
+    
     private Model() {
         usuarios = new HashMap();
         usuarios.put("111", new Usuario("111", "111", 0));
+<<<<<<< HEAD
         usuarios.put("222", new Usuario("222", "222", 2));
         usuarios.put("333", new Usuario("333", "333", 3));
+=======
+        usuarios.put("222", new Usuario("222", "222", 1));
+        usuarios.put("333", new Usuario("333", "333", 1));
+        usuarios.put("444", new Usuario("444", "444", 2));
+        usuarios.put("555", new Usuario("555", "555", 2));
+>>>>>>> eb8f909a82caa9d45d0d68c37f3ae612d8752e9c
 
         profesores = new HashMap();
         profesores.put("222", new Profesor("222", "Javier Antonio", "8876-7645", "Ingles"));
@@ -58,6 +72,28 @@ public class Model {
         favoritas = new HashMap();
         favoritas.put("111", Arrays.asList(new String[]{"2-111-11"}));
         favoritas.put("222", Arrays.asList(new String[]{"1-111-11", "1-222-22"}));
+        
+        profesorList = new ArrayList<>();
+        profesorList.add(new Profesor("222", "Mario", 1111111, "Artes", "mario@gmail.com"));
+        profesorList.add(new Profesor("333", "Pedro", 2222222, "Mate", "pedro@gmail.com"));
+        
+        estudianteList = new ArrayList<>();
+        estudianteList.add(new Estudiante("444", "Roberto", 3333333,"roberto@gmail.com",new ArrayList<>()));
+        estudianteList.add(new Estudiante("555", "Ashley", 4444444,"ashley@gmail.com",new ArrayList<>()));
+        
+        grupoListA = new ArrayList<>();
+        grupoListA.add(new Grupo("1","12:00 - 1:30", profesorList.get(0), estudianteList));
+        grupoListA.add(new Grupo("2","12:00 - 1:30", profesorList.get(1), estudianteList));
+        
+        grupoListB = new ArrayList<>();
+        grupoListA.add(new Grupo("3","12:00 - 1:30", profesorList.get(0), estudianteList));
+        grupoListA.add(new Grupo("4","12:00 - 1:30", profesorList.get(1), estudianteList));
+        
+        cursoList = new ArrayList<>();
+        
+        cursoList.add(new Curso("111","Pintura en Tela", 1500, "logo", "arte", grupoListA, "En oferta"));
+        
+        cursoList.add(new Curso("222","Programacion", 3500, "logo", "mate", grupoListB, "En oferta"));
     }
 
     public void agregarUsuario(Usuario usuario) {
@@ -121,5 +157,41 @@ public class Model {
         }
         return result;
     }
-
+        
+        
+        public Profesor profesorFind(Usuario u) throws Exception{
+        Profesor p = null;
+        for(int i = 0; i<profesorList.size(); i++)
+        {
+            p = profesorList.get(i);
+            if(p.getId().equals(u.getCedula())){
+                return p;
+                
+            }
+        }
+        return p;
+        }
+        
+        public List<Grupo> gruposFind(Profesor p){
+            List<Grupo> grupos = new ArrayList<>();
+            
+            for(int i = 0; i<cursoList.size(); i++)
+            {
+                Curso c = cursoList.get(i);
+                System.out.println("size: " + c.getGrupoList().size());
+                for(int j = 0; j<c.getGrupoList().size(); j++)
+                {
+                    Grupo g = c.getGrupoList().get(j);
+                    //System.out.println("profesor: " + g.getProfesor().getId());
+                    if(g.getProfesor().getId().equals(p.getId()))
+                    {
+                        // En el ID del grupo, setea el nombre del curso en el que esta el grupo;
+                        c.getGrupoList().get(j).setId(c.getNombre());
+                        grupos.add(c.getGrupoList().get(j));
+                    }
+                }
+            }
+            
+            return grupos;
+        }
 }
