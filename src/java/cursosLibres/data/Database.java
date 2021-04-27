@@ -36,19 +36,34 @@ public class Database {
     }
     public Connection getConnection(){
         try {
+            System.out.println("1");
             Properties prop = new Properties();
+            System.out.println("2");
             URL resourceUrl = getClass().getResource(PROPERTIES_FILE_NAME);
-            File file = new File(resourceUrl.toURI());            
+            System.out.println("3");
+            File file = new File(resourceUrl.toURI());
+            System.out.println("4");
             prop.load(new BufferedInputStream(new FileInputStream(file)));
+            System.out.println("5");
             String driver = prop.getProperty("database_driver");
+            System.out.println("6");
             String server = prop.getProperty("database_server");
+            System.out.println("7");
             String port = prop.getProperty("database_port");
+            System.out.println("8");
             String user = prop.getProperty("database_user");
+            System.out.println("9");
             String password = prop.getProperty("database_password");
+            System.out.println("10");
             String database = prop.getProperty("database_name");
-            
+            System.out.println("11");
             String URL_conexion="jdbc:mysql://"+ server+":"+port+"/"+
+<<<<<<< HEAD
                     database+"?user="+user+"&password="+password+"&serverTimezone=UTC&useSSL=False ";            
+=======
+                    database+"?user="+user+"&password="+password+"&serverTimezone=UTC&useSSL=false";  
+            System.out.println("12");
+>>>>>>> a187b2ba38cc2c0b8795a7a8772a367b7f5e4a72
             Class.forName(driver).newInstance();
             return DriverManager.getConnection(URL_conexion);
         } catch (Exception e) {

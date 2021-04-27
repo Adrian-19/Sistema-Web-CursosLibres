@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cursosLibres.grupos;
+package cursosLibres.historial;
+
 
 import cursosLibres.logic.Usuario;
+import cursosLibres.logic.Estudiante;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,42 +18,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author adria
- */
-@WebServlet(name = "GruposController", urlPatterns = {"/presentation/Grupos/show", "/presentation/Grupos/matricular"})
+
+@WebServlet(name = "teacherRegistrationControl", urlPatterns = {"/presentation/Historial/show","/presentation/Historial/pdf"})
 public class Controller extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         request.setAttribute("model", new Model());
-        
-        String viewUrl="";     
+
+        String viewUrl = "";
         switch (request.getServletPath()) {
-          case "/presentation/Grupos/show":
-              viewUrl = this.show(request);
-              break;
-        }          
-        request.getRequestDispatcher(viewUrl).forward( request, response); 
+            case "/presentation/Historial/show":
+                viewUrl = this.showRecord(request);
+                break;
+            case "/presentation/Historial/pdf":
+               // viewUrl = this.showRegister(request);
+                break;
+
+        }
+        request.getRequestDispatcher(viewUrl).forward(request, response);
     }
 
-    public String show(HttpServletRequest request) {
-        return this.showAction(request);
-    }
-    
-    public String showAction(HttpServletRequest request) {
-        Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
-        
-        
-        // Preguntar cual curso fue seleccionado
-        
-        
-        return "";
-    }
-    
+
+
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -89,5 +82,29 @@ public class Controller extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+
+
+    public String showRecord(HttpServletRequest request) {
+        return this.showActionRecords(request);
+    }
+
+    public String showActionRecords(HttpServletRequest request) {
+        Model model = (Model) request.getAttribute("model");
+        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        HttpSession session = request.getSession(true);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        try {
+            Estudiante estudiante = domainModel.estudianteFind(usuario.getCedula());
+            model.setEstudiante(estudiante);
+            model.setHistorial(estudiante.getHistorial());
+
+        
+            
+        } catch (Exception ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "/presentation/Historial/View.jsp";
+    }
 
 }

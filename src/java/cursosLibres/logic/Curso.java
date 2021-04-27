@@ -5,6 +5,7 @@
  */
 package cursosLibres.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,27 +15,30 @@ import java.util.List;
 public class Curso{
     String id;
     String nombre;
-    Double costo;
+    int costo;
     String logo;
     String tematica;
     List<Grupo> grupoList;
+    String estado;
     
-    public Curso(String id, String nombre, Double costo, String logo, String tematica, List<Grupo> grupoList) {
+    public Curso(String id, String nombre, int costo, String logo, String tematica, List<Grupo> grupoList, String estado) {
         this.id = id;
         this.nombre = nombre;
         this.costo = costo;
         this.logo = logo;
         this.tematica = tematica;
         this.grupoList = grupoList;
+        this.estado = estado;
     }
     
     public Curso() {
         this.id = "";
         this.nombre = "";
-        this.costo = 0.0;
+        this.costo = 0;
         this.logo = "";
         this.tematica = "";
-        this.grupoList = null;
+        this.grupoList = new ArrayList<>();
+        this.estado = "";
     }
     
     public String getId() {
@@ -53,11 +57,11 @@ public class Curso{
         this.nombre = nombre;
     }
 
-    public Double getCosto() {
+    public int getCosto() {
         return costo;
     }
 
-    public void setCosto(Double costo) {
+    public void setCosto(int costo) {
         this.costo = costo;
     }
 
@@ -83,6 +87,14 @@ public class Curso{
 
     public void setGrupoList(List<Grupo> grupoList) {
         this.grupoList = grupoList;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
     

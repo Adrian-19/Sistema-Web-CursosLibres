@@ -6,6 +6,7 @@
 package cursosLibres.teacherRegistration;
 
 import cursosLibres.logic.Usuario;
+import cursosLibres.logic.Profesor;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -19,10 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author jsanchez
- */
+
 @WebServlet(name = "teacherRegistrationControl", urlPatterns = {"/presentation/teacherRegistration/show","/presentation/teacherRegistration/register"})
 public class Controller extends HttpServlet {
 
@@ -34,9 +32,6 @@ public class Controller extends HttpServlet {
 
         String viewUrl = "";
         switch (request.getServletPath()) {
-            case "/presentation/login/logout":
-                viewUrl = this.logout(request);
-                break;
             case "/presentation/teacherRegistration/register":
                 viewUrl = this.register(request);
                 break;
@@ -49,16 +44,6 @@ public class Controller extends HttpServlet {
     }
 
 
-    public String logout(HttpServletRequest request) {
-        return this.logoutAction(request);
-    }
-
-    public String logoutAction(HttpServletRequest request) {
-        HttpSession session = request.getSession(true);
-        session.removeAttribute("usuario");
-        session.invalidate();
-        return "/presentation/Index.jsp";
-    }
 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -128,19 +113,30 @@ public class Controller extends HttpServlet {
             errores.put("correoProFld", "Correo requerida");
         }
         if (request.getParameter("telefonoProFld").isEmpty()) {
-            errores.put("telefonoProFld", "Telefono requerida");
+            errores.put("telefonoProFld", "Telefono requerido");
         }
-//        if (request.getParameter("especProFld").isEmpty()) {
-//            errores.put("especProFld", "Especialidad requerida");
-//        }
+        if (request.getParameter("nombreProFld").isEmpty()) {
+            errores.put("nombreProFld", "Nombre requerido");
+        }
+        if (request.getParameter("especProFld").isEmpty()) {
+            errores.put("especProFld", "Especialidad requerida");
+       }
 
         return errores;
     }
         void updateModelRegister(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
 
-        model.getProfesor().setCedula(request.getParameter("cedulaProFld"));
-        model.getProfesor().setClave(request.getParameter("claveProFld"));
+        model.getUprofesor().setCedula(request.getParameter("cedulaProFld"));
+        model.getUprofesor().setClave(request.getParameter("claveProFld"));
+       
+        model.getProfesor().setId(request.getParameter("cedulaProFld"));
+        model.getProfesor().setNombre(request.getParameter("nombreProFld"));
+        model.getProfesor().setTelefono(request.getParameter("telefonoProFld"));
+        model.getProfesor().setEspecialidad(request.getParameter("especProFld"));
+        model.getProfesor().setCorreo(request.getParameter("correoProFld"));
+        
+        
     }
 
     private String registerAction(HttpServletRequest request) {
@@ -150,18 +146,25 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession(true);
         try {
 
-            if(!domainModel.existeUsuario(model.getProfesor().getCedula())){
-            String cedula =   model.getProfesor().getCedula();
-            String clave = model.getProfesor().getClave(); 
-            Usuario nuevo = new Usuario(cedula,clave,1);
+            if(!domainModel.existeUsuario(model.getUprofesor().getCedula())){
+            String cedula =   model.getUprofesor().getCedula();
+            String clave = model.getUprofesor().getClave(); 
+            Usuario nuevo = new Usuario(cedula,clave,2);
             domainModel.agregarUsuario(nuevo);
-            List<Usuario> list = domainModel.teachersFind();
-            model.setUsuarios(list);
+            String telefono = model.getProfesor().getTelefono();
+            String nombre = model.getProfesor().getNombre();
+            String espec = model.getProfesor().getEspecialidad();
+            String correo = model.getProfesor().getCorreo();
+            Profesor nueProfesor = new Profesor(cedula,nombre,telefono,espec,correo);
+            domainModel.agregarProfesor(nueProfesor);
+           
+            List<Profesor> list = domainModel.teachersFind();
+            model.setProfesores(list);
             session.setAttribute("profesor", domainModel.usuarioFind(cedula,clave));
             return "/presentation/teacherRegistration/show";
             }else{            
-            List<Usuario> list = domainModel.teachersFind();
-            model.setUsuarios(list);
+            List<Profesor> list = domainModel.teachersFind();
+            model.setProfesores(list);
             Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
             errores.put("cedulaProFld", "Usuario ya existe ");
@@ -185,11 +188,17 @@ public class Controller extends HttpServlet {
         Model model = (Model) request.getAttribute("model");
         cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
         try {
-            List<Usuario> list = domainModel.teachersFind();
-            model.setUsuarios(list);
-            model.getProfesor().setCedula("");
-            model.getProfesor().setClave("");
+            List<Profesor> list = domainModel.teachersFind();
+            model.setProfesores(list);
+            model.getUprofesor().setCedula("");
+            model.getUprofesor().setClave("");
+            model.getProfesor().setId("");
+            model.getProfesor().setNombre("");
+            model.getProfesor().setTelefono("");
+            model.getProfesor().setEspecialidad("");
+            model.getProfesor().setCorreo("");
         
+            
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }

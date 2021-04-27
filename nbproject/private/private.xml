@@ -3,10 +3,39 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/login/Controller.java</file>
             <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/abrirGrupos/Controller.java</file>
             <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/abrirGrupos/Model.java</file>
             <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/login/Model.java</file>
+=======
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Grupo.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/login/Model.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Estudiante.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/presentation/Head.jsp</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/teacherRegistration/Controller.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/historial/Model.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/historial/Controller.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Curso.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Matricula.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/css/style2.css</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/teacherRegistration/Model.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/presentation/login/viewRegister.jsp</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/grupos/Controller.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/presentation/VerCursos/View.jsp</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/presentation/Index.jsp</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Usuario.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/presentation/Header.jsp</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/presentation/Grupos/View.jsp</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Profesor.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/css/style.css</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/presentation/Historial/View.jsp</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/presentation/login/View2.jsp</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Model.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/login/Controller.java</file>
+            <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/presentation/teacherRegistration/View.jsp</file>
+>>>>>>> a187b2ba38cc2c0b8795a7a8772a367b7f5e4a72
         </group>
     </open-files>
 </project-private>

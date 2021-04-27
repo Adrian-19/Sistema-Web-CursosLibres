@@ -20,8 +20,9 @@ public class UsuarioDao {
     public void create(Usuario u) throws Exception{
         String sql="insert into Logins (id, clave, tipo, correo) "+
                 "values(?,?,?,?)";
+            System.out.println("hola!");
         PreparedStatement stm = Database.instance().prepareStatement(sql);
-        
+        System.out.println("hola!");
         stm.setString(1, u.getCedula());
         stm.setString(2, u.getClave());
         stm.setString(3, String.valueOf(u.getTipo()));

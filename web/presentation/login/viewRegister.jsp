@@ -35,12 +35,15 @@
 								<input type="password" name="claveFld" value="<%=form.get("claveFld")[0]%>"  title="<%=title("claveFld",errores)%>" class="form_input <%=erroneo("claveFld",errores)%>" placeholder="Contraseña">
 							</div>
                                                         <div class="row">
+							    <input type="text" name="nombreFld" value="<%=form.get("nombreFld")[0]%>"  title="<%=title("nombreFld",errores)%>" class="form_input <%=erroneo("nombreFld",errores)%>" placeholder="Nombre">
+							</div>
+                                                        <div class="row">
 								<input type="text" name="telefonoFld" value="<%=form.get("telefonoFld")[0]%>"  title="<%=title("telefonoFld",errores)%>" class="form_input <%=erroneo("telefonoFld",errores)%>" placeholder="Telefono">
 							</div>
                                                         <div class="row">
 								<input type="text" name="correoFld" value="<%=form.get("correoFld")[0]%>"  title="<%=title("correoFld",errores)%>" class="form_input <%=erroneo("claveFld",errores)%>" placeholder="Correo">
 							</div>
-                                                        
+
                                                         
 							<div class="row">
 								<input type="submit" value="Registrarse" class="btn btnRL">
@@ -74,8 +77,9 @@
        Map<String,String[]> values = new HashMap<String,String[]>();
        values.put("cedulaFld", new String[]{model.getCurrent().getCedula()});
        values.put("claveFld", new String[]{model.getCurrent().getClave()});
-       values.put("correoFld", new String[]{model.getCurrent().getCorreo()});
-       values.put("telefonoFld", new String[]{model.getCurrent().getTelefono()});
+       values.put("correoFld", new String[]{model.getEstudiante().getCorreo()});
+       values.put("telefonoFld", new String[]{model.getEstudiante().getTelefono()});
+       values.put("nombreFld", new String[]{model.getEstudiante().getNombre()});
        return values;
     }
 

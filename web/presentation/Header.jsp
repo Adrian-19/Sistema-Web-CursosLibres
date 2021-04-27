@@ -63,11 +63,14 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <!-- Por separado o en una sola pagina? -->
-                      <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/GruposDeProfesor/View.jsp">Ver mis grupos</a></li>
-                      <li><a class="dropdown-item" href="#">Ver mis cursos</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/GruposDeProfesor/show">Ver mis grupos</a></li>
+                     
                     </ul>
+                  </li>
+                <%}%>
+                <%if(usuario.getTipo() == 3){%> 
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Historial/show">Historial</a>
                   </li>
                 <%}%>
                 
