@@ -6,6 +6,9 @@
 package cursosLibres.abrirGrupos;
 
 import cursosLibres.logic.Grupo;
+import cursosLibres.logic.Usuario;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -14,24 +17,38 @@ import cursosLibres.logic.Grupo;
  * 
  */
 public class Model {
-    
-    Grupo current; 
+
+    List<Grupo> grupos; 
+    Grupo currentGrupo; 
+
     
     public Model(){
         this.reset(); 
     }
     
     public void reset(){
-        setCurrent(new Grupo()); 
+       List<Grupo> rows = new ArrayList<>(); 
+       this.setGrupos(rows); 
+       setCurrentGrupo(new Grupo()); 
+
     }
     
-    public Grupo getCurrent() {
-        return current;
+    //lista de grupos
+    public List<Grupo> getGrupos() {
+        return grupos;
+    }
+        
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
+    }   
+ 
+    //grupo actual 
+    public Grupo getCurrentGrupo() {
+        return currentGrupo;
     }
 
-    public void setCurrent(Grupo current) {
-        this.current = current;
+    public void setCurrentGrupo(Grupo current) {
+        this.currentGrupo = current;
     }
-
-   
+    
 }

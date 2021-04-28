@@ -48,7 +48,8 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/teacherRegistration/show">Registro Profesores</a></li>
                       <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/View.jsp">Registrar Cursos</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/AbrirGrupos/show">Registrar Grupos</a></li>
+                      <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/VerCursos/show">Ver cursos</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>

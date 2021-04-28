@@ -20,109 +20,65 @@
                 <h1>Registro de cursos </h1>
             </div>
         </div>
-        
-        <br> 
-        
-        
-        <div class="container">
-            
-            <div class="row">
- 
-                <div class="col bg-dark ">
-                    
-                    <form class="row g-3 text-white">
-                        
-                        
-                      <div class="col-md-6">
-                          <br>
-                        <label for="inputName" class="form-label">Nombre del curso</label>
-                        <input type="text" class="form-control" id="inputNombre">
-                      </div>
-                        
-                      <div class="col-md-6">
-                          <br>
-                        <label for="inputId" class="form-label">Codigo del curso</label>
-                        <input type="text" class="form-control" id="inputCodigo">
-                      </div>
-                        
-                       <div class="col-md-6">
-                        <label for="inputName" class="form-label">Tematica</label>
-                        <input type="text" class="form-control" id="inputTematica">
-                       </div>
-   
-                        
-                      <div class="col-md-6">
-                        <label class="form-label">Costo</label>
-                        <input type="text" class="form-control" id="inputCosto">
-                      </div>
-                        
 
-                        
+        <div class="container main-content bg-dark">
+             <form class="container row g-3 text-white form-horizontal m-4">
 
-                        <div class="col-12">
-                            <br>
-                            <label class="form-label">Logo</label>
-                            <div class="input-group">
-                              <input type="file" class="form-control"  id="inputGroupFile04">
-                            </div>                 
-                    
-                            <br>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <br>
-                            
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="habilitado">
-                              <label class="form-check-label" for="flexRadioDefault1">
-                                Habilitado
-                              </label>
-                            </div>
-                            
-                            <br>
-                            
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="deshabilitado" checked>
-                              <label class="form-check-label" for="flexRadioDefault2">
-                                Deshabilitado
-                              </label>
-                            </div>  
-                            
-                        </div>                         
-                        
-                        
-                      <div class="col-12" >
-                          <br><br>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                      </div>
-                    </form>
-                    
+
+              <div class="form-group col-md-6 text-center">
+                  <br>
+                <label for="inputNombre" class="form-label">Nombre del curso</label>
+                <input type="text" class="form-control" id="inputNombre">
+              </div>
+
+
+               <div class="form-group col-md-6 text-center">
+                   <br>
+                <label for="inputTematica" class="form-label">Tematica</label>
+                <input type="text" class="form-control" id="inputTematica">
+               </div>
+
+
+              <div class="form-group col-md-6 text-center">
+                <label class="form-label">Costo</label>
+                <input type="text" class="form-control" id="inputCosto">
+              </div>
+
+
+                 <div class="form-group col-md-12">
+                  <label for="LogoFile">Logo del curso</label>
+                  <input type="file" class="form-control-file" id="LogoFile">
+                </div>                       
+
+                <div class="form-group col-md-6">
                     <br>
 
-                </div>
-                
-                
-                
-                
-                
-                <div class="col bg-transparent">
-                    <h3>
-                       
-                      
-                    </h3>                    
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="habilitado">
+                      <label class="form-check-label" for="habilitado">
+                        Habilitado
+                      </label>
+                    </div>
 
-                </div>                  
-             
-                
-            </div>
-            
-     
-            <div class="row"> 
-                <br><br>
-            
-            </div>
-            
-    
+                    <br>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="deshabilitado" checked>
+                      <label class="form-check-label" for="deshabilitado">
+                        Deshabilitado
+                      </label>
+                    </div>  
+
+                </div>                         
+
+
+              <div class="form-group col-12 text-center" >
+                  <br><br>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                 <br><br>
+              </div>
+            </form>           
+
         </div>
 
     </body>
