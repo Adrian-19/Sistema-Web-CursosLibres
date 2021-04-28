@@ -4,6 +4,7 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="cursosLibres.historial.Model"%>
 <%@page import="cursosLibres.logic.Matricula"%>
+<%@page import="cursosLibres.logic.Estudiante"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -17,30 +18,32 @@
     <%@ include file="/presentation/Header.jsp" %>
     <% Model model = (Model) request.getAttribute("model"); %>
     <%List<Matricula> historial = model.getHistorial();%>
-
-
-
-
+    <%Estudiante estudiante = model.getEstudiante();%>
 
     <div >
-        <div class="mw-100 mh-100" > 
-            <span class="mw-100 mh-100 border-bottom border-primary" >
-            <h1 class="display-6 text-primary text-center align-middle">Historial Academico de <%=model.getEstudiante().getNombre()%></h1>
-        </span>
-        </div>
-        <div >
-            <dl class="row text-center">
-                <dt class="col-sm-3">ID</dt>
-                <dd class="col-sm-9 text-left"> <%=model.getEstudiante().getId()%></dd>
-                <dt class="col-sm-3">Telefono</dt>
-                <dd class="col-sm-9 text-left"> <%=model.getEstudiante().getTelefono()%></dd>
-                <dt class="col-sm-3">Correo</dt>
-                <dd class="col-sm-9 text-left"> <%=model.getEstudiante().getCorreo()%></dd>
-                <dt class="col-sm-3">Fecha</dt>
-                <dd class="col-sm-9 text-left"> <%=LocalDate.now()%>  </dd>
-
-            </dl>
-
+        <div class="container-fluid" > 
+            <div class="position-relative">
+                <span class="d-block border-bottom border-primary" >
+                    <h1 class="display-6 text-primary text-center">Datos</h1>
+                </span>
+            </div>
+            <span class="d-block mw100 h-auto border-bottom border-primary " >
+                <dl class="row text-center">
+                    <dt class="col-sm-3">ID</dt>
+                    <dd class="col-sm-9 text-left"> <%=estudiante.getId()%></dd>
+                    <dt class="col-sm-3">Telefono</dt>
+                    <dd class="col-sm-9 text-left"> <%=estudiante.getTelefono()%></dd>
+                    <dt class="col-sm-3">Correo</dt>
+                    <dd class="col-sm-9 text-left"> <%=estudiante.getCorreo()%></dd>
+                    <dt class="col-sm-3">Fecha</dt>
+                    <dd class="col-sm-9 text-left"> <%=LocalDate.now()%>  </dd>
+                </dl>
+            </span>
+            <div class="position-relative">
+                <span class="d-block border-bottom border-primary" >
+                    <h1 class="display-6 text-primary text-center">Historial Academico de <%=model.getEstudiante().getNombre()%></h1>
+                </span>
+            </div>
         </div>
         <div class="containerTabPro  text-center">
             <table class="table table-hover table-primary table-striped">
@@ -63,8 +66,14 @@
 
                 </tbody>
             </table>                                      
-        </div>                                       
+        </div>   
+        <div class="d-flex justify-content-center h-25">
+            <a class="btn btn-primary" href="/Sistema-Web-CursosLibres/presentation/Historial/pdf" role="button">Ver PDF</a>
+        </div> 
+
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
 
 </body>
 

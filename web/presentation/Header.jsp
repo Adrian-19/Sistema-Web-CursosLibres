@@ -68,9 +68,9 @@
                     </ul>
                   </li>
                 <%}%>
-                <%if(usuario.getTipo() == 3){%> 
+                <%if(usuario.getTipo() == 2){%> 
                   <li class="nav-item">
-                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Historial/show">Historial</a>
+                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Historial/showRecord">Historial</a>
                   </li>
                 <%}%>
                 
