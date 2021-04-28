@@ -149,7 +149,7 @@ public class Controller extends HttpServlet {
             if(!domainModel.existeUsuario(model.getUprofesor().getCedula())){
             String cedula =   model.getUprofesor().getCedula();
             String clave = model.getUprofesor().getClave(); 
-            Usuario nuevo = new Usuario(cedula,clave,2);
+            Usuario nuevo = new Usuario(cedula,clave,1);
             domainModel.agregarUsuario(nuevo);
             String telefono = model.getProfesor().getTelefono();
             String nombre = model.getProfesor().getNombre();

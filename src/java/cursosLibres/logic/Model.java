@@ -44,7 +44,7 @@ public class Model {
         usuarios.put("222", new Usuario("222", "222", 1));
         usuarios.put("333", new Usuario("333", "333", 1));
         usuarios.put("444", new Usuario("444", "444", 2));
-        usuarios.put("555", new Usuario("555", "555", 3));
+        usuarios.put("555", new Usuario("555", "555", 2));
 
 
         profesores = new HashMap();
