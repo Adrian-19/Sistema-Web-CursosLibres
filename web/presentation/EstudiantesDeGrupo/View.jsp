@@ -4,6 +4,15 @@
     Author     : adria
 --%>
 
+
+<%@page import="cursosLibres.logic.Matricula"%>
+<%@page import="cursosLibres.logic.Estudiante"%>
+<%@page import="java.util.List"%>
+<%@page import = "cursosLibres.EstudiantesDeGrupo.Model" %>
+<%
+    Model model = (Model) request.getAttribute("model");
+    List<Estudiante> estudiantes = model.getEstudiantes();
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,12 +34,17 @@
                     <th>Calificación</th>
                     <th> </th>
                 </tr>
-                <% for(int i = 0; i<10; i++) {%> <!-- Recorrer lista de grupos del curso seleccionado -->
+                <% for(Estudiante e : estudiantes) {%> <!-- Recorrer lista de grupos del curso seleccionado -->
                 <tr>
-                    <td><%=i%></td>
-                    <td>Adrian</td> 
-                    <td>22222222</td> 
-                    <td>adrian@gmail.com</td> 
+                    <td><%=e.getId()%></td>
+                    <td><%=e.getNombre()%></td> 
+                    <td><%=e.getCorreo()%></td>
+                    <%for(Matricula h : e.getHistorial()){%>
+                    <%if(h.getNombreCurso().equals(model.getCurso().getNombre())){%>
+                        <td><%=h.getNota()%></td> 
+                    <%}%>
+                    <%}%>
+                    
                     <td> </td>
                     <td>
                         <!--Pendiente-->
