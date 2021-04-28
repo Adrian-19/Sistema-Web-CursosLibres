@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 
 
-@WebServlet(name = "LoginController", urlPatterns = {"/presentation/login/show", "/presentation/login/login", "/presentation/login/logout", "/presentation/login/register","/presentation/login/showRegister"})
+@WebServlet(name = "RecordsController", urlPatterns = {"/presentation/login/show", "/presentation/login/login", "/presentation/login/logout", "/presentation/login/register","/presentation/login/showRegister"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request,
@@ -109,7 +109,7 @@ public class Controller extends HttpServlet {
 //                    viewUrl = "/presentation/Index.jsp";
 //                break;
 //            }
-            return "/presentation/Index.jsp";
+            return "/presentation/VerCursos/View.jsp";
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
@@ -128,7 +128,7 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession(true);
         session.removeAttribute("usuario");
         session.invalidate();
-        return "/presentation/Index.jsp";
+        return "/presentation/VerCursos/View.jsp";
     }
 
     public String show(HttpServletRequest request) {
@@ -238,7 +238,7 @@ public class Controller extends HttpServlet {
             if(!domainModel.existeUsuario(model.getCurrent().getCedula())){
             String cedula =   model.getCurrent().getCedula();
             String clave = model.getCurrent().getClave(); 
-            Usuario nuevo = new Usuario(cedula,clave,3);
+            Usuario nuevo = new Usuario(cedula,clave,2);
             String telefono = model.getEstudiante().getTelefono();
             String nombre = model.getEstudiante().getNombre();
             String correo = model.getEstudiante().getCorreo();
@@ -248,7 +248,7 @@ public class Controller extends HttpServlet {
             domainModel.agregarEstudiante(estudianteNue); //
             domainModel.agregarUsuario(nuevo);           //
             session.setAttribute("usuario", domainModel.usuarioFind(cedula,clave));
-            return "/presentation/Index.jsp";
+            return "/presentation/VerCursos/View.jsp";
             }else{
             Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);

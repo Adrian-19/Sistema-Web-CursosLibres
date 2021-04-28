@@ -7,6 +7,7 @@ package cursosLibres.gruposDeProfesor;
 
 import cursosLibres.logic.Grupo;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
  * @author adria
  */
 public class Model {
-    List<Grupo> grupos;
+    HashMap<String, List<Grupo>> grupos;
     Grupo seleccionado;
     
     public Model(){
@@ -22,16 +23,16 @@ public class Model {
     }
     
     public void reset(){
-        List<Grupo> rows = new ArrayList<>();
+        HashMap<String, List<Grupo>> rows = new HashMap();
         seleccionado = null;
         setGrupos(rows);
     }
-
-    public List<Grupo> getGrupos() {
+    
+    public HashMap<String, List<Grupo>> getGrupos() {
         return grupos;
     }
 
-    public void setGrupos(List<Grupo> grupos) {
+    public void setGrupos(HashMap<String, List<Grupo>> grupos) {
         this.grupos = grupos;
     }
 
