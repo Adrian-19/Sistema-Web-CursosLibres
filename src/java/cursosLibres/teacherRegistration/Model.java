@@ -15,6 +15,7 @@ public class Model {
     List<Profesor> profesores;
     Profesor profesor;
     Usuario Uprofesor;
+    String codigoBusqueda;
     
 
 
@@ -27,6 +28,7 @@ public class Model {
         this.setProfesores(rows);
         setProfesor(new Profesor());   
         setUprofesor(new Usuario());
+        setCodigoBusqueda("");
     }
 
     public List<Profesor> getProfesores() {
@@ -51,6 +53,14 @@ public class Model {
 
     public void setUprofesor(Usuario Uprofesor) {
         this.Uprofesor = Uprofesor;
+    }
+
+    public String getCodigoBusqueda() {
+        return codigoBusqueda;
+    }
+
+    public void setCodigoBusqueda(String codigoBusqueda) {
+        this.codigoBusqueda = codigoBusqueda;
     }
     
 

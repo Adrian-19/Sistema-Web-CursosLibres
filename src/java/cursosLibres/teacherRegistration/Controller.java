@@ -8,6 +8,7 @@ package cursosLibres.teacherRegistration;
 import cursosLibres.logic.Usuario;
 import cursosLibres.logic.Profesor;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-@WebServlet(name = "teacherRegistrationControl", urlPatterns = {"/presentation/teacherRegistration/show","/presentation/teacherRegistration/register"})
+@WebServlet(name = "teacherRegistrationControl", urlPatterns = {"/presentation/teacherRegistration/show", "/presentation/teacherRegistration/register", "/presentation/teacherRegistration/search"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request,
@@ -29,7 +29,6 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
 
         request.setAttribute("model", new Model());
-
         String viewUrl = "";
         switch (request.getServletPath()) {
             case "/presentation/teacherRegistration/register":
@@ -38,13 +37,13 @@ public class Controller extends HttpServlet {
             case "/presentation/teacherRegistration/show":
                 viewUrl = this.showRegister(request);
                 break;
+            case "/presentation/teacherRegistration/search":
+                viewUrl = this.search(request);
+                break;
 
         }
         request.getRequestDispatcher(viewUrl).forward(request, response);
     }
-
-
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -101,6 +100,7 @@ public class Controller extends HttpServlet {
 
     }
 //
+
     Map<String, String> validarRegistro(HttpServletRequest request) {
         Map<String, String> errores = new HashMap<>();
         if (request.getParameter("cedulaProFld").isEmpty()) {
@@ -120,57 +120,57 @@ public class Controller extends HttpServlet {
         }
         if (request.getParameter("especProFld").isEmpty()) {
             errores.put("especProFld", "Especialidad requerida");
-       }
+        }
 
         return errores;
     }
-        void updateModelRegister(HttpServletRequest request) {
+
+    void updateModelRegister(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
 
         model.getUprofesor().setCedula(request.getParameter("cedulaProFld"));
         model.getUprofesor().setClave(request.getParameter("claveProFld"));
-       
+
         model.getProfesor().setId(request.getParameter("cedulaProFld"));
         model.getProfesor().setNombre(request.getParameter("nombreProFld"));
         model.getProfesor().setTelefono(request.getParameter("telefonoProFld"));
         model.getProfesor().setEspecialidad(request.getParameter("especProFld"));
         model.getProfesor().setCorreo(request.getParameter("correoProFld"));
-        
-        
+
     }
 
     private String registerAction(HttpServletRequest request) {
-   
+
         Model model = (Model) request.getAttribute("model");
         cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
         HttpSession session = request.getSession(true);
         try {
 
-            if(!domainModel.existeUsuario(model.getUprofesor().getCedula())){
-            String cedula =   model.getUprofesor().getCedula();
-            String clave = model.getUprofesor().getClave(); 
-            Usuario nuevo = new Usuario(cedula,clave,1);
-            domainModel.agregarUsuario(nuevo);
-            String telefono = model.getProfesor().getTelefono();
-            String nombre = model.getProfesor().getNombre();
-            String espec = model.getProfesor().getEspecialidad();
-            String correo = model.getProfesor().getCorreo();
-            Profesor nueProfesor = new Profesor(cedula,nombre,telefono,espec,correo);
-            domainModel.agregarProfesor(nueProfesor);
-           
-            List<Profesor> list = domainModel.teachersFind();
-            model.setProfesores(list);
-            session.setAttribute("profesor", domainModel.usuarioFind(cedula,clave));
-            return "/presentation/teacherRegistration/show";
-            }else{            
-            List<Profesor> list = domainModel.teachersFind();
-            model.setProfesores(list);
-            Map<String, String> errores = new HashMap<>();
-            request.setAttribute("errores", errores);
-            errores.put("cedulaProFld", "Usuario ya existe ");
-            return "/presentation/teacherRegistration/View.jsp";
+            if (!domainModel.existeUsuario(model.getUprofesor().getCedula())) {
+                String cedula = model.getUprofesor().getCedula();
+                String clave = model.getUprofesor().getClave();
+                Usuario nuevo = new Usuario(cedula, clave, 1);
+                domainModel.agregarUsuario(nuevo);
+                String telefono = model.getProfesor().getTelefono();
+                String nombre = model.getProfesor().getNombre();
+                String espec = model.getProfesor().getEspecialidad();
+                String correo = model.getProfesor().getCorreo();
+                Profesor nueProfesor = new Profesor(cedula, nombre, telefono, espec, correo);
+                domainModel.agregarProfesor(nueProfesor);
+
+                List<Profesor> list = domainModel.teachersFind();
+                model.setProfesores(list);
+                session.setAttribute("profesor", domainModel.usuarioFind(cedula, clave));
+                return "/presentation/teacherRegistration/show";
+            } else {
+                List<Profesor> list = domainModel.teachersFind();
+                model.setProfesores(list);
+                Map<String, String> errores = new HashMap<>();
+                request.setAttribute("errores", errores);
+                errores.put("cedulaProFld", "Usuario ya existe ");
+                return "/presentation/teacherRegistration/View.jsp";
             }
-            
+
         } catch (Exception ex) {
 
             Map<String, String> errores = new HashMap<>();
@@ -180,6 +180,7 @@ public class Controller extends HttpServlet {
             return "/presentation/Error.jsp";
         }
     }
+
     public String showRegister(HttpServletRequest request) {
         return this.showActionRegister(request);
     }
@@ -197,12 +198,57 @@ public class Controller extends HttpServlet {
             model.getProfesor().setTelefono("");
             model.getProfesor().setEspecialidad("");
             model.getProfesor().setCorreo("");
-        
-            
+
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "/presentation/teacherRegistration/View.jsp";
+    }
+
+    private String search(HttpServletRequest request) {
+        try {
+
+            this.updateModelSearch(request);
+            return this.searchAction(request);
+
+        } catch (Exception e) {
+            return "/presentation/Error.jsp";
+        }
+
+    }
+
+    void updateModelSearch(HttpServletRequest request) {
+        Model model = (Model) request.getAttribute("model");
+        model.setCodigoBusqueda(request.getParameter("busProFld"));
+    }
+
+    private String searchAction(HttpServletRequest request) {
+
+        Model model = (Model) request.getAttribute("model");
+        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        try {
+
+            if (domainModel.existeProfesor(model.getCodigoBusqueda())) {
+
+                Profesor profesor = domainModel.profesorFind(model.getCodigoBusqueda());
+                List<Profesor> list = new ArrayList();
+                list.add(profesor);
+                model.setProfesores(list);
+                model.getUprofesor().setCedula("");
+                model.getUprofesor().setClave("");
+                return "/presentation/teacherRegistration/View.jsp";
+            } else {
+                List<Profesor> list = domainModel.teachersFind();
+                //List<Profesor> list = new ArrayList();
+                model.setProfesores(list);
+                model.getUprofesor().setCedula("");
+                model.getUprofesor().setClave("");
+                return "/presentation/teacherRegistration/View.jsp";
+            }
+
+        } catch (Exception ex) {
+            return "/presentation/Error.jsp";
+        }
     }
 
 }

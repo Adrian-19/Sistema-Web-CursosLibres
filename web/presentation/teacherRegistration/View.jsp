@@ -43,11 +43,11 @@
                             <div class="row">
                                 <input type="text" name="telefonoProFld" value="<%=form.get("telefonoProFld")[0]%>"  title="<%=title("telefonoProFld", errores)%>" class="form_input <%=erroneo("telefonoProFld", errores)%>" placeholder="Telefono">
                             </div>
-                           
-                               <div class="row">
+
+                            <div class="row">
                                 <input type="text" name="correoProFld" value="<%=form.get("correoProFld")[0]%>"  title="<%=title("correoProFld", errores)%>" class="form_input <%=erroneo("correoProFld", errores)%>" placeholder="Correo">
-                               </div>
-                            
+                            </div>
+
                             <div class="row">
                                 <input type="text" name="especProFld" value="<%=form.get("especProFld")[0]%>"  title="<%=title("especProFld", errores)%>" class="form_input <%=erroneo("especProFld", errores)%>" placeholder="Especialidades">
                             </div>
@@ -64,33 +64,53 @@
         </div>
     </div>
     <div class="text-center">
-        <h2>Lista de profesores</h2>
-    <div class="containerTabPro  text-center">
-        <table class="table table-hover table-primary table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Telefono</th>
-                    <th scope="col">Especialidad</th>
-                     <th scope="col">Correo</th>
-                </tr>
-            </thead>
-            <tbody>
-               <% for(Profesor p:profesores){%>
-                <tr >
-                    <th scope="row"><%=p.getId()%></th>
-                    <td><%=p.getNombre()%></td>
-                    <td><%=p.getTelefono()%></td>
-                    <td><%=p.getEspecialidad() %></td>
-                    <td><%=p.getCorreo() %></td>
-                </tr>            
-                <%}%>
-                
-            </tbody>
-        </table>                                      
-    </div>                                       
-</div>
+        
+        
+        <div class="container">
+            <form method="post" name="BusquedaPro" action="/Sistema-Web-CursosLibres/presentation/teacherRegistration/search">
+            <div class = "row">
+                 <div class = "col-sm-8"><h2>Lista de profesores</h2> </div>
+                <div class="col-md-auto search">
+                    
+                        <input type="text" name="busProFld" class="form-control input-sm" placeholder="Buscar Profesor" />
+                        <button type="submit" class="boton_profesor btn btn-primary btn-sm">Buscar</button>
+                        
+                    
+                  
+                </div>
+            </div>
+            </form>
+        </div>
+                   
+       
+        <div class="containerTabPro  text-center">
+            <table class="table table-hover table-primary table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Especialidad</th>
+                        <th scope="col">Correo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(!profesores.isEmpty()){ for (Profesor p : profesores) {%>
+                    <tr >
+                        <th scope="row"><%=p.getId()%></th>
+                        <td><%=p.getNombre()%></td>
+                        <td><%=p.getTelefono()%></td>
+                        <td><%=p.getEspecialidad()%></td>
+                        <td><%=p.getCorreo()%></td>
+                    </tr>            
+                    <%}
+                     }
+                    %>
+
+                </tbody>
+            </table>                                      
+        </div>                                       
+    </div>
 
 </body>
 
@@ -119,6 +139,7 @@
         values.put("nombreProFld", new String[]{model.getProfesor().getNombre()});
         values.put("telefonoProFld", new String[]{model.getProfesor().getTelefono()});
         values.put("especProFld", new String[]{model.getProfesor().getEspecialidad()});
+        values.put("busProFld", new String[]{model.getCodigoBusqueda()});
         return values;
     }
 
