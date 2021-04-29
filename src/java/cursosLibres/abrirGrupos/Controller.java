@@ -6,6 +6,7 @@
 
 package cursosLibres.abrirGrupos; 
 
+import cursosLibres.logic.Profesor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpSession;
  * @author DS
  */
 
-@WebServlet(name = "Controller", urlPatterns = {"/presentation/AbrirGrupos/show"})
+@WebServlet(name = "Controller", urlPatterns = {"/presentation/AbrirGrupos/show", "/presentation/AbrirGrupos/register"})
 public class Controller extends HttpServlet {
 
     /**
@@ -41,7 +42,7 @@ public class Controller extends HttpServlet {
              case "/presentation/AbrirGrupos/show": 
                 viewUrl = this.show(request); //se llama al método show para mostrar
                 break;
-            case "/presentation/AbrirGrupos/guardar": 
+            case "/presentation/AbrirGrupos/register": 
                 viewUrl = this.guardarGrupo(request); //para guardar un nuevo grupo
                 break;  
         }
@@ -116,17 +117,19 @@ public class Controller extends HttpServlet {
             Map<String, String> errores = this.validarRegistro(request); 
             if(errores.isEmpty()) {
                 this.updateModelRegister(request); 
-                return this.registerAction(request); 
+                return this.registerAction(request);  
             } else {
                 request.setAttribute("errores", errores); 
-                return "/presentation/AbrirGrupos/View.jsp"; // ? 
+                return "/presentation/AbrirGrupos/View.jsp"; 
             }
         } catch (Exception e) {
-            return "/presentation/Error.jsp";
+            return "/presentation/AbrirGrupos/View.jsp";
+            //return "/presentation/Error.jsp"; //??
         }
  
     }
     
+    //No muestra errores**
      Map<String, String> validarRegistro(HttpServletRequest request) {
          Map<String, String> errores = new HashMap<>();
 
@@ -155,6 +158,7 @@ public class Controller extends HttpServlet {
          
      }
      
+     //funciona **
     void updateModelRegister(HttpServletRequest request) {
         Model model = (Model)request.getAttribute("model"); 
         
@@ -171,6 +175,7 @@ public class Controller extends HttpServlet {
         
         //lista de estudiantes ?
         model.getCurrentGrupo().setEstudianteList(new ArrayList<>() );
+        
     }
 
     
@@ -179,8 +184,21 @@ public class Controller extends HttpServlet {
         cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
         HttpSession session = request.getSession(true); // sesión 
         
+        String id = ""; // como recuperar el id si es incremental ???
         try {
-            //if(!domainModel )
+            //Programar: si no existe el grupo en ese curso, entonces agreguelo
+            
+            
+//            if(!domainModel.existeGrupo(id)){
+//                String idIncre = ""; 
+//                Profesor prof = domainModel.profesorFind(model.getCurrentGrupo().getProfesor().getId()); 
+//                String horario = model.getCurrentGrupo().getHorario(); 
+//                
+//                //lista de estudiantes ? 
+//                
+//                
+//                
+//            }
             
         } catch (Exception e){
             
@@ -189,7 +207,7 @@ public class Controller extends HttpServlet {
         
         return null;
     }
-    
+
     
 
 }

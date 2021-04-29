@@ -129,15 +129,25 @@ public class Model {
     }
     
     public Estudiante estudianteFind(String cedula) throws Exception {
-        if (estudiantes.get(cedula) != null) {
+        if (estudiantes.get(cedula) != null) {     
             return estudiantes.get(cedula);
         } else {
             throw new Exception("Estudiante no existe");
+            
         }
     }
 
     public boolean existeUsuario(String cedula) {
         if (usuarios.get(cedula) != null) {
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+    
+        public boolean existeProfesor(String cedula) {
+        if (profesores.get(cedula) != null) {
             return true;
 
         } else {
@@ -151,6 +161,14 @@ public class Model {
             result.add(p);
         }
         return result;
+    }
+    
+    public Profesor profesorFind(String cedula) throws Exception {
+        if (profesores.get(cedula) != null) {
+            return profesores.get(cedula);
+        } else {
+            throw new Exception("Estudiante no existe");
+        }
     }
         
         
@@ -194,7 +212,11 @@ public class Model {
             return cursoGrupos;
         }
         
+<<<<<<< HEAD
         public Grupo grupoFind(String nombreCurso, String grupoID) throws Exception{
+=======
+        public Curso grupoFind(String nombreCurso, String grupoID) throws Exception{ 
+>>>>>>> e894e8bc7779d182436391cc421f0da82fbd434e
             for(Curso c : cursoList){
                 if(c.getNombre().equals(nombreCurso)){
                     for(Grupo g : c.getGrupoList()){
@@ -206,6 +228,7 @@ public class Model {
             }
             throw new Exception("Grupo no existe");
         }
+<<<<<<< HEAD
        
         public Curso cursoFind(String curso){
             for(Curso c : cursoList){
@@ -216,3 +239,49 @@ public class Model {
             return null;
         }
 } 
+=======
+
+
+// --- IMPLEMENTAR 
+    
+    //verifica si ya existe un grupo en un curso 
+    public boolean existeGrupo(String cursoId, String grupoId) {
+        for(Curso curso: cursoList){ //buscar el curso por su id
+            if(curso.getId() == cursoId){
+                for(Grupo g : curso.getGrupoList()){
+                    if(g.getId() == grupoId) return true; 
+                }
+            }
+        } 
+        return false; 
+    }
+    
+    //verifica que el profesor exista / retorna al profesor si lo encuentra
+    public Profesor profesorFind(String cedula) throws Exception {
+        for(Profesor p : profesorList){
+            if(p.getId() == cedula){
+                return p; 
+            }else {
+                throw new Exception("Profesor no existe");
+            }
+        }
+        return null;
+ 
+    }    
+    
+    //retorna una lista de grupos de un curso
+    public List<Grupo> gruposFind(String id) throws Exception {
+        for(Curso curso: cursoList){ //buscar el curso por su id
+            if(curso.getId() == id){
+                return curso.getGrupoList();
+            }
+        }
+        return null;
+    }
+    
+    //obtener cursos para la vista de cursos 
+    public List<Curso> getCursosList(){
+        return cursoList; 
+    }
+}
+>>>>>>> e894e8bc7779d182436391cc421f0da82fbd434e

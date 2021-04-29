@@ -41,7 +41,7 @@
 								<input type="text" name="telefonoFld" value="<%=form.get("telefonoFld")[0]%>"  title="<%=title("telefonoFld",errores)%>" class="form_input <%=erroneo("telefonoFld",errores)%>" placeholder="Telefono">
 							</div>
                                                         <div class="row">
-								<input type="text" name="correoFld" value="<%=form.get("correoFld")[0]%>"  title="<%=title("correoFld",errores)%>" class="form_input <%=erroneo("claveFld",errores)%>" placeholder="Correo">
+								<input type="text" name="correoFld" value="<%=form.get("correoFld")[0]%>"  title="<%=title("correoFld",errores)%>" class="form_input <%=erroneo("correoFld",errores)%>" placeholder="Correo">
 							</div>
 
                                                         

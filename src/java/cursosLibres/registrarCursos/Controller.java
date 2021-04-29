@@ -3,28 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cursosLibres.verCursos;
-
-import cursosLibres.logic.Curso;
-import cursosLibres.verCursos.Model; 
+package cursosLibres.registrarCursos;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.logging.Level;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.logging.Logger;
-
 
 /**
  *
- * @author DS
+ * @author ESCINF
  */
-@WebServlet(name = "ControllerC", urlPatterns = {"/presentation/VerCursos/show"})
+@WebServlet(name = "ControllerRegCursos", urlPatterns = {"/presentation/RegistrarCursos/show"})
 public class Controller extends HttpServlet {
 
     /**
@@ -38,20 +31,20 @@ public class Controller extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 
         request.setAttribute("model", new Model());
         
         String viewUrl = "";
         //la página de guardar un nuevo grupo tiene como acciones guardar y mostrar *
         switch (request.getServletPath()) {
-             case "/presentation/VerCursos/show": 
+             case "/presentation/RegistrarCursos/show": 
                 viewUrl = this.show(request); //se llama al método show para mostrar
                 break;
         }
         
         request.getRequestDispatcher(viewUrl).forward( request, response); 
 
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -94,22 +87,20 @@ public class Controller extends HttpServlet {
     }// </editor-fold>
 
     private String show(HttpServletRequest request) {
-       return this.showAction(request); //llama al método de abajo
-
+        return this.showAction(request);
     }
+
     private String showAction(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model"); 
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
-        try {
-            List<Curso> list = domainModel.getCursosList(); 
-            model.setListaCursos(list);
-            
-        } catch(Exception e){
-           Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
-
-        }
+        model.getCurrentCurso().setCosto(0);
+        model.getCurrentCurso().setEstado("");
+        model.getCurrentCurso().setId("");
+        model.getCurrentCurso().setGrupoList(null);
+        model.getCurrentCurso().setLogo("");
+        model.getCurrentCurso().setNombre("");
+        model.getCurrentCurso().setTematica("");
         
-        return "/presentation/VerCursos/View.jsp";
+        return "/presentation/RegistrarCursos/View.jsp"; 
     }
 
 }

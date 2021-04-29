@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 
 
-@WebServlet(name = "RecordsController", urlPatterns = {"/presentation/login/show", "/presentation/login/login", "/presentation/login/logout", "/presentation/login/register","/presentation/login/showRegister"})
+@WebServlet(name = "loginController", urlPatterns = {"/presentation/login/show", "/presentation/login/login", "/presentation/login/logout", "/presentation/login/register","/presentation/login/showRegister"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request,
@@ -59,7 +59,7 @@ public class Controller extends HttpServlet {
                 return this.loginAction(request);
             } else {
                 request.setAttribute("errores", errores);
-                return "/presentation/login/View.jsp";
+                return "/presentation/login/View2.jsp";
             }
         } catch (Exception e) {
             return "/presentation/Error.jsp";
