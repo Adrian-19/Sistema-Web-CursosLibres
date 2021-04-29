@@ -83,8 +83,8 @@ public class Model {
         grupoListA.add(new Grupo("2","12:00 - 1:30", profesorList.get(1), estudianteList));
         
         grupoListB = new ArrayList<>();
-        grupoListA.add(new Grupo("3","12:00 - 1:30", profesorList.get(0), estudianteList));
-        grupoListA.add(new Grupo("4","12:00 - 1:30", profesorList.get(1), estudianteList));
+        grupoListB.add(new Grupo("3","12:00 - 1:30", profesorList.get(0), estudianteList));
+        grupoListB.add(new Grupo("4","12:00 - 1:30", profesorList.get(1), estudianteList));
         
         cursoList = new ArrayList<>();
         
@@ -186,26 +186,43 @@ public class Model {
         return p;
         }
         
-        public List<Grupo> gruposFind(Profesor p){
-            List<Grupo> grupos = new ArrayList<>();
-            
+        // Hashmap con nombre del curso como llave y lista de grupos como valor.
+        public HashMap gruposFind(Profesor p){
+            System.out.println("Buscando a profesores con id: " + p.getId());
+            HashMap<String, List<Grupo>> cursoGrupos = new HashMap();
             for(int i = 0; i<cursoList.size(); i++)
             {
+                List<Grupo> grupos = new ArrayList<>();
                 Curso c = cursoList.get(i);
-                System.out.println("size: " + c.getGrupoList().size());
+                System.out.println("Curso: " + c.getNombre());
                 for(int j = 0; j<c.getGrupoList().size(); j++)
                 {
                     Grupo g = c.getGrupoList().get(j);
-                    //System.out.println("profesor: " + g.getProfesor().getId());
                     if(g.getProfesor().getId().equals(p.getId()))
                     {
-                        // En el ID del grupo, setea el nombre del curso en el que esta el grupo;
-                        c.getGrupoList().get(j).setId(c.getNombre());
-                        grupos.add(c.getGrupoList().get(j));
+                        System.out.println("Profesor " + g.getProfesor().getId() +"; " + g.getProfesor().getNombre() +" da un curso llamado " + c.getNombre());
+                        grupos.add(g);
                     }
+                }
+                if(!grupos.isEmpty())
+                {
+                    cursoGrupos.put(c.getNombre(), grupos);
                 }
             }
             
-            return grupos;
+            return cursoGrupos;
+        }
+        
+        public Curso grupoFind(String nombreCurso, String grupoID) throws Exception{
+            for(Curso c : cursoList){
+                if(c.getNombre().equals(nombreCurso)){
+                    for(Grupo g : c.getGrupoList()){
+                        if(g.getId().equals(grupoID)){
+                            return c;
+                        }
+                    }
+                }
+            }
+            throw new Exception("Grupo no existe");
         }
 }

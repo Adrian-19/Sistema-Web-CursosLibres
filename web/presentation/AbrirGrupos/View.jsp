@@ -4,6 +4,11 @@
     Author     : DS
 --%>
 
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="cursosLibres.logic.Grupo"%>
+<%@page import="java.util.List"%>
+<%@page import="cursosLibres.abrirGrupos.Model"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,84 +19,95 @@
     </head>
     <body>
         <%@ include file="/presentation/Header.jsp" %>
-        
-        <div  class="jumbotron bg-transparent" >
-            <div class="text-center" class = "container" >
-                <h1>Abrir un nuevo grupo </h1>
-            </div>
-        </div>
-        
-        <br> 
-        
-        
-        <div class="container">
-            
-            <div class="row">
- 
-                <div class="col bg-dark ">
-                    
-                    <form class="row g-3 text-white">
-                        
-                        
-                      <div class="col-md-6">
-                          <br>
-                        <label for="inputName" class="form-label">Nombre del curso</label>
-                        <input type="text" class="form-control" id="inputNombre">
-                      </div>
-                        
-                      <div class="col-md-6">
-                          <br>
-                        <label for="inputId" class="form-label">Horario</label>
-                        <input type="text" class="form-control" id="inputCodigo">
-                      </div>
-                        
-                        <div class="col-auto my-6">
-                          <label class="mr-sm-2" for="inlineFormCustomSelect">Profesor</label>
-                          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                            <option selected>Choose...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </select>
-                        </div>
-  
-                        
-                      <div class="col-12" >
-                          <br><br>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                      </div>
-                    </form>
-                    
-                    <br>
+         <% Model model = (Model) request.getAttribute("model"); %>
+         <%List<Grupo> grupos = model.getGrupos();%>
+         <% Map<String, String> errores = (Map<String, String>) request.getAttribute("errores"); %>
+        <% Map<String, String[]> form = (errores == null) ? this.getForm(model) : request.getParameterMap();%>
 
-                </div>
+        <!-- Main Content --> 
+        <div  class="jumbotron bg-transparent text-center" >
+            <h1>Abrir un nuevo grupo </h1>
+        </div>
+
+        <div class="container main-content bg-dark text-center p-4">
+            
+        <%-- inicio del form--%>           
+            <form class="container form-horizontal text-white bg-dark col-9" >
+                <br>
                 
-                
-                
-                
-                
-                <div class="col bg-transparent">
-                    <h3>
-                       
+                <%-- Input para el profesor --%>
+                <div class="form-group">
+
+                  <label class="mr-sm-2" for="inlineFormCustomSelect">Profesor</label>
+                  <input type="text" class="form-control" id="idProfesor">
+                  <!--<select class="custom-select mr-sm-2" id="inlineFormProfesor">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>-->
+                </div>  
+
+                <div class="form-group"> <%-- hora inicio --%>
+                  <br>
+                <label for="inputId" class="form-label">Hora de inicio</label>
+                <input type="time" class="form-control" id="inputHorarioInic">
+              </div>    
+
+              <div class="form-group"> <%--hora fin --%>
+                  <br>
+                <label for="inputId" class="form-label">Hora de finalización</label>
+                <input type="time" class="form-control" id="inputHorarioFin">
+              </div>
+
+              <div class="form-group">
+                  <br><br>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <br> <br> 
+              </div>
+                  
+                  <div> <!-- Label para mostrar problemas con la hora -->
+                  <label id="errorHora"> </label>
+
+              </div>
                       
-                    </h3>                    
-
-                </div>                  
-             
-                
-            </div>
-            
-     
-            <div class="row"> 
-                <br><br>
-            
-            </div>
-            
-    
+            </form>
+          
+            <br> <br> <br> <br> 
+        <%-- fin del form--%>  
         </div>
         
-        
-        
+ 
     </body>
 </html>
 
+<%!
+    private String erroneo(String campo, Map<String, String> errores) {
+        if ((errores != null) && (errores.get(campo) != null)) {
+            return "is-invalid";
+        } else {
+            return "";
+        }
+    }
+
+    private String title(String campo, Map<String, String> errores) {
+        if ((errores != null) && (errores.get(campo) != null)) {
+            return errores.get(campo);
+        } else {
+            return "";
+        }
+    }
+
+    private Map<String, String[]> getForm(Model model) {
+        Map<String, String[]> values = new HashMap<String, String[]>();
+        values.put("idProfesor", new String[]{model.getCurrentGrupo().getId()});
+        values.put("inputHorarioInic", new String[]{model.getCurrentGrupo().getHorario()});
+        values.put("inputHorarioFin", new String[]{model.getCurrentGrupo().getHorario()});
+
+//falta list de estudiantes? 
+
+        return values;
+    }
+
+
+%> 
