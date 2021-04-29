@@ -20,7 +20,7 @@
     <body>
         <%@ include file="/presentation/Header.jsp" %>
          <% Model model = (Model) request.getAttribute("model"); %>
-         <%List<Grupo> grupos = model.getGrupos();%>
+         <%-- <%List<Grupo> grupos = model.getGrupos();%>  --%>
          <% Map<String, String> errores = (Map<String, String>) request.getAttribute("errores"); %>
         <% Map<String, String[]> form = (errores == null) ? this.getForm(model) : request.getParameterMap();%>
 
@@ -32,37 +32,31 @@
         <div class="container main-content bg-dark text-center p-4">
             
         <%-- inicio del form--%>           
-            <form class="container form-horizontal text-white bg-dark col-9" >
+            <form method="post" name="RegistroGrupos" action="/Sistema-Web-CursosLibres/presentation/AbrirGrupos/register" class="container form-horizontal text-white bg-dark col-9" >
                 <br>
                 
                 <%-- Input para el profesor --%>
                 <div class="form-group">
 
                   <label class="mr-sm-2" for="inlineFormCustomSelect">Profesor</label>
-                  <input type="text" class="form-control" id="idProfesor">
-                  <!--<select class="custom-select mr-sm-2" id="inlineFormProfesor">
-                    <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>-->
+                  <input type="text" class="form-control" name="idProfesor" value="<%=form.get("idProfesor")[0]%>"  title="<%=title("idProfesor", errores)%>" class="form_input <%=erroneo("idProfesor", errores)%>" placeholder="Cédula del profesor">
                 </div>  
 
                 <div class="form-group"> <%-- hora inicio --%>
                   <br>
                 <label for="inputId" class="form-label">Hora de inicio</label>
-                <input type="time" class="form-control" id="inputHorarioInic">
+                <input type="time" class="form-control" name="inputHorarioInic"  value="<%=form.get("inputHorarioInic")[0]%>"  title="<%=title("inputHorarioInic", errores)%>" class="form_input <%=erroneo("inputHorarioInic", errores)%>" >
               </div>    
 
               <div class="form-group"> <%--hora fin --%>
                   <br>
                 <label for="inputId" class="form-label">Hora de finalización</label>
-                <input type="time" class="form-control" id="inputHorarioFin">
+                <input type="time" class="form-control" name="inputHorarioFin"    value="<%=form.get("inputHorarioFin")[0]%>"  title="<%=title("inputHorarioFin", errores)%>" class="form_input <%=erroneo("inputHorarioFin", errores)%>">
               </div>
 
               <div class="form-group">
                   <br><br>
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="submit" class="btn btn-primary" value="Registrar">Guardar</button>
                 <br> <br> 
               </div>
                   
@@ -77,6 +71,38 @@
         <%-- fin del form--%>  
         </div>
         
+        <%--Datos al final ?   
+        <div class="text-center ">
+            <br><br>
+            <h3>Datos registrados</h3>
+            <div class="containerTabPro  text-center">
+                <table class="table table-hover table-borderless table-striped bg-dark text-white" >
+                    <thead>
+                        <tr>
+                            <th scope="col">Id del grupo</th>
+                            <th scope="col">Nombre del profesor</th>
+                            <th scope="col">Id del profesor</th>
+                            <th scope="col">Horario</th>
+                             <th scope="col">Cantidad de estudiantes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       <% for(Grupo p:grupos){%>
+                        <tr >
+                            <th scope="row"><%=p.getId()%></th>
+                            <td><%=p.getId()%></td>
+                            <td><%=p.getProfesor().getNombre() %></td>                            
+                            <td><%=p.getProfesor().getId() %></td>
+                            <td><%=p.getHorario() %></td>
+                            <td><%=p.getEstudianteList().size() %></td>
+                        </tr>            
+                        <%}%>
+
+                    </tbody>
+                </table>                                      
+            </div>                                       
+        </div>        
+        --%> 
  
     </body>
 </html>

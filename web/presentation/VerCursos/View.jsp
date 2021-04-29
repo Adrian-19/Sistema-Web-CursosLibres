@@ -4,6 +4,9 @@
     Author     : DS
 --%>
 
+<%@page import="cursosLibres.logic.Curso"%>
+<%@page import="java.util.List"%>
+<%@page import="cursosLibres.verCursos.Model"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html> 
@@ -15,120 +18,60 @@
     </head>
     <body >
         <%@ include file="/presentation/Header.jsp" %>
-        
+        <% Model model = (Model) request.getAttribute("model"); %>
+        <%List<Curso> cursos = model.getListaCursos();%>
+
         
         
         <div  class="jumbotron bg-transparent" >
             <div class="text-center" class = "container" >
                 <h1>Descubra nuestros cursos</h1>
-                <h2>Encuentre lo que busca...</h2>
-                <h6>*pendiente barra de busqueda*</h6>
+                
+                <%-- Search bar --%>
+                <div class="input-group mb-3 p-4 bg-transparent main-content">
+                  <input type="text" class="form-control" placeholder="Buscar cursos" aria-label="Buscar cursos" aria-describedby="button-addon2">
+                  <button class="btn btn-outline-primary" type="button" id="button-addon2">Search</button>
+                </div>
+               
+
             </div>
         </div>
         
         <br>  
         
         <!<!-- curso 1 -->
-        <div class="container">
+        <div method="post" class="container main-content">
             
             <div class="row">
-                
-                <div class="col">
-                    
-                    <div class="card">
-                      <img src="/Tanteando/images/logo.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Curso 1</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      </div>
-                    </div>
-                    
-                </div>
-                
-                <br>
-                
-                <div class="col">
-                    
-                    <div class="card">
-                      <img src="/Tanteando/images/logo.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Curso 2</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      </div>
-                    </div>
-                    
-                </div>
-                
-                 <div class="col">
-                    
-                    <div class="card">
-                      <img src="/Tanteando/images/logo.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Curso 3</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      </div>
-                    </div>
-                    
-                </div>
-                
-                <br>
-                
-                
-                
+                <%for (Curso c: cursos){ %>
+                    <div class="container card">
+                        <div class="main-content">
+                          <img src="/Tanteando/images/logo.jpg" class="card-img-top" alt="...">  
+                        </div>
+                        
+                          <table class="container p-4 m-5">
+                              <tbody>
+                                  <tr>
+                                   <th scope="row"> <% c.getNombre(); %> </th>   
+                                   <td> <%=c.getId()%> </td> 
+                                   <td> <%=c.getNombre() %> </td> 
+                                   <%--revisar referencia --%>
+                                   <td>
+                                        <a href="/Sistema-Web-CursosLibres/presentation/GruposDeProfesor/show"> Ver grupos </a>
+                                   </td>
+                                   <th> <%c.getTematica(); %> </th> 
+                                  </tr>                              
+                              </tbody>                        
+                          </table>                            
+                       
+                    </div>      
+                      
+                <%}%>
             </div>
-            
+ 
             <br>
-            
-           <div class="row">
-                
-                <div class="col">
-                    
-                    <div class="card">
-                      <img src="/Tanteando/images/logo.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Curso 4</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      </div>
-                    </div>
-                    
-                </div>
-                
-                <br>
-                
-                <div class="col">
-                    
-                    <div class="card">
-                      <img src="/Tanteando/images/logo.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Curso 5</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      </div>
-                    </div>
-                    
-                </div>
-                
-                 <div class="col">
-                    
-                    <div class="card">
-                      <img src="/Tanteando/images/logo.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Curso 6</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      </div>
-                    </div>
-                    
-                </div>
-                
-                <br>
-                
-                
-                
-            </div>
-            
-            <br><!-- fin -->
-            
-            
-        </div>
+    
+        </div><!-- fin -->
         
  
     </body>

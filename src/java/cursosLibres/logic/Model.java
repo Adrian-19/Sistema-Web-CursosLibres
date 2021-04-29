@@ -131,10 +131,11 @@ public class Model {
     }
     
     public Estudiante estudianteFind(String cedula) throws Exception {
-        if (estudiantes.get(cedula) != null) {
+        if (estudiantes.get(cedula) != null) {     
             return estudiantes.get(cedula);
         } else {
             throw new Exception("Estudiante no existe");
+            
         }
     }
 
@@ -196,7 +197,7 @@ public class Model {
             return cursoGrupos;
         }
         
-        public Curso grupoFind(String nombreCurso, String grupoID) throws Exception{
+        public Curso grupoFind(String nombreCurso, String grupoID) throws Exception{ 
             for(Curso c : cursoList){
                 if(c.getNombre().equals(nombreCurso)){
                     for(Grupo g : c.getGrupoList()){
@@ -208,4 +209,47 @@ public class Model {
             }
             throw new Exception("Grupo no existe");
         }
+
+
+// --- IMPLEMENTAR 
+    
+    //verifica si ya existe un grupo en un curso 
+    public boolean existeGrupo(String cursoId, String grupoId) {
+        for(Curso curso: cursoList){ //buscar el curso por su id
+            if(curso.getId() == cursoId){
+                for(Grupo g : curso.getGrupoList()){
+                    if(g.getId() == grupoId) return true; 
+                }
+            }
+        } 
+        return false; 
+    }
+    
+    //verifica que el profesor exista / retorna al profesor si lo encuentra
+    public Profesor profesorFind(String cedula) throws Exception {
+        for(Profesor p : profesorList){
+            if(p.getId() == cedula){
+                return p; 
+            }else {
+                throw new Exception("Profesor no existe");
+            }
+        }
+        return null;
+ 
+    }    
+    
+    //retorna una lista de grupos de un curso
+    public List<Grupo> gruposFind(String id) throws Exception {
+        for(Curso curso: cursoList){ //buscar el curso por su id
+            if(curso.getId() == id){
+                return curso.getGrupoList();
+            }
+        }
+        return null;
+    }
+    
+    //obtener cursos para la vista de cursos 
+    public List<Curso> getCursosList(){
+        return cursoList; 
+    }
 }
