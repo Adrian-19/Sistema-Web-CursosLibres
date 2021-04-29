@@ -20,14 +20,14 @@
     <%List<Matricula> historial = model.getHistorial();%>
     <%Estudiante estudiante = model.getEstudiante();%>
 
-    <div >
+    <div class="mb-5">
         <div class="container-fluid" > 
             <div class="position-relative">
                 <span class="d-block border-bottom border-primary" >
                     <h1 class="display-6 text-primary text-center">Datos</h1>
                 </span>
             </div>
-            <span class="d-block mw100 h-auto border-bottom border-primary " >
+            <span class="d-block mw-100 h-auto border-bottom border-primary " >
                 <dl class="row text-center">
                     <dt class="col-sm-3">ID</dt>
                     <dd class="col-sm-9 text-left"> <%=estudiante.getId()%></dd>
@@ -70,7 +70,14 @@
         <div class="d-flex justify-content-center h-25">
             <a class="btn btn-primary" href="/Sistema-Web-CursosLibres/presentation/Historial/pdf" role="button">Ver PDF</a>
         </div> 
+        <div class="d-block h-25">
 
+        </div>
+
+    </div>
+                    
+    <div class="d-block h-25">
+        <span class="mh-100"></span>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 

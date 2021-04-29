@@ -8,77 +8,121 @@ and open the template in the editor.
     Author     : emanuelle
 */
 .containerTabPro{
-    	width: 50%;
-	border-radius: 20px;
-	margin: 5em auto;
-	display: flex;   
+    width: 50%;
+    border-radius: 20px;
+    margin: 5em auto;
+    display: flex;   
 }
 
 
 .main-content{
-	width: 50%;
-	border-radius: 20px;
-	box-shadow: 0 5px 5px rgba(0,0,0,.4);
-	margin: 5em auto;
-	display: flex;
+    width: 50%;
+    border-radius: 20px;
+    box-shadow: 0 5px 5px rgba(0,0,0,.4);
+    margin: 5em auto;
+    display: flex;
 }
 .company_info{
-	background-color: #0066ff ;
-	border-top-left-radius: 20px;
-	border-bottom-left-radius: 20px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	color: #fff;
+    background-color: #0066ff ;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
 }
 
 .row > h2{
-	color:#0066ff;
+    color:#0066ff;
 }
 .login_form{
-	background-color: #fff;
-	border-top-right-radius:20px;
-	border-bottom-right-radius:20px;
-	border-top:1px solid #ccc;
-	border-right:1px solid #ccc;
+    background-color: #fff;
+    border-top-right-radius:20px;
+    border-bottom-right-radius:20px;
+    border-top:1px solid #ccc;
+    border-right:1px solid #ccc;
 
 }
 form{
-	padding: 0 2em;
+    padding: 0 2em;
 }
 .form_input{
-	width: 100%;
-	border:0px solid transparent;
-	border-radius: 0;
-	border-bottom: 1px solid #aaa;
-	padding: 1em .5em .5em;
-	padding-left: 2em;
-	outline:none;
-	margin:1.5em auto;
-	transition: all .5s ease;
+    width: 100%;
+    border:0px solid transparent;
+    border-radius: 0;
+    border-bottom: 1px solid #aaa;
+    padding: 1em .5em .5em;
+    padding-left: 2em;
+    outline:none;
+    margin:1.5em auto;
+    transition: all .5s ease;
 }
 .form_input:focus{
-	border-bottom-color: #0066ff;
-	box-shadow: 0 0 5px rgba(0,80,80,.4); 
-	border-radius: 4px;
+    border-bottom-color: #0066ff;
+    box-shadow: 0 0 5px rgba(0,80,80,.4); 
+    border-radius: 4px;
 }
 .btnRL{
-	transition: all .5s ease;
-	width: 70%;
-	border-radius: 30px;
-	color:#0066ff;
-	font-weight: 600;
-	background-color: #fff;
-	border: 1px solid #0066ff;
-	margin-top: 1.5em;
-	margin-bottom: 1em;
+    transition: all .5s ease;
+    width: 70%;
+    border-radius: 30px;
+    color:#0066ff;
+    font-weight: 600;
+    background-color: #fff;
+    border: 1px solid #0066ff;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
 }
 .btnRL:hover, .btnRL:focus{
-	background-color: #0066ff;
-	color:#fff;
+    background-color: #0066ff;
+    color:#fff;
 }
 
 input[type=text].is-invalid,input[type=password].is-invalid{
     border-color: #dc3545;
-   
+
+}
+
+#search {
+    float: right;
+    margin-top: 9px;
+    width: 250px;
+}
+
+.search {
+    padding: 5px 0;
+    width: 230px;
+    height: 30px;
+    position: relative;
+    left: 10px;
+    float: left;
+    line-height: 22px;
+}
+
+.search input {
+    position: absolute;
+    width: 0px;
+    float: Left;
+    margin-left: 210px;
+    -webkit-transition: all 0.7s ease-in-out;
+    -moz-transition: all 0.7s ease-in-out;
+    -o-transition: all 0.7s ease-in-out;
+    transition: all 0.7s ease-in-out;
+    height: 30px;
+    line-height: 18px;
+    padding: 0 2px 0 2px;
+    border-radius:1px;
+}
+
+.search:hover input, .search input:focus {
+    width: 200px;
+    margin-left: 0px;
+}
+.boton_profesor {
+    height: 30px;
+    width: 100px;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    border-radius:1px;
 }

@@ -9,19 +9,15 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import cursosLibres.logic.Usuario;
 import cursosLibres.logic.Estudiante;
 import cursosLibres.logic.Matricula;
 import java.awt.Font;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "teacherRegistrationControl", urlPatterns = {"/presentation/Historial/showRecord", "/presentation/Historial/pdf"})
+@WebServlet(name = "RecordsController", urlPatterns = {"/presentation/Historial/showRecord", "/presentation/Historial/pdf"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request,
@@ -42,6 +38,7 @@ public class Controller extends HttpServlet {
         switch (request.getServletPath()) {
             case "/presentation/Historial/showRecord":
                 viewUrl = this.showRecord(request);
+                
                 break;
             case "/presentation/Historial/pdf":
                 viewUrl = this.print(request, response);
@@ -104,7 +101,7 @@ public class Controller extends HttpServlet {
             model.setEstudiante(estudiante);
             model.setHistorial(estudiante.getHistorial());
         } catch (Exception ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            return "/presentation/Error.jsp";
         }
         return "/presentation/Historial/View.jsp";
     }

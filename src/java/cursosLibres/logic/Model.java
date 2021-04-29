@@ -147,6 +147,15 @@ public class Model {
             return false;
         }
     }
+    
+        public boolean existeProfesor(String cedula) {
+        if (profesores.get(cedula) != null) {
+            return true;
+
+        } else {
+            return false;
+        }
+    }
 
     public List<Profesor> teachersFind() throws Exception {
         List<Profesor> result = new ArrayList();
@@ -154,6 +163,14 @@ public class Model {
             result.add(p);
         }
         return result;
+    }
+    
+    public Profesor profesorFind(String cedula) throws Exception {
+        if (profesores.get(cedula) != null) {
+            return profesores.get(cedula);
+        } else {
+            throw new Exception("Estudiante no existe");
+        }
     }
         
         
