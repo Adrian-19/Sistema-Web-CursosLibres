@@ -5,7 +5,6 @@
  */
 package cursosLibres.EstudiantesDeGrupo;
 
-import cursosLibres.logic.Curso;
 import cursosLibres.logic.Estudiante;
 import cursosLibres.logic.Grupo;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.List;
  * @author adria
  */
 public class Model {
-    Curso current;
+    Grupo current;
     List<Estudiante> estudiantes;
     
     public Model(){
@@ -25,15 +24,15 @@ public class Model {
     
     public void reset(){
         estudiantes = new ArrayList<>();
-        current = new Curso();
+        current = new Grupo();
     }
     
-    public Curso getCurso() {
+    public Grupo getGrupo() {
         return current;
     }
 
-    public void setCurso(Curso curso) {
-        this.current = curso;
+    public void setGrupo(Grupo grupo) {
+        this.current = grupo;
     }
 
     public List<Estudiante> getEstudiantes() {

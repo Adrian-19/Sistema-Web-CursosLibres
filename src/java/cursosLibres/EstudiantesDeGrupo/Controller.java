@@ -5,6 +5,7 @@
  */
 package cursosLibres.EstudiantesDeGrupo;
 
+import cursosLibres.logic.Grupo;
 import cursosLibres.logic.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,7 +49,7 @@ public class Controller extends HttpServlet {
     
     public String show(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        model.getCurso().setNombre(request.getParameter("nombreCurso"));
+        model.getGrupo().setId(request.getParameter("grupoID"));
         return this.showAction(request);
     }
     
@@ -58,7 +59,9 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         try{
-            model.setCurso(domainModel.grupoFind(model.getCurso().getNombre(), request.getParameter("grupoID")));
+            model.setGrupo(domainModel.grupoFind(request.getParameter("nombreCurso"), model.getGrupo().getId()));
+            model.setEstudiantes(model.getGrupo().getEstudianteList());
+            // como conseguimos la lista de estudiantes para ponerlo en el view.jsp?
             return "/presentation/EstudiantesDeGrupo/View.jsp";
         }catch(Exception ex){
             return "";

@@ -26,9 +26,11 @@ public class UsuarioDao {
         stm.setString(1, u.getCedula());
         stm.setString(2, u.getClave());
         stm.setString(3, String.valueOf(u.getTipo()));
-        
+        stm.setString(4, "nada");
+        System.out.println(u.getClave() + " " + u.getClave() + " " + u.getTipo());
         int count=Database.instance().executeUpdate(stm);
         if (count==0){
+            System.out.println("Cliente ya existe");
             throw new Exception("Cliente ya existe");
         }
     }

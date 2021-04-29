@@ -99,9 +99,6 @@
                     </ul>
                   </li>
                 -->
-                  <li class="nav-item">
-                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Grupos/View.jsp" tabindex="-1">Grupos</a>
-                  </li>
                 </ul>
               </div>
             </div>

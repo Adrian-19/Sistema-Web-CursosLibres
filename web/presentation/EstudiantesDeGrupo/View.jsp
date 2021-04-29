@@ -40,12 +40,12 @@
                     <td><%=e.getNombre()%></td> 
                     <td><%=e.getCorreo()%></td>
                     <%for(Matricula h : e.getHistorial()){%>
-                    <%if(h.getNombreCurso().equals(model.getCurso().getNombre())){%>
-                        <td><%=h.getNota()%></td> 
+                    <%if(h.getIdGrupo().equals(model.getGrupo().getId())){%>
+                        <td><%=h.getNota()%></td>
+                        <%break;%>
                     <%}%>
                     <%}%>
                     
-                    <td> </td>
                     <td>
                         <!--Pendiente-->
                         <a href = "/Sistema-Web-CursosLibres/presentation/Calificacion/View.jsp" class = "btn btn-default" role = "button">Poner calificación</a>

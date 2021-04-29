@@ -50,17 +50,15 @@ public class Model {
         profesores = new HashMap();
         profesores.put("222", new Profesor("222", "Javier Antonio", "8876-7645", "Ingles","javier@gmail.com"));
  
-        Matricula m1 = new Matricula("Mat01","Calculo",90.00);
-        Matricula m2 = new Matricula("Mat02","Calculo I",90.00);
-        Matricula m3 = new Matricula("Mat03","Calculo II",90.00);
-        Matricula m4 = new Matricula("Mat04","Calculo III",90.00);
-        Matricula m5 = new Matricula("Mat05","Algebra Lineal",90.00);
+        Matricula m1 = new Matricula("Mat01","Calculo",90.00, "1");
+        Matricula m2 = new Matricula("Mat02","Calculo I",90.00, "2");
+        Matricula m3 = new Matricula("Mat03","Calculo II",90.00, "3");
+        Matricula m4 = new Matricula("Mat04","Calculo III",90.00, "4");
         List<Matricula> historial = new ArrayList<>();
         historial.add(m1);
         historial.add(m2);
         historial.add(m3);
         historial.add(m4);
-        historial.add(m5);
         
         
         estudiantes = new HashMap();
@@ -196,16 +194,25 @@ public class Model {
             return cursoGrupos;
         }
         
-        public Curso grupoFind(String nombreCurso, String grupoID) throws Exception{
+        public Grupo grupoFind(String nombreCurso, String grupoID) throws Exception{
             for(Curso c : cursoList){
                 if(c.getNombre().equals(nombreCurso)){
                     for(Grupo g : c.getGrupoList()){
                         if(g.getId().equals(grupoID)){
-                            return c;
+                            return g;
                         }
                     }
                 }
             }
             throw new Exception("Grupo no existe");
         }
-}
+       
+        public Curso cursoFind(String curso){
+            for(Curso c : cursoList){
+                if(c.getNombre().equals(curso)){
+                    return c;
+                }
+            }
+            return null;
+        }
+} 

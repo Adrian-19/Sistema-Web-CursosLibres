@@ -12,18 +12,21 @@ package cursosLibres.logic;
 public class Matricula {
     String idCurso;
     String nombreCurso;
+    String idGrupo;
     double nota;
 
-    public Matricula(String idCurso, String nombreCurso, double nota) {
+    public Matricula(String idCurso, String nombreCurso, double nota, String idGrupo) {
         this.idCurso = idCurso;
         this.nombreCurso = nombreCurso;
         this.nota = nota;
+        this.idGrupo = idGrupo;
     }
     
     public Matricula() {
         this.idCurso = "";
         this.nombreCurso = "";
         this.nota = 0.0;
+        this.idGrupo = "";
     }
     
     public String getIdCurso() {
@@ -48,6 +51,14 @@ public class Matricula {
 
     public void setNota(double nota) {
         this.nota = nota;
+    }
+
+    public String getIdGrupo() {
+        return idGrupo;
+    }
+
+    public void setIdGrupo(String idGrupo) {
+        this.idGrupo = idGrupo;
     }
     
     

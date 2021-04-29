@@ -36,36 +36,19 @@ public class Database {
     }
     public Connection getConnection(){
         try {
-            System.out.println("1");
-            Properties prop = new Properties();
-            System.out.println("2");
-            URL resourceUrl = getClass().getResource(PROPERTIES_FILE_NAME);
-            System.out.println("3");
-            File file = new File(resourceUrl.toURI());
-            System.out.println("4");
-            prop.load(new BufferedInputStream(new FileInputStream(file)));
-            System.out.println("5");
-            String driver = prop.getProperty("database_driver");
-            System.out.println("6");
-            String server = prop.getProperty("database_server");
-            System.out.println("7");
-            String port = prop.getProperty("database_port");
-            System.out.println("8");
-            String user = prop.getProperty("database_user");
-            System.out.println("9");
-            String password = prop.getProperty("database_password");
-            System.out.println("10");
-            String database = prop.getProperty("database_name");
-            System.out.println("11");
+            String driver= "com.mysql.cj.jdbc.Driver";
+            String server= "localhost";
+            String port="3306";
+            String user="root";
+            String password= "LinksMajora9719";
+            String database = "cursoslibres";
             String URL_conexion="jdbc:mysql://"+ server+":"+port+"/"+
-
             database+"?user="+user+"&password="+password+"&serverTimezone=UTC&useSSL=False ";            
-
-            System.out.println("12");
 
             Class.forName(driver).newInstance();
             return DriverManager.getConnection(URL_conexion);
         } catch (Exception e) {
+            System.out.println("excepcion en getConnection");
             System.err.println(e.getMessage());
             System.exit(-1);
         } 
@@ -80,6 +63,7 @@ public class Database {
             statement.executeUpdate();
             return statement.getUpdateCount();
         } catch (SQLException ex) {
+            System.out.println("Error en Execute update");
             return 0;
         }
     }
@@ -87,6 +71,7 @@ public class Database {
         try {
             return statement.executeQuery();
         } catch (SQLException ex) {
+            System.out.println("Error en executequery");
         }
         return null;
     }    
