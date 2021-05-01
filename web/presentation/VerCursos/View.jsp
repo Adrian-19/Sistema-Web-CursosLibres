@@ -8,19 +8,21 @@
 <%@page import="java.util.List"%>
 <%@page import="cursosLibres.verCursos.Model"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
+
 <!DOCTYPE html>
-<html> 
+ 
     <head>
          <%@ include file="/presentation/Head.jsp" %>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title> Cursos </title>
     </head>
-    <body >
+    
         <%@ include file="/presentation/Header.jsp" %>
         <% Model model = (Model) request.getAttribute("model"); %>
         <%List<Curso> cursos = model.getListaCursos();%>
-
         
         
         <div  class="jumbotron bg-transparent" >
@@ -46,7 +48,7 @@
                 <%for (Curso c: cursos){ %>
                     <div class="container card">
                         <div class="main-content">
-                          <img src="/Tanteando/images/logo.jpg" class="card-img-top" alt="...">  
+                          <img src="/Sistema-Web-CursosLibres/images/logo.jpg" class="card-img-top" alt="...">  
                         </div>
                         
                           <table class="container p-4 m-5">
@@ -57,8 +59,30 @@
                                    <td> <%=c.getNombre() %> </td> 
                                    <%--revisar referencia --%>
                                    <td>
-                                        <a href="/Sistema-Web-CursosLibres/presentation/Grupos/show?nombreCurso=<%=c.getNombre()%>"> Ver grupos </a>
+                                    <a href="/Sistema-Web-CursosLibres/presentation/Grupos/show?cursoId=<%=c.getId()%>"> Ver grupos </a> 
                                    </td>
+                                   
+                                   <%if(model.getUsuario() != null){ %>
+                                        <%if (model.getUsuario().getTipo() ==0 ) { %>
+
+                                        <td>
+                                         <a href="/Sistema-Web-CursosLibres/presentation/AbrirGrupos/show"> Abrir grupos </a> 
+                                        </td>
+
+                                        <%}%>
+
+                                   <%}%>
+                                   
+                                   <td>
+                                       
+                                       <!-- Controller de abrir grupo --- codigo-> el código de este curso que se está imprimiendo -->
+                                       <!--<!--  tag =====> ver grupos      |    tag ====> crear un nuevo grupo  -->
+                                       
+                                       <%--<a href="/Sistema-Web-CursosLibres/presentation/abrirGrupos/show ?nombreCurso=<%=c.getNombre()%>"> Ver grupos </a> --%>
+                                   </td>
+                                   <!-- if (usuario.getTipo !=0) { -->
+                                   <!-- estudiante y profesor ver los grupos de un curso  -->
+                                   
                                    <th> <%c.getTematica(); %> </th> 
                                   </tr>                              
                               </tbody>                        
@@ -74,5 +98,5 @@
         </div><!-- fin -->
         
  
-    </body>
-</html>
+    
+

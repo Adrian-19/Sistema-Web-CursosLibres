@@ -6,6 +6,7 @@
 package cursosLibres.verCursos;
 
 import cursosLibres.logic.Curso;
+import cursosLibres.logic.Usuario;
 import cursosLibres.verCursos.Model; 
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -42,7 +44,7 @@ public class Controller extends HttpServlet {
         request.setAttribute("model", new Model());
         
         String viewUrl = "";
-        //la página de guardar un nuevo grupo tiene como acciones guardar y mostrar *
+        
         switch (request.getServletPath()) {
              case "/presentation/VerCursos/show": 
                 viewUrl = this.show(request); //se llama al método show para mostrar
@@ -105,8 +107,13 @@ public class Controller extends HttpServlet {
             List<Curso> list = service.getListaCursos(); 
             model.setListaCursos(list);
             
+            HttpSession session = request.getSession(true);
+            Usuario usuario = (Usuario) session.getAttribute("usuario");
+            model.setUsuario(usuario);
+            
+           
+            
         } catch(Exception e){
-           Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
 
         }
         
