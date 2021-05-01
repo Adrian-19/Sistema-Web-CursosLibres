@@ -40,7 +40,7 @@
         <br>  
         
         <!<!-- curso 1 -->
-        <div method="post" class="container main-content">
+        <div class="container main-content">
             
             <div class="row">
                 <%for (Curso c: cursos){ %>

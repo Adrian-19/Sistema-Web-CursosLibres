@@ -243,7 +243,7 @@ public class Model {
     }
     
     //verifica que el profesor exista / retorna al profesor si lo encuentra
-    public Profesor profesorFind(String cedula) throws Exception {
+    public Profesor profesorFindd(String cedula)  throws Exception { //
         for(Profesor p : profesorList){
             if(p.getId() == cedula){
                 return p; 

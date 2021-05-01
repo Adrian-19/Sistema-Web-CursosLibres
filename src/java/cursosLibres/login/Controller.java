@@ -109,7 +109,7 @@ public class Controller extends HttpServlet {
 //                    viewUrl = "/presentation/Index.jsp";
 //                break;
 //            }
-            return "/presentation/VerCursos/View.jsp";
+            return "/presentation/VerCursos/show";
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
@@ -128,7 +128,7 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession(true);
         session.removeAttribute("usuario");
         session.invalidate();
-        return "/presentation/VerCursos/View.jsp";
+        return "/presentation/VerCursos/show";
     }
 
     public String show(HttpServletRequest request) {

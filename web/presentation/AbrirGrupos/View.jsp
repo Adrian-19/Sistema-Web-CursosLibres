@@ -4,6 +4,7 @@
     Author     : DS
 --%>
 
+<%@page import="cursosLibres.logic.Curso"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="cursosLibres.logic.Grupo"%>
@@ -21,6 +22,7 @@
         <%@ include file="/presentation/Header.jsp" %>
          <% Model model = (Model) request.getAttribute("model"); %>
          <%-- <%List<Grupo> grupos = model.getGrupos();%>  --%>
+         <%List<Curso> cursos = model.getCursos();%>
          <% Map<String, String> errores = (Map<String, String>) request.getAttribute("errores"); %>
         <% Map<String, String[]> form = (errores == null) ? this.getForm(model) : request.getParameterMap();%>
 
@@ -34,7 +36,8 @@
         <%-- inicio del form--%>           
             <form method="post" name="RegistroGrupos" action="/Sistema-Web-CursosLibres/presentation/AbrirGrupos/register" class="container form-horizontal text-white bg-dark col-9" >
                 <br>
-                
+                      
+         
                 <%-- Input para el profesor --%>
                 <div class="form-group">
 

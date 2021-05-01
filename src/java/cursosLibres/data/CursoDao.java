@@ -51,7 +51,7 @@ public class CursoDao {
     public Curso from (ResultSet rs){
         try{
             Curso c = new Curso();
-            c.setId(String.valueOf(rs.getInt("id")));
+            c.setId(String.valueOf(rs.getInt("codigo")));
             c.setNombre(rs.getString("nombre"));
             c.setTematica(rs.getString("tematica"));
             c.setCosto(rs.getInt("costo"));
@@ -60,5 +60,21 @@ public class CursoDao {
         }catch (SQLException ex) {
             return null;
         }
+    }
+    
+    
+    
+    // 
+    public List<Curso> findAll(){
+        List<Curso> cursos = new ArrayList<>(); 
+        String sql = "select * from cursos"; 
+        
+        try{
+            PreparedStatement stm = Database.instance().prepareStatement(sql); 
+            ResultSet rs = Database.instance().executeQuery(stm); 
+            while(rs.next()){ cursos.add(from(rs)); }
+        } catch (SQLException ex) { }
+        
+        return cursos; 
     }
 }

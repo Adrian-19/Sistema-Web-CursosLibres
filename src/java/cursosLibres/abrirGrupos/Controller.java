@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +39,7 @@ public class Controller extends HttpServlet {
         request.setAttribute("model", new Model());
         
         String viewUrl = "";
-        //la página de guardar un nuevo grupo tiene como acciones guardar y mostrar *
+        
         switch (request.getServletPath()) {
              case "/presentation/AbrirGrupos/show": 
                 viewUrl = this.show(request); //se llama al método show para mostrar
@@ -47,7 +49,7 @@ public class Controller extends HttpServlet {
                 break;  
         }
         
-        request.getRequestDispatcher(viewUrl).forward(request, response); // para qué se usa? 
+        request.getRequestDispatcher(viewUrl).forward(request, response); 
 
     
     }
@@ -123,13 +125,12 @@ public class Controller extends HttpServlet {
                 return "/presentation/AbrirGrupos/View.jsp"; 
             }
         } catch (Exception e) {
-            return "/presentation/AbrirGrupos/View.jsp";
-            //return "/presentation/Error.jsp"; //??
+            return "/presentation/Error.jsp"; //??
         }
  
     }
     
-    //No muestra errores**
+   
      Map<String, String> validarRegistro(HttpServletRequest request) {
          Map<String, String> errores = new HashMap<>();
 
@@ -137,9 +138,7 @@ public class Controller extends HttpServlet {
             errores.put("idProfesor", "Dato requerido"); 
         }
          
-        
-         //se ha usado un label para el error de hora // probar
-         if (request.getParameter("inputHorarioInic").isEmpty()) {
+        if (request.getParameter("inputHorarioInic").isEmpty()) {
             errores.put("errorHora", "Dato requerido"); //como poner esto para ints? 
         }
         if (request.getParameter("inputHorarioFin").isEmpty()) {
@@ -154,16 +153,20 @@ public class Controller extends HttpServlet {
             errores.put("errorHora", "La hora del curso no está correcta.");         }
         //
         
+        if(request.getParameter("nombreCurso").isEmpty() || request.getParameter("nombreCurso").equals("Seleccionar")){
+            errores.put("nombreCurso", "Seleccionar"); 
+        }
+        
         return errores; 
          
      }
      
-     //funciona **
+     
     void updateModelRegister(HttpServletRequest request) {
         Model model = (Model)request.getAttribute("model"); 
         
         //ID
-        //model.getCurrent().setId("autoincrement"); // Cómo agregar el autoincrement? // en la base de datos?
+        // en la base de datos?
         
         //Hora
         String inic = request.getParameter("inputHorarioInic"); 
@@ -181,24 +184,17 @@ public class Controller extends HttpServlet {
     
     private String registerAction(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        cursosLibres.logic.Service domainModel = cursosLibres.logic.Service.instance(); 
+        //cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
         HttpSession session = request.getSession(true); // sesión 
         
-        String id = ""; // como recuperar el id si es incremental ???
+        String id = "";
+        
         try {
-            //Programar: si no existe el grupo en ese curso, entonces agreguelo
-            
-            
-//            if(!domainModel.existeGrupo(id)){
-//                String idIncre = ""; 
-//                Profesor prof = domainModel.profesorFind(model.getCurrentGrupo().getProfesor().getId()); 
-//                String horario = model.getCurrentGrupo().getHorario(); 
-//                
-//                //lista de estudiantes ? 
-//                
-//                
-//                
-//            }
+            //Programar: si no existe el grupo en ese curso, entonces agregarlo
+            if(!domainModel.existeGrupo()){
+                
+            }
             
         } catch (Exception e){
             

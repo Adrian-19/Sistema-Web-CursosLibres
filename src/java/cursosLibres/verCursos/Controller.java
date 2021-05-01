@@ -99,9 +99,10 @@ public class Controller extends HttpServlet {
     }
     private String showAction(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model"); 
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance(); 
+        
         try {
-            List<Curso> list = domainModel.getCursosList(); 
+            List<Curso> list = service.getListaCursos(); 
             model.setListaCursos(list);
             
         } catch(Exception e){
