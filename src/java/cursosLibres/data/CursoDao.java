@@ -34,6 +34,19 @@ public class CursoDao {
         }
     }
     
+    public Curso read(String id) throws Exception{
+        String sql="select * from Cursos where codigo=?";
+        PreparedStatement stm = Database.instance().prepareStatement(sql);
+        stm.setInt(1, Integer.valueOf(id));
+        ResultSet rs =  Database.instance().executeQuery(stm);           
+        if (rs.next()) {
+            return from(rs);
+        }
+        else{
+            throw new Exception ("Curso no Existe");
+        }
+    }
+    
     public Curso findByNombre(String nombre){
         Curso c = null;
         String sql ="select * from Cursos where nombre=?";
@@ -48,10 +61,12 @@ public class CursoDao {
         return c;
     }
     
+    
+    
     public Curso from (ResultSet rs){
         try{
             Curso c = new Curso();
-            c.setId(String.valueOf(rs.getInt("id")));
+            c.setId(String.valueOf(rs.getInt("codigo")));
             c.setNombre(rs.getString("nombre"));
             c.setTematica(rs.getString("tematica"));
             c.setCosto(rs.getInt("costo"));

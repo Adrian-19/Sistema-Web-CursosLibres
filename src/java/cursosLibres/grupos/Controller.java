@@ -37,8 +37,8 @@ public class Controller extends HttpServlet {
           case "/presentation/Grupos/show":
               viewUrl = this.show(request);
               break;
-//          case "/presentation/Grupos/matricular":
-//              viewUrl = 
+          case "/presentation/Grupos/matricular":
+              viewUrl = this.matricular(request);
         }          
         request.getRequestDispatcher(viewUrl).forward( request, response); 
     }
@@ -78,17 +78,28 @@ public class Controller extends HttpServlet {
             if(usuario != null){
                 Estudiante e = domainModel.estudianteFind(usuario.getCedula());
                 if(e == null){return "/presentation/Grupos/View.jsp";}
-                
+                model.setListaGrupos(this.listaFinal(e, request));
             }
             return "/presentation/Grupos/View.jsp";
         }catch(Exception ex){
             return "";
         }
     }
-
-    public List<Grupo> listaFinal(Estudiante est){
-        //List<Grupo> lista =  new ArrayList<>();
-        return new ArrayList<>();
+    
+    // Elimina los grupos en los que ya el estudiante esta matriculado
+    public List<Grupo> listaFinal(Estudiante est, HttpServletRequest request){
+        Model model = (Model) request.getAttribute("model");
+        List<Grupo> listaFin =  model.getListaGrupos();
+        for(Matricula m : est.getHistorial()){
+            String grupo = m.getIdGrupo();
+            for(Grupo a : listaFin){
+                if(a.getId().equals(grupo)){
+                    listaFin.remove(a);
+                    break;
+                }
+            }
+        }
+        return listaFin;
     }
 
     

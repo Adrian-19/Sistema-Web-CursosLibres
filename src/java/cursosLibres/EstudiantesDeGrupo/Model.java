@@ -7,6 +7,7 @@ package cursosLibres.EstudiantesDeGrupo;
 
 import cursosLibres.logic.Estudiante;
 import cursosLibres.logic.Grupo;
+import cursosLibres.logic.Matricula;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,8 @@ import java.util.List;
 public class Model {
     Grupo current;
     List<Estudiante> estudiantes;
-    
+    Matricula matricula;
+    List<Matricula> listaMatriculas;
     public Model(){
         this.reset();
     }
@@ -25,6 +27,8 @@ public class Model {
     public void reset(){
         estudiantes = new ArrayList<>();
         current = new Grupo();
+        matricula = new Matricula();
+        listaMatriculas = new ArrayList<>();
     }
     
     public Grupo getGrupo() {
@@ -41,6 +45,22 @@ public class Model {
 
     public void setEstudiantes(List<Estudiante> estudiantes) {
         this.estudiantes = estudiantes;
+    }
+
+    public Matricula getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(Matricula matricula) {
+        this.matricula = matricula;
+    }
+
+    public List<Matricula> getListaMatriculas() {
+        return listaMatriculas;
+    }
+
+    public void setListaMatriculas(List<Matricula> listaMatriculas) {
+        this.listaMatriculas = listaMatriculas;
     }
     
     

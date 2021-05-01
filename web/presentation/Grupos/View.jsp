@@ -9,10 +9,10 @@
 <!-- Pedir al model del MVC si existe un usuario logeado -->
 <!-- Recibir el nombre del curso  -->
 
-<%@page import = "cursosLibres.Grupos.Model"%>
+<%@page import = "cursosLibres.grupos.Model"%>
 <%
-    Model model = request.getAttribute("model");
-    List<Grupo> grupos = model.getGrupos();
+    Model model = (Model) request.getAttribute("model");
+    List<Grupo> grupos = model.getListaGrupos();
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

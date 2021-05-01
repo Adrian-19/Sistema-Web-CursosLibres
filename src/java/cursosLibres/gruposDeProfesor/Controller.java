@@ -45,7 +45,7 @@ public class Controller extends HttpServlet {
     public String showAction(HttpServletRequest request) {
         
         Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
         // En login action de Login se guarda el Usuario logeado en en un HttpSession.
         HttpSession session = request.getSession(true);
         // Se obtiene el usuario guardado en la sesion y se almacena en "usuario"
@@ -53,7 +53,7 @@ public class Controller extends HttpServlet {
         Profesor profesor;
         try {
             // Busca el profesor de acuerdo con el usuario logeado
-            profesor = domainModel.profesorFind(usuario);
+            profesor = service.get(usuario);
         } catch (Exception ex) {
             profesor=null;
         }
@@ -63,7 +63,7 @@ public class Controller extends HttpServlet {
             // id del profesor seleccionado.
             // select * from Grupos where idProfesor = <profesor.getCedula()>;
             
-            model.setGrupos(domainModel.gruposFind(profesor));
+            model.setGrupos(service.search(profesor));
             return "/presentation/GruposDeProfesor/View.jsp";
         } catch (Exception ex) {
             return "";

@@ -14,12 +14,14 @@ public class Matricula {
     String nombreCurso;
     String idGrupo;
     double nota;
-
-    public Matricula(String idCurso, String nombreCurso, double nota, String idGrupo) {
+    String idEstudiante;
+    
+    public Matricula(String idCurso, String nombreCurso, double nota, String idGrupo, String idEstudiante) {
         this.idCurso = idCurso;
         this.nombreCurso = nombreCurso;
         this.nota = nota;
         this.idGrupo = idGrupo;
+        this.idEstudiante = idEstudiante;
     }
     
     public Matricula() {
@@ -27,6 +29,7 @@ public class Matricula {
         this.nombreCurso = "";
         this.nota = 0.0;
         this.idGrupo = "";
+        this.idEstudiante = "";
     }
     
     public String getIdCurso() {
@@ -59,6 +62,14 @@ public class Matricula {
 
     public void setIdGrupo(String idGrupo) {
         this.idGrupo = idGrupo;
+    }
+
+    public String getIdEstudiante() {
+        return idEstudiante;
+    }
+
+    public void setIdEstudiante(String idEstudiante) {
+        this.idEstudiante = idEstudiante;
     }
     
     
