@@ -19,6 +19,7 @@ import java.util.List;
  * @author adria
  */
 public class GrupoDao {
+    
     public void create(Grupo g, Curso c) throws Exception{
         CursoDao cd = new CursoDao();
         String sql = "insert into Grupos(horario, idProfesor, codigoCurso)"

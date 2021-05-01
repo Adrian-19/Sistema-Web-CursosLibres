@@ -1,5 +1,5 @@
 package cursosLibres.logic;
-
+import cursosLibres.data.CursoDao;
 import cursosLibres.data.EstudianteDao;
 import cursosLibres.data.GrupoDao;
 import cursosLibres.data.ProfesorDao;
@@ -23,21 +23,36 @@ public class Service {
 
     private UsuarioDao usuarioDao;
     private ProfesorDao profesorDao;
-    private GrupoDao grupoDao;
+
+    //* Cursos y Grupos 
+    private CursoDao cursoDao; 
+    private GrupoDao grupoDao; 
+    
+
     private MatriculaDao matriculaDao;
     private EstudianteDao estudianteDao;
-    
+
     public Service(){
+
+        cursoDao = new CursoDao(); 
+
         usuarioDao = new UsuarioDao();
         profesorDao = new ProfesorDao();
         grupoDao = new GrupoDao();
         matriculaDao = new MatriculaDao();
         estudianteDao = new EstudianteDao();
+
+
     }
 
     // ------------ USUARIO ------------- 
     public void add(Usuario u) throws Exception{
         usuarioDao.create(u);
+    }
+    
+    // ------------ CURSOS ------------- 
+    public List<Curso> getListaCursos() {
+       return cursoDao.findAll();   
     }
     
     // ------------ PROFESORES -------------
@@ -61,14 +76,14 @@ public class Service {
         return grupoDao.read(id);
     }
     
-    // ------------ CURSOS -------------
-    
-    public Curso get(Grupo g) throws Exception{
-        return new Curso();
+    public boolean existeGrupo(){
+        
+        return true; 
     }
+
+    
     
     // ---------- MATRICULAS -------------
-    
     public List<Matricula> findByGrupo(Grupo g){
         return matriculaDao.findByGrupo(g.getId());
     }

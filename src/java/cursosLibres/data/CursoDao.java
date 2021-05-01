@@ -76,4 +76,20 @@ public class CursoDao {
             return null;
         }
     }
+    
+    
+    
+    // 
+    public List<Curso> findAll(){
+        List<Curso> cursos = new ArrayList<>(); 
+        String sql = "select * from cursos"; 
+        
+        try{
+            PreparedStatement stm = Database.instance().prepareStatement(sql); 
+            ResultSet rs = Database.instance().executeQuery(stm); 
+            while(rs.next()){ cursos.add(from(rs)); }
+        } catch (SQLException ex) { }
+        
+        return cursos; 
+    }
 }
