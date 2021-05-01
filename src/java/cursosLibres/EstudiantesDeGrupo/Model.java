@@ -20,6 +20,7 @@ public class Model {
     List<Estudiante> estudiantes;
     Matricula matricula;
     List<Matricula> listaMatriculas;
+    
     public Model(){
         this.reset();
     }

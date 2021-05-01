@@ -35,6 +35,18 @@ public class MatriculaDao {
         return r;
     } 
     
+    public void updateNota(Matricula m) throws Exception{
+        String sql = "update Matriculas set calificacion=? where idGrupo=? and idEstudiante=?";
+        PreparedStatement stm = Database.instance().prepareStatement(sql);
+        stm.setInt(1, (int)m.getNota());
+        stm.setInt(2, Integer.valueOf(m.getIdGrupo()));
+        stm.setInt(3, Integer.valueOf(m.getIdEstudiante()));
+        int count=Database.instance().executeUpdate(stm);
+        if (count==0){
+            throw new Exception("Matricula no existe");
+        }
+    }
+    
     public Matricula from(ResultSet rs){
         try{
             Matricula m = new Matricula();

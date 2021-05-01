@@ -73,4 +73,7 @@ public class Service {
         return matriculaDao.findByGrupo(g.getId());
     }
     
+    public void updateNota(Matricula m) throws Exception{
+        matriculaDao.updateNota(m);
+    }
 }

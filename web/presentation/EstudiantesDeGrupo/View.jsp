@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="cursosLibres.logic.Matricula"%>
 <%@page import="cursosLibres.logic.Estudiante"%>
@@ -14,6 +15,7 @@
     Model model = (Model) request.getAttribute("model");
     List<Estudiante> estudiantes = model.getEstudiantes();
     Map<String, String> errores = (Map<String, String>) request.getAttribute("errores");
+    Map<String,String[]> form = (errores==null)?this.getForm(model):request.getParameterMap();
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -44,13 +46,14 @@
                     <td><%=e.getCorreo()%></td>
                     <%for(Matricula m : model.getListaMatriculas()){%>
                         <%if(m.getIdEstudiante().equals(e.getId())){%>
+                        <%model.setMatricula(m);%>
                             <td><%=m.getNota()%></td>
                         <%}%>
                     <%}%>
                     <td>
-                        <form method ="post" name="Calificar" action ="/Sistema-Web-CursosLibres/presentation/EstudiantesDeGrupo/matricular">
-                            <input type ="text" class ="form-control" name = "calificacion" placeholder="Agregar calificacion">
-                            <button type ="submit" class ="btn btn-warning" value ="Registrar">Guardar</button>
+                        <form method ="post" name="Calificacion" action ="/Sistema-Web-CursosLibres/presentation/EstudiantesDeGrupo/calificar?grupoID=<%=model.getMatricula().getIdGrupo()%>&estudianteID=<%=model.getMatricula().getIdEstudiante()%>">
+                            <input type ="text" name = "calificarFld" value="<%=form.get("calificarFld")[0]%>" title ="<%=title("calificarFld",errores)%>" class = "form_input <%=erroneo("calificarFld",errores)%>" placeholder="Agregar calificacion">
+                            <button type ="submit" class ="btn btn-warning" value ="Calificar">Guardar</button>
                         </form>
                         <!--Pendiente
                         <a href = "/Sistema-Web-CursosLibres/presentation/Calificacion/View.jsp" class = "btn btn-default" role = "button">Poner calificación</a>
@@ -63,3 +66,24 @@
     </body>
 </html>
 
+<%!
+    private String erroneo(String campo, Map<String,String> errores){
+      if ( (errores!=null) && (errores.get(campo)!=null) )
+        return "is-invalid";
+      else
+        return "";
+    }
+    
+    private String title(String campo, Map<String,String> errores){
+      if ( (errores!=null) && (errores.get(campo)!=null) )
+        return errores.get(campo);
+      else
+        return "";
+    }
+
+    private Map<String,String[]> getForm(Model model){
+       Map<String,String[]> values = new HashMap<String,String[]>();
+       values.put("calificarFld", new String[]{String.valueOf(model.getMatricula().getNota())});
+       return values;
+    }
+%>
