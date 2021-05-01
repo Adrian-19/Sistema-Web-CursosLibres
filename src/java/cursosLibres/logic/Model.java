@@ -255,7 +255,10 @@ public class Model {
     }
     
     //verifica que el profesor exista / retorna al profesor si lo encuentra
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0261d0f6e30c5a8c526f3dc9eb3a2c32643ddae7
     public Profesor profesorFindd(String cedula)  throws Exception { //
         for(Profesor p : profesorList){
             if(p.getId() == cedula){
@@ -266,8 +269,12 @@ public class Model {
         }
         return null;
  
+<<<<<<< HEAD
     }    
 
+=======
+    }  
+>>>>>>> 0261d0f6e30c5a8c526f3dc9eb3a2c32643ddae7
 //    public Profesor profesorFind(String cedula) throws Exception {
 //        for(Profesor p : profesorList){
 //            if(p.getId() == cedula){
@@ -278,7 +285,10 @@ public class Model {
 //        }
 //        return null;
 //    }    
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0261d0f6e30c5a8c526f3dc9eb3a2c32643ddae7
     
     //retorna una lista de grupos de un curso
     public List<Grupo> gruposFind(String id) throws Exception {

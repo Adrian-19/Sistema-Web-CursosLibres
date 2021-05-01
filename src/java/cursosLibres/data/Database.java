@@ -40,7 +40,11 @@ public class Database {
             String server= "localhost";
             String port="3306";
             String user="root";
+<<<<<<< HEAD
             String password= "root";
+=======
+            String password= "admin1907";
+>>>>>>> 0261d0f6e30c5a8c526f3dc9eb3a2c32643ddae7
             String database = "cursoslibres";
             String URL_conexion="jdbc:mysql://"+ server+":"+port+"/"+
             database+"?user="+user+"&password="+password+"&serverTimezone=UTC&useSSL=False ";            
