@@ -4,9 +4,16 @@
     Author     : adria
 --%>
 
+<%@page import="cursosLibres.logic.Grupo"%>
+<%@page import="java.util.List"%>
 <!-- Pedir al model del MVC si existe un usuario logeado -->
 <!-- Recibir el nombre del curso  -->
 
+<%@page import = "cursosLibres.grupos.Model"%>
+<%
+    Model model = (Model) request.getAttribute("model");
+    List<Grupo> grupos = model.getListaGrupos();
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,13 +36,13 @@
                     <th>Horario</th>
                     <th> </th>
                 </tr>
-                <% for(int i = 0; i<10; i++) {%> <!-- Recorrer lista de grupos del curso seleccionado -->
+                <% for(Grupo g : grupos) {%> <!-- Recorrer lista de grupos del curso seleccionado -->
                 <tr>
-                    <td><%=i%></td>
-                    <td>Adrian</td> 
-                    <td>12:30 - 4:20</td>
+                    <td><%=g.getId()%></td>
+                    <td><%=g.getProfesor().getNombre()%></td> 
+                    <td><%=g.getHorario()%></td>
                     <td>
-                        <button class = "btn btn-primary">Matricular</button>
+                        <a href="/Sistema-Web-CursosLibres/presentation/Grupos/matricular?grupoID=<%=g.getId()%>" class = "btn btn-default" role ="button"> Matricularme </a>
                     </td>
                 </tr>
                 <%}%>

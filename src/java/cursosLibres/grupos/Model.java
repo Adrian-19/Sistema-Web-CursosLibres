@@ -6,6 +6,10 @@
 package cursosLibres.grupos;
 
 import cursosLibres.logic.Curso;
+import cursosLibres.logic.Estudiante;
+import cursosLibres.logic.Grupo;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,4 +17,44 @@ import cursosLibres.logic.Curso;
  */
 public class Model {
     Curso current;
+    List<Grupo> listaGrupos;
+    Estudiante estudiante;
+
+    public Model(Curso current, List<Grupo> listaGrupos, Estudiante estudiante) {
+        this.current = current;
+        this.listaGrupos = listaGrupos;
+        this.estudiante = estudiante;
+    }
+
+    public Model(){
+        this.current = new Curso();
+        this.listaGrupos = new ArrayList<>();
+        this.estudiante = new Estudiante();
+    }
+    
+    public Curso getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Curso current) {
+        this.current = current;
+    }
+
+    public List<Grupo> getListaGrupos() {
+        return listaGrupos;
+    }
+
+    public void setListaGrupos(List<Grupo> listaGrupos) {
+        this.listaGrupos = listaGrupos;
+    }
+
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
+    }
+    
+    
 }

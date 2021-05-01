@@ -93,8 +93,8 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession(true);
         try {
             Usuario real = domainModel.usuarioFind(model.getCurrent().getCedula(), model.getCurrent().getClave());
-
-           // service.add(real);
+            System.out.println("Real: " + real.getCedula() + " | " + real.getClave());
+            //service.add(real);
 
             session.setAttribute("usuario", real);
 //            String viewUrl = "";
@@ -109,7 +109,7 @@ public class Controller extends HttpServlet {
 //                    viewUrl = "/presentation/Index.jsp";
 //                break;
 //            }
-            return "/presentation/VerCursos/View.jsp";
+            return "/presentation/VerCursos/show";
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
@@ -128,7 +128,7 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession(true);
         session.removeAttribute("usuario");
         session.invalidate();
-        return "/presentation/VerCursos/View.jsp";
+        return "/presentation/VerCursos/show";
     }
 
     public String show(HttpServletRequest request) {

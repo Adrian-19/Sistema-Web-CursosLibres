@@ -31,4 +31,30 @@ public class ProfesorDao {
 //            throw new Exception("Cliente ya existe");
 //        }
     }
+    
+    public Profesor read (String id) throws Exception{
+        String sql = "select * from Profesores where id=?";
+        PreparedStatement stm = Database.instance().prepareStatement(sql);
+        stm.setInt(1, Integer.valueOf(id));
+        ResultSet rs =  Database.instance().executeQuery(stm);           
+        if (rs.next()) {
+            return from(rs);
+        }
+        else{
+            throw new Exception ("Profesor no Existe");
+        }
+    }
+    
+    public Profesor from (ResultSet rs){
+        try {
+            Profesor r= new Profesor();
+            r.setId(String.valueOf(rs.getInt("id")));
+            r.setNombre(rs.getString("nombre"));
+            r.setEspecialidad(String.valueOf(rs.getString("especialidad")));
+            r.setTelefono(String.valueOf(rs.getInt("telefono")));
+            return r;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
 }

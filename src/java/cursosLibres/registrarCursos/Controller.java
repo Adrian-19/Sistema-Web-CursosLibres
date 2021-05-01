@@ -3,27 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cursosLibres.EstudiantesDeGrupo;
+package cursosLibres.registrarCursos;
 
-import cursosLibres.logic.Estudiante;
-import cursosLibres.logic.Grupo;
-import cursosLibres.logic.Matricula;
-import cursosLibres.logic.Usuario;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author adria
+ * @author ESCINF
  */
-@WebServlet(name = "EstudiantesDeGrupoController", urlPatterns = {"/presentation/EstudiantesDeGrupo/show"})
+@WebServlet(name = "ControllerRegCursos", urlPatterns = {"/presentation/RegistrarCursos/show"})
 public class Controller extends HttpServlet {
 
     /**
@@ -38,39 +32,21 @@ public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         request.setAttribute("model", new Model());
-        String viewUrl="";     
+        
+        String viewUrl = "";
+        //la página de guardar un nuevo grupo tiene como acciones guardar y mostrar *
         switch (request.getServletPath()) {
-          case "/presentation/EstudiantesDeGrupo/show":
-              viewUrl = this.show(request);
-              break;
-        } 
+             case "/presentation/RegistrarCursos/show": 
+                viewUrl = this.show(request); //se llama al método show para mostrar
+                break;
+        }
         
         request.getRequestDispatcher(viewUrl).forward( request, response); 
+
     }
-    
-    public String show(HttpServletRequest request) {
-        return this.showAction(request);
-    }
-    
-    public String showAction(HttpServletRequest request) {
-        Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
-        try{
-            model.setGrupo(service.getGrupo(request.getParameter("grupoID")));
-            List<Matricula> matriculas = service.findByGrupo(model.getGrupo());
-            model.setListaMatriculas(matriculas);
-            List<Estudiante> estudiantes = new ArrayList<>();
-            for(Matricula m : matriculas){
-                estudiantes.add(service.getEstudiante(m.getIdEstudiante()));
-            }
-            model.setEstudiantes(estudiantes);
-            return "/presentation/EstudiantesDeGrupo/View.jsp";
-        }catch(Exception ex){
-            return "";
-        }
-    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -109,5 +85,22 @@ public class Controller extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private String show(HttpServletRequest request) {
+        return this.showAction(request);
+    }
+
+    private String showAction(HttpServletRequest request) {
+        Model model = (Model) request.getAttribute("model"); 
+        model.getCurrentCurso().setCosto(0);
+        model.getCurrentCurso().setEstado("");
+        model.getCurrentCurso().setId("");
+        model.getCurrentCurso().setGrupoList(null);
+        model.getCurrentCurso().setLogo("");
+        model.getCurrentCurso().setNombre("");
+        model.getCurrentCurso().setTematica("");
+        
+        return "/presentation/RegistrarCursos/View.jsp"; 
+    }
 
 }

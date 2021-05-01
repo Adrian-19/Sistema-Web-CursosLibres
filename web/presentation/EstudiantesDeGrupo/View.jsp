@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="java.util.Map"%>
 <%@page import="cursosLibres.logic.Matricula"%>
 <%@page import="cursosLibres.logic.Estudiante"%>
 <%@page import="java.util.List"%>
@@ -12,6 +13,7 @@
 <%
     Model model = (Model) request.getAttribute("model");
     List<Estudiante> estudiantes = model.getEstudiantes();
+    Map<String, String> errores = (Map<String, String>) request.getAttribute("errores");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,7 +21,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@ include file="/presentation/Head.jsp" %>
-        <title>JSP Page</title>
+        <title>Mis Grupos</title>
     </head>
     <body>
         <%@ include file="/presentation/Header.jsp" %>
@@ -38,17 +40,21 @@
                 <tr>
                     <td><%=e.getId()%></td>
                     <td><%=e.getNombre()%></td> 
+                    <td><%=e.getTelefono()%></td>
                     <td><%=e.getCorreo()%></td>
-                    <%for(Matricula h : e.getHistorial()){%>
-                    <%if(h.getNombreCurso().equals(model.getCurso().getNombre())){%>
-                        <td><%=h.getNota()%></td> 
+                    <%for(Matricula m : model.getListaMatriculas()){%>
+                        <%if(m.getIdEstudiante().equals(e.getId())){%>
+                            <td><%=m.getNota()%></td>
+                        <%}%>
                     <%}%>
-                    <%}%>
-                    
-                    <td> </td>
                     <td>
-                        <!--Pendiente-->
+                        <form method ="post" name="Calificar" action ="/Sistema-Web-CursosLibres/presentation/EstudiantesDeGrupo/matricular">
+                            <input type ="text" class ="form-control" name = "calificacion" placeholder="Agregar calificacion">
+                            <button type ="submit" class ="btn btn-warning" value ="Registrar">Guardar</button>
+                        </form>
+                        <!--Pendiente
                         <a href = "/Sistema-Web-CursosLibres/presentation/Calificacion/View.jsp" class = "btn btn-default" role = "button">Poner calificación</a>
+                        -->
                     </td>
                 </tr>
                 <%}%>
@@ -56,3 +62,4 @@
         </div>
     </body>
 </html>
+

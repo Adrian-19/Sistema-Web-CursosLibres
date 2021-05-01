@@ -5,15 +5,20 @@
  */
 package cursosLibres.verCursos;
 
+import cursosLibres.logic.Curso;
 import cursosLibres.verCursos.Model; 
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.logging.Level;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -43,6 +48,9 @@ public class Controller extends HttpServlet {
                 viewUrl = this.show(request); //se llama al método show para mostrar
                 break;
         }
+        
+        request.getRequestDispatcher(viewUrl).forward( request, response); 
+
         
     }
 
@@ -90,6 +98,18 @@ public class Controller extends HttpServlet {
 
     }
     private String showAction(HttpServletRequest request) {
+        Model model = (Model) request.getAttribute("model"); 
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance(); 
+        
+        try {
+            List<Curso> list = service.getListaCursos(); 
+            model.setListaCursos(list);
+            
+        } catch(Exception e){
+           Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
+
+        }
+        
         return "/presentation/VerCursos/View.jsp";
     }
 

@@ -6,10 +6,13 @@
 
 package cursosLibres.abrirGrupos; 
 
+import cursosLibres.logic.Profesor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +25,7 @@ import javax.servlet.http.HttpSession;
  * @author DS
  */
 
-@WebServlet(name = "Controller", urlPatterns = {"/presentation/AbrirGrupos/show"})
+@WebServlet(name = "Controller", urlPatterns = {"/presentation/AbrirGrupos/show", "/presentation/AbrirGrupos/register"})
 public class Controller extends HttpServlet {
 
     /**
@@ -36,17 +39,17 @@ public class Controller extends HttpServlet {
         request.setAttribute("model", new Model());
         
         String viewUrl = "";
-        //la página de guardar un nuevo grupo tiene como acciones guardar y mostrar *
+        
         switch (request.getServletPath()) {
              case "/presentation/AbrirGrupos/show": 
                 viewUrl = this.show(request); //se llama al método show para mostrar
                 break;
-            case "/presentation/AbrirGrupos/guardar": 
+            case "/presentation/AbrirGrupos/register": 
                 viewUrl = this.guardarGrupo(request); //para guardar un nuevo grupo
                 break;  
         }
         
-        request.getRequestDispatcher(viewUrl).forward(request, response); // para qué se usa? 
+        request.getRequestDispatcher(viewUrl).forward(request, response); 
 
     
     }
@@ -116,17 +119,18 @@ public class Controller extends HttpServlet {
             Map<String, String> errores = this.validarRegistro(request); 
             if(errores.isEmpty()) {
                 this.updateModelRegister(request); 
-                return this.registerAction(request); 
+                return this.registerAction(request);  
             } else {
                 request.setAttribute("errores", errores); 
-                return "/presentation/AbrirGrupos/View.jsp"; // ? 
+                return "/presentation/AbrirGrupos/View.jsp"; 
             }
         } catch (Exception e) {
-            return "/presentation/Error.jsp";
+            return "/presentation/Error.jsp"; //??
         }
  
     }
     
+   
      Map<String, String> validarRegistro(HttpServletRequest request) {
          Map<String, String> errores = new HashMap<>();
 
@@ -134,9 +138,7 @@ public class Controller extends HttpServlet {
             errores.put("idProfesor", "Dato requerido"); 
         }
          
-        
-         //se ha usado un label para el error de hora // probar
-         if (request.getParameter("inputHorarioInic").isEmpty()) {
+        if (request.getParameter("inputHorarioInic").isEmpty()) {
             errores.put("errorHora", "Dato requerido"); //como poner esto para ints? 
         }
         if (request.getParameter("inputHorarioFin").isEmpty()) {
@@ -151,15 +153,20 @@ public class Controller extends HttpServlet {
             errores.put("errorHora", "La hora del curso no está correcta.");         }
         //
         
+        if(request.getParameter("nombreCurso").isEmpty() || request.getParameter("nombreCurso").equals("Seleccionar")){
+            errores.put("nombreCurso", "Seleccionar"); 
+        }
+        
         return errores; 
          
      }
+     
      
     void updateModelRegister(HttpServletRequest request) {
         Model model = (Model)request.getAttribute("model"); 
         
         //ID
-        //model.getCurrent().setId("autoincrement"); // Cómo agregar el autoincrement? // en la base de datos?
+        // en la base de datos?
         
         //Hora
         String inic = request.getParameter("inputHorarioInic"); 
@@ -171,16 +178,23 @@ public class Controller extends HttpServlet {
         
         //lista de estudiantes ?
         model.getCurrentGrupo().setEstudianteList(new ArrayList<>() );
+        
     }
 
     
     private String registerAction(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        cursosLibres.logic.Service domainModel = cursosLibres.logic.Service.instance(); 
+        //cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
         HttpSession session = request.getSession(true); // sesión 
         
+        String id = "";
+        
         try {
-            //if(!domainModel )
+            //Programar: si no existe el grupo en ese curso, entonces agregarlo
+            if(!domainModel.existeGrupo()){
+                
+            }
             
         } catch (Exception e){
             
@@ -189,7 +203,7 @@ public class Controller extends HttpServlet {
         
         return null;
     }
-    
+
     
 
 }

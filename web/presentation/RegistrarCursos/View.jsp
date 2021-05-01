@@ -21,40 +21,40 @@
             </div>
         </div>
 
-        <div class="container main-content bg-dark">
+        <div  class="container main-content bg-dark">
              <form class="container row g-3 text-white form-horizontal m-4">
 
 
               <div class="form-group col-md-6 text-center">
                   <br>
                 <label for="inputNombre" class="form-label">Nombre del curso</label>
-                <input type="text" class="form-control" id="inputNombre">
+                <input type="text" class="form-control" name="inputNombre">
               </div>
 
 
                <div class="form-group col-md-6 text-center">
                    <br>
                 <label for="inputTematica" class="form-label">Tematica</label>
-                <input type="text" class="form-control" id="inputTematica">
+                <input type="text" class="form-control" name="inputTematica">
                </div>
 
 
               <div class="form-group col-md-6 text-center">
                 <label class="form-label">Costo</label>
-                <input type="text" class="form-control" id="inputCosto">
+                <input type="text" class="form-control" name="inputCosto">
               </div>
 
 
                  <div class="form-group col-md-12">
                   <label for="LogoFile">Logo del curso</label>
-                  <input type="file" class="form-control-file" id="LogoFile">
+                  <input type="file" class="form-control-file" name="LogoFile">
                 </div>                       
 
                 <div class="form-group col-md-6">
                     <br>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="habilitado">
+                      <input class="form-check-input" type="radio"name="habilitado">
                       <label class="form-check-label" for="habilitado">
                         Habilitado
                       </label>
@@ -63,7 +63,7 @@
                     <br>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="deshabilitado" checked>
+                      <input class="form-check-input" type="radio" name="deshabilitado" checked>
                       <label class="form-check-label" for="deshabilitado">
                         Deshabilitado
                       </label>

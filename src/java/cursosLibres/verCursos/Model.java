@@ -5,10 +5,44 @@
  */
 package cursosLibres.verCursos;
 
+import cursosLibres.logic.Curso;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author DS
  */
 public class Model {
+    List<Curso> cursos; 
+    Curso currentCurso; 
     
+    public Model(){
+        this.reset(); 
+    }
+    
+    public void reset() {
+        List<Curso> rows = new ArrayList<>(); 
+        this.setListaCursos(rows); 
+        setCurrentCurso(new Curso()); 
+        
+    }
+    
+    //Cursos list
+    public List<Curso> getListaCursos(){
+        return cursos; 
+    }
+    
+    public void setListaCursos(List<Curso> c){
+        cursos = c; 
+    }
+    
+    //current curso
+    public Curso getCurrentCurso(){
+        return currentCurso; 
+    }
+    
+    public void setCurrentCurso(Curso c){
+        currentCurso = c; 
+    }
 }

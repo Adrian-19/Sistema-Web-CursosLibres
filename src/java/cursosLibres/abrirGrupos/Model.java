@@ -5,6 +5,7 @@
  */
 package cursosLibres.abrirGrupos;
 
+import cursosLibres.logic.Curso;
 import cursosLibres.logic.Grupo;
 import cursosLibres.logic.Usuario;
 import java.util.ArrayList;
@@ -18,8 +19,9 @@ import java.util.List;
  */
 public class Model {
 
-    List<Grupo> grupos; 
     Grupo currentGrupo; 
+    String cursoId; //? 
+    List<Curso> listaCursos;  //para asociarlo a un curso 
 
     
     public Model(){
@@ -28,20 +30,11 @@ public class Model {
     
     public void reset(){
        List<Grupo> rows = new ArrayList<>(); 
-       this.setGrupos(rows); 
        setCurrentGrupo(new Grupo()); 
+       cursoId =""; 
 
     }
     
-    //lista de grupos
-    public List<Grupo> getGrupos() {
-        return grupos;
-    }
-        
-    public void setGrupos(List<Grupo> grupos) {
-        this.grupos = grupos;
-    }   
- 
     //grupo actual 
     public Grupo getCurrentGrupo() {
         return currentGrupo;
@@ -51,4 +44,23 @@ public class Model {
         this.currentGrupo = current;
     }
     
+    //Id del curso 
+    // conseguir este string por el método get
+    //se usa para buscar el curso al cual pertenece este grupo en el domain Model
+    public String getIdCurso(){
+        return cursoId; 
+    }
+    
+    public void setIdCurso(String s){
+        cursoId= s; 
+    }
+    
+    //lista cursos 
+    public List<Curso> getCursos(){
+        return listaCursos; 
+    }
+    
+    public void setListaCursos(List<Curso> c){
+        listaCursos = c; 
+    }
 }
