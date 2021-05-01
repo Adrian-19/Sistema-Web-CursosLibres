@@ -245,7 +245,9 @@ public class Controller extends HttpServlet {
             Estudiante estudianteNue = new Estudiante(cedula,nombre,telefono,correo,new ArrayList<>());
             
             
-            domainModel.agregarEstudiante(estudianteNue); //
+            domainModel.agregarEstudiante(estudianteNue);
+            cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+            service.add(nuevo);
             domainModel.agregarUsuario(nuevo);           //
             session.setAttribute("usuario", domainModel.usuarioFind(cedula,clave));
             return "/presentation/VerCursos/View.jsp";
