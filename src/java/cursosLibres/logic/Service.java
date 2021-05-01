@@ -1,9 +1,4 @@
 package cursosLibres.logic;
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 0261d0f6e30c5a8c526f3dc9eb3a2c32643ddae7
 import cursosLibres.data.CursoDao;
 import cursosLibres.data.EstudianteDao;
 import cursosLibres.data.GrupoDao;
@@ -28,37 +23,26 @@ public class Service {
 
     private UsuarioDao usuarioDao;
     private ProfesorDao profesorDao;
-<<<<<<< HEAD
 
     //* Cursos y Grupos 
     private CursoDao cursoDao; 
     private GrupoDao grupoDao; 
     
-=======
-    
-    //* Cursos y Grupos 
-    private CursoDao cursoDao; 
-    private GrupoDao grupoDao; 
->>>>>>> 0261d0f6e30c5a8c526f3dc9eb3a2c32643ddae7
+
     private MatriculaDao matriculaDao;
     private EstudianteDao estudianteDao;
 
     public Service(){
- 
-<<<<<<< HEAD
-=======
+
         cursoDao = new CursoDao(); 
->>>>>>> 0261d0f6e30c5a8c526f3dc9eb3a2c32643ddae7
+
         usuarioDao = new UsuarioDao();
         profesorDao = new ProfesorDao();
         grupoDao = new GrupoDao();
         matriculaDao = new MatriculaDao();
         estudianteDao = new EstudianteDao();
-<<<<<<< HEAD
-        cursoDao = new CursoDao(); 
-        
-=======
->>>>>>> 0261d0f6e30c5a8c526f3dc9eb3a2c32643ddae7
+
+
     }
 
     // ------------ USUARIO ------------- 
@@ -71,11 +55,6 @@ public class Service {
        return cursoDao.findAll();   
     }
     
-<<<<<<< HEAD
-   
-    
-=======
->>>>>>> 0261d0f6e30c5a8c526f3dc9eb3a2c32643ddae7
     // ------------ PROFESORES -------------
     
     public Profesor get(Usuario u) throws Exception{
