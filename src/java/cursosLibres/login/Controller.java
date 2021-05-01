@@ -93,8 +93,8 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession(true);
         try {
             Usuario real = domainModel.usuarioFind(model.getCurrent().getCedula(), model.getCurrent().getClave());
-
-           // service.add(real);
+            System.out.println("Real: " + real.getCedula() + " | " + real.getClave());
+            //service.add(real);
 
             session.setAttribute("usuario", real);
 //            String viewUrl = "";

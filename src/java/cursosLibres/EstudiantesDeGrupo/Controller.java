@@ -5,9 +5,13 @@
  */
 package cursosLibres.EstudiantesDeGrupo;
 
+import cursosLibres.logic.Estudiante;
+import cursosLibres.logic.Grupo;
+import cursosLibres.logic.Matricula;
 import cursosLibres.logic.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,18 +51,21 @@ public class Controller extends HttpServlet {
     }
     
     public String show(HttpServletRequest request) {
-        Model model = (Model) request.getAttribute("model");
-        model.getCurso().setNombre(request.getParameter("nombreCurso"));
         return this.showAction(request);
     }
     
     public String showAction(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
-        HttpSession session = request.getSession(true);
-        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
         try{
-            model.setCurso(domainModel.grupoFind(model.getCurso().getNombre(), request.getParameter("grupoID")));
+            model.setGrupo(service.getGrupo(request.getParameter("grupoID")));
+            List<Matricula> matriculas = service.findByGrupo(model.getGrupo());
+            model.setListaMatriculas(matriculas);
+            List<Estudiante> estudiantes = new ArrayList<>();
+            for(Matricula m : matriculas){
+                estudiantes.add(service.getEstudiante(m.getIdEstudiante()));
+            }
+            model.setEstudiantes(estudiantes);
             return "/presentation/EstudiantesDeGrupo/View.jsp";
         }catch(Exception ex){
             return "";

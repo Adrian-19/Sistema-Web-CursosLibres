@@ -33,7 +33,7 @@ public class Model {
     
     List<Profesor> profesorList;
     List<Estudiante> estudianteList;
-    
+    List<Estudiante> estudianteListB; 
     List<Grupo> grupoListA ;
     List<Grupo> grupoListB ;
     
@@ -49,22 +49,20 @@ public class Model {
 
         profesores = new HashMap();
         profesores.put("222", new Profesor("222", "Javier Antonio", "8876-7645", "Ingles","javier@gmail.com"));
- 
-        Matricula m1 = new Matricula("Mat01","Calculo",90.00);
-        Matricula m2 = new Matricula("Mat02","Calculo I",90.00);
-        Matricula m3 = new Matricula("Mat03","Calculo II",90.00);
-        Matricula m4 = new Matricula("Mat04","Calculo III",90.00);
-        Matricula m5 = new Matricula("Mat05","Algebra Lineal",90.00);
-        List<Matricula> historial = new ArrayList<>();
-        historial.add(m1);
-        historial.add(m2);
-        historial.add(m3);
-        historial.add(m4);
-        historial.add(m5);
-        
-        
-        estudiantes = new HashMap();
-        estudiantes.put("555", new Estudiante("555","Melany","8989-8989","melany@gmail.com",historial));
+// 
+////        Matricula m1 = new Matricula("Mat01","Calculo",90.00, "1");
+////        Matricula m2 = new Matricula("Mat02","Calculo I",90.00, "2");
+////        Matricula m3 = new Matricula("Mat03","Calculo II",90.00, "3");
+////        Matricula m4 = new Matricula("Mat04","Calculo III",90.00, "4");
+////        List<Matricula> historial = new ArrayList<>();
+////        historial.add(m1);
+////        historial.add(m2);
+////        historial.add(m3);
+////        historial.add(m4);
+//        
+//        
+//        estudiantes = new HashMap();
+//        estudiantes.put("555", new Estudiante("555","Melany","8989-8989","melany@gmail.com",historial));
         //HashMap<String,List<String>> favoritas;
         favoritas = new HashMap();
         favoritas.put("111", Arrays.asList(new String[]{"2-111-11"}));
@@ -78,13 +76,15 @@ public class Model {
         estudianteList.add(new Estudiante("444", "Roberto", "3333333","roberto@gmail.com",new ArrayList<>()));
         estudianteList.add(new Estudiante("555", "Ashley", "4444444","ashley@gmail.com",new ArrayList<>()));
         
+        estudianteListB = new ArrayList<>();
+        
         grupoListA = new ArrayList<>();
         grupoListA.add(new Grupo("1","12:00 - 1:30", profesorList.get(0), estudianteList));
         grupoListA.add(new Grupo("2","12:00 - 1:30", profesorList.get(1), estudianteList));
         
         grupoListB = new ArrayList<>();
-        grupoListB.add(new Grupo("3","12:00 - 1:30", profesorList.get(0), estudianteList));
-        grupoListB.add(new Grupo("4","12:00 - 1:30", profesorList.get(1), estudianteList));
+        grupoListB.add(new Grupo("3","12:00 - 1:30", profesorList.get(0), estudianteListB));
+        grupoListB.add(new Grupo("4","12:00 - 1:30", profesorList.get(1), estudianteListB));
         
         cursoList = new ArrayList<>();
         
@@ -214,18 +214,30 @@ public class Model {
             return cursoGrupos;
         }
         
-        public Curso grupoFind(String nombreCurso, String grupoID) throws Exception{ 
+
+        public Grupo grupoFind(String nombreCurso, String grupoID) throws Exception{
             for(Curso c : cursoList){
                 if(c.getNombre().equals(nombreCurso)){
                     for(Grupo g : c.getGrupoList()){
                         if(g.getId().equals(grupoID)){
-                            return c;
+                            return g;
                         }
                     }
                 }
             }
             throw new Exception("Grupo no existe");
         }
+
+       
+        public Curso cursoFind(String curso){
+            for(Curso c : cursoList){
+                if(c.getNombre().equals(curso)){
+                    return c;
+                }
+            }
+            return null;
+        }
+
 
 
 // --- IMPLEMENTAR 
@@ -243,6 +255,7 @@ public class Model {
     }
     
     //verifica que el profesor exista / retorna al profesor si lo encuentra
+<<<<<<< HEAD
     public Profesor profesorFindd(String cedula)  throws Exception { //
         for(Profesor p : profesorList){
             if(p.getId() == cedula){
@@ -254,6 +267,18 @@ public class Model {
         return null;
  
     }    
+=======
+//    public Profesor profesorFind(String cedula) throws Exception {
+//        for(Profesor p : profesorList){
+//            if(p.getId() == cedula){
+//                return p; 
+//            }else {
+//                throw new Exception("Profesor no existe");
+//            }
+//        }
+//        return null;
+//    }    
+>>>>>>> e9f95ae02a2539b31b93a9d3298153fea50c845e
     
     //retorna una lista de grupos de un curso
     public List<Grupo> gruposFind(String id) throws Exception {

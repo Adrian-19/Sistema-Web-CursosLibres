@@ -18,7 +18,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
                 
-              <a class="navbar-brand" href="/Sistema-Web-CursosLibres/presentation/Index.jsp">CursosLibres</a>
+              <a class="navbar-brand" href="/Sistema-Web-CursosLibres/presentation/VerCursos/show">CursosLibres</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -99,9 +99,6 @@
                     </ul>
                   </li>
                 -->
-                  <li class="nav-item">
-                    <a class="nav-link active" href="/Sistema-Web-CursosLibres/presentation/Grupos/View.jsp" tabindex="-1">Grupos</a>
-                  </li>
                 </ul>
               </div>
             </div>

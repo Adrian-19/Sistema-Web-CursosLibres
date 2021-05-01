@@ -57,7 +57,7 @@
                                    <td> <%=c.getNombre() %> </td> 
                                    <%--revisar referencia --%>
                                    <td>
-                                        <a href="/Sistema-Web-CursosLibres/presentation/GruposDeProfesor/show"> Ver grupos </a>
+                                        <a href="/Sistema-Web-CursosLibres/presentation/Grupos/show?nombreCurso=<%=c.getNombre()%>"> Ver grupos </a>
                                    </td>
                                    <th> <%c.getTematica(); %> </th> 
                                   </tr>                              
