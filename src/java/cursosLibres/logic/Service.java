@@ -5,6 +5,7 @@ import cursosLibres.data.GrupoDao;
 import cursosLibres.data.ProfesorDao;
 import cursosLibres.data.UsuarioDao;
 import cursosLibres.data.MatriculaDao;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -55,6 +56,29 @@ public class Service {
        return cursoDao.findAll();   
     }
     
+    public boolean existeCurso(String stringBusqueda) throws Exception {
+        if (cursoDao.read(stringBusqueda) != null) {
+            return true;
+
+        } else {
+            return false;
+        }        
+    }
+    
+    public Curso getCurso(String id) throws Exception {
+       return cursoDao.read(id); 
+    }
+    
+    public Curso getCursoNom(String nom) throws Exception {
+       return cursoDao.findByNombre(nom); 
+      
+    }
+    
+    
+    public List<Curso> getLikeCursos(String nom) throws SQLException {
+        return cursoDao.getLikeCursos(nom);
+    }
+
     // ------------ PROFESORES -------------
     
     public Profesor get(Usuario u) throws Exception{
@@ -91,4 +115,8 @@ public class Service {
     public void updateNota(Matricula m) throws Exception{
         matriculaDao.updateNota(m);
     }
+
+
+
+
 }
