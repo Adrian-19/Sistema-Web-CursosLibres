@@ -20,6 +20,17 @@ import java.util.List;
  */
 public class MatriculaDao {
   
+    public void create(Matricula m) throws Exception{
+        String sql = "insert into matriculas (idEstudiante, idGrupo)"
+                + "values(?,?)";
+        PreparedStatement stm = Database.instance().prepareStatement(sql);
+        stm.setInt(1, Integer.valueOf(m.getIdEstudiante()));
+        stm.setInt(2, Integer.valueOf(m.getIdGrupo()));
+        int count=Database.instance().executeUpdate(stm);
+        if (count==0){
+            throw new Exception("Curso ya existe");
+        }
+    }
     
     public List<Matricula> findByGrupo(String id){
         List<Matricula> r = new ArrayList<>();
@@ -34,6 +45,20 @@ public class MatriculaDao {
         } catch (SQLException ex) { }
         return r;
     } 
+    
+    public List<Matricula> findByEstudiante(Estudiante e){
+        List<Matricula> r = new ArrayList<>();
+        String sql = "select * from matriculas where idEstudiante=?";
+        try {        
+            PreparedStatement stm = Database.instance().prepareStatement(sql);
+            stm.setInt(1, Integer.valueOf(e.getId()));   
+            ResultSet rs =  Database.instance().executeQuery(stm); 
+            while (rs.next()) {
+                r.add(from(rs));
+            }
+        } catch (SQLException ex) { }
+        return r;
+    }
     
     public void updateNota(Matricula m) throws Exception{
         String sql = "update Matriculas set calificacion=? where idGrupo=? and idEstudiante=?";

@@ -55,6 +55,10 @@ public class Service {
        return cursoDao.findAll();   
     }
     
+    public Curso getCurso(String codigo) throws Exception{
+        return cursoDao.read(codigo);
+    }
+    
     // ------------ PROFESORES -------------
     
     public Profesor get(Usuario u) throws Exception{
@@ -76,6 +80,10 @@ public class Service {
         return grupoDao.read(id);
     }
     
+    public List<Grupo> getGruposByCurso(Curso c) throws Exception{
+        return grupoDao.findByCurso(c);
+    }
+    
     public boolean existeGrupo(){
         
         return true; 
@@ -84,11 +92,19 @@ public class Service {
     
     
     // ---------- MATRICULAS -------------
+    public void add(Matricula m) throws Exception{
+        matriculaDao.create(m);
+    }
+    
     public List<Matricula> findByGrupo(Grupo g){
         return matriculaDao.findByGrupo(g.getId());
     }
     
     public void updateNota(Matricula m) throws Exception{
         matriculaDao.updateNota(m);
+    }
+    
+    public List<Matricula> findByEstudiante(Estudiante e){
+        return matriculaDao.findByEstudiante(e);
     }
 }
