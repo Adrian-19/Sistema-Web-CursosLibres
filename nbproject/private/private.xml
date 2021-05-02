@@ -5,38 +5,22 @@
             <url>src/java/cursosLibres/grupos/Controller.java</url>
             <bookmark id="1">
                 <name/>
-                <line>50</line>
+                <line>47</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Service.java</file>
-            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/teacherRegistration/Controller.java</file>
-            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/web/presentation/login/viewRegister.jsp</file>
-            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/web/presentation/GruposDeProfesor/View.jsp</file>
-            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/grupos/Controller.java</file>
-            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/data/ProfesorDao.java</file>
-            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/web/presentation/EstudiantesDeGrupo/View.jsp</file>
-            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/data/MatriculaDao.java</file>
-            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/web/presentation/Header.jsp</file>
-            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/EstudiantesDeGrupo/Controller.java</file>
             <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/login/Controller.java</file>
-            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/EstudiantesDeGrupo/Model.java</file>
-=======
-            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/verCursos/Model.java</file>
-            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/data/CursoDao.java</file>
-            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/verCursos/Controller.java</file>
-            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Service.java</file>
-            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/web/presentation/VerCursos/View.jsp</file>
-            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/teacherRegistration/Model.java</file>
-            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/teacherRegistration/Controller.java</file>
-            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/web/presentation/teacherRegistration/View.jsp</file>
-            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/web/presentation/Header.jsp</file>
-            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Model.java</file>
->>>>>>> dbcd2bee085ab1a9f995987d30a16cb538cec2e5
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/web/presentation/VerCursos/View.jsp</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/data/MatriculaDao.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/grupos/Model.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/web/presentation/Grupos/View.jsp</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/data/GrupoDao.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/data/CursoDao.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/grupos/Controller.java</file>
+            <file>file:/C:/Users/adria/Documents/NetBeansProjects/Progra%20IV/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Service.java</file>
         </group>
     </open-files>
 </project-private>
