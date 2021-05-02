@@ -18,6 +18,7 @@ public class Model {
     List<Curso> cursos; 
     Curso currentCurso; 
     Usuario user; 
+    String stringBusqueda; 
     
     public Model(){
         this.reset(); 
@@ -27,6 +28,8 @@ public class Model {
         List<Curso> rows = new ArrayList<>(); 
         this.setListaCursos(rows); 
         setCurrentCurso(new Curso()); 
+        setUsuario(new Usuario());
+        setStringBusqueda(""); 
         
     }
     
@@ -55,4 +58,16 @@ public class Model {
     public Usuario getUsuario(){
         return user; 
     }
+    
+    //Busqueda
+
+    public void setStringBusqueda(String stringBusqueda) {
+        this.stringBusqueda = stringBusqueda;
+    }
+
+    public String getStringBusqueda() {
+        return stringBusqueda;
+    }
+
+    
 }

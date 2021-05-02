@@ -30,11 +30,17 @@
                 <h1>Descubra nuestros cursos</h1>
                 
                 <%-- Search bar --%>
-                <div class="input-group mb-3 p-4 bg-transparent main-content">
-                  <input type="text" class="form-control" placeholder="Buscar cursos" aria-label="Buscar cursos" aria-describedby="button-addon2">
-                  <button class="btn btn-outline-primary" type="button" id="button-addon2">Search</button>
-                </div>
+                
                
+                <div class="p-4 bg-transparent main-content">
+                   <form action="/Sistema-Web-CursosLibres/presentation/VerCursos/buscar"  method="post" class="form-inline">
+                   <input type="text" class="form-control" placeholder="Buscar cursos" name="busqCursos"  id="busqCursos">
+                   <button type="submit" class=" btn-outline-primary" >Search</button>                       
+                   </form>
+                   
+
+                </div>
+
 
             </div>
         </div>
@@ -45,7 +51,7 @@
         <div class="container main-content">
             
             <div class="row">
-                <%for (Curso c: cursos){ %>
+                <%for (Curso c: model.getListaCursos()){ %>
                     <div class="container card">
                         <div class="main-content">
                           <img src="/Sistema-Web-CursosLibres/images/logo.jpg" class="card-img-top" alt="...">  
@@ -62,28 +68,13 @@
                                     <a href="/Sistema-Web-CursosLibres/presentation/Grupos/show?cursoId=<%=c.getId()%>"> Ver grupos </a> 
                                    </td>
                                    
-                                   <%if(model.getUsuario() != null){ %>
-                                        <%if (model.getUsuario().getTipo() ==0 ) { %>
-
+                                   <%if(model.getUsuario() != null && model.getUsuario().getTipo() == 0){ %>
                                         <td>
-                                         <a href="/Sistema-Web-CursosLibres/presentation/AbrirGrupos/show"> Abrir grupos </a> 
+                                         <a href="/Sistema-Web-CursosLibres/presentation/AbrirGrupos/show?cursoId=<%=c.getId()%>"> Abrir grupos </a> 
                                         </td>
-
-                                        <%}%>
 
                                    <%}%>
                                    
-                                   <td>
-                                       
-                                       <!-- Controller de abrir grupo --- codigo-> el código de este curso que se está imprimiendo -->
-                                       <!--<!--  tag =====> ver grupos      |    tag ====> crear un nuevo grupo  -->
-                                       
-                                       <%--<a href="/Sistema-Web-CursosLibres/presentation/abrirGrupos/show ?nombreCurso=<%=c.getNombre()%>"> Ver grupos </a> --%>
-                                   </td>
-                                   <!-- if (usuario.getTipo !=0) { -->
-                                   <!-- estudiante y profesor ver los grupos de un curso  -->
-                                   
-                                   <th> <%c.getTematica(); %> </th> 
                                   </tr>                              
                               </tbody>                        
                           </table>                            
@@ -97,6 +88,3 @@
     
         </div><!-- fin -->
         
- 
-    
-
