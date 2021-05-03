@@ -26,9 +26,19 @@
         <%@ include file="/presentation/Header.jsp" %>
         <hr>
         <div class = "container">
-            <h1 class = "page-header">Grupos del curso <!-- Nombre del curso seleccionado --></h1>
-        </div>
-        <div class = "container">
+            <div class = "row">
+                <div class = "col-md-6">
+                    <h1 class = "page-header">Grupos del curso <!-- Nombre del curso seleccionado --></h1>
+                    <h3><%=model.getCurrent().getNombre()%></h3>
+                </div>
+                <div class ="col-md-6">
+                    <%if(model.getMatriculaExitosa() == 1){%>
+                        <div class="alert alert-success" role="alert">
+                            Matricula exitosa!
+                        </div> 
+                    <%}%>
+                </div>
+            </div>
             <table class = "table table-primary table-striped table-hover">
                 <tr>
                     <th>ID</th>
@@ -43,11 +53,11 @@
                     <td><%=g.getId()%></td>
                     <td><%=g.getProfesor().getNombre()%></td> 
                     <td><%=g.getHorario()%></td>
+                    <% if(model.getMatriculado() != 1){%>
                     <td>
-                        <% if(model.getMatriculado() != 1){%>
-                            <a href="/Sistema-Web-CursosLibres/presentation/Grupos/matricular?grupoID=<%=g.getId()%>&cursoId=<%=model.getCurrent().getId()%>" class = "btn btn-default" role ="button"> Matricularme </a>
-                        <%}%>
+                        <a href="/Sistema-Web-CursosLibres/presentation/Grupos/matricular?grupoID=<%=g.getId()%>&cursoId=<%=model.getCurrent().getId()%>&exitoso=1" class = "btn btn-default" role ="button"> Matricularme </a>
                     </td>
+                    <%}%>
                 </tr>
                 <%}%>
             </table>

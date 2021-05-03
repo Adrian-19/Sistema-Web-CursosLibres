@@ -102,12 +102,6 @@ public class Service {
         return grupoDao.findByCurso(c);
     }
     
-    public boolean existeGrupo(){
-        
-        return true; 
-    }
-
-    
     
     // ---------- MATRICULAS -------------
     public void add(Matricula m) throws Exception{
