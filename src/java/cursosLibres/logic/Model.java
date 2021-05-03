@@ -88,9 +88,9 @@ public class Model {
         
         cursoList = new ArrayList<>();
         
-        cursoList.add(new Curso("111","Pintura en Tela", 1500, "logo", "arte", grupoListA, "En oferta"));
+        cursoList.add(new Curso("1","Pintura en Tela", 1500, "logo", "arte", grupoListA, "En oferta"));
         
-        cursoList.add(new Curso("222","Programacion", 3500, "logo", "mate", grupoListB, "En oferta"));
+        cursoList.add(new Curso("2","Programacion", 3500, "logo", "mate", grupoListB, "En oferta"));
     }
 
     public void agregarUsuario(Usuario usuario) {
@@ -231,7 +231,7 @@ public class Model {
        
         public Curso cursoFind(String curso){
             for(Curso c : cursoList){
-                if(c.getNombre().equals(curso)){
+                if(c.getId().equals(curso)){
                     return c;
                 }
             }

@@ -61,6 +61,20 @@ public class GrupoDao {
         return hm;
     }
     
+    public List<Grupo> findByCurso(Curso c) throws Exception{
+        List<Grupo> r = new ArrayList<>();
+        String sql = "select * from Grupos where codigoCurso=?";
+        try{
+            PreparedStatement stm = Database.instance().prepareStatement(sql);
+            stm.setInt(1, Integer.valueOf(c.getId()));
+            ResultSet rs =  Database.instance().executeQuery(stm); 
+            while (rs.next()) {
+                r.add(from(rs));
+            }
+        }catch (SQLException ex) {}
+        return r;
+    }
+    
     public Grupo read(String id) throws Exception{
         String sql = "select * from Grupos where id=?";
         PreparedStatement stm = Database.instance().prepareStatement(sql);

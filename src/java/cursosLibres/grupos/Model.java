@@ -19,17 +19,20 @@ public class Model {
     Curso current;
     List<Grupo> listaGrupos;
     Estudiante estudiante;
-
-    public Model(Curso current, List<Grupo> listaGrupos, Estudiante estudiante) {
+    int matriculado;
+    
+    public Model(Curso current, List<Grupo> listaGrupos, Estudiante estudiante, int matriculado) {
         this.current = current;
         this.listaGrupos = listaGrupos;
         this.estudiante = estudiante;
+        this.matriculado = matriculado;
     }
 
     public Model(){
         this.current = new Curso();
         this.listaGrupos = new ArrayList<>();
         this.estudiante = new Estudiante();
+        this.matriculado = 0;
     }
     
     public Curso getCurrent() {
@@ -54,6 +57,14 @@ public class Model {
 
     public void setEstudiante(Estudiante estudiante) {
         this.estudiante = estudiante;
+    }
+
+    public int getMatriculado() {
+        return matriculado;
+    }
+
+    public void setMatriculado(int matriculado) {
+        this.matriculado = matriculado;
     }
     
     
