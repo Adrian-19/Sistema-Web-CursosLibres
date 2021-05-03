@@ -32,10 +32,14 @@
                     <h3><%=model.getCurrent().getNombre()%></h3>
                 </div>
                 <div class ="col-md-6">
-                    <%if(model.getMatriculaExitosa() == 1){%>
+                    <%if(session.getAttribute("exitoso")!=null){%>
+                    <%int criterio = (Integer) session.getAttribute("exitoso");%>
+                    <%if(criterio == 1){%>
                         <div class="alert alert-success" role="alert">
                             Matricula exitosa!
-                        </div> 
+                        </div>
+                    <%session.setAttribute("exitoso", 0);%>
+                    <%}%>
                     <%}%>
                 </div>
             </div>
@@ -55,7 +59,7 @@
                     <td><%=g.getHorario()%></td>
                     <% if(model.getMatriculado() != 1){%>
                     <td>
-                        <a href="/Sistema-Web-CursosLibres/presentation/Grupos/matricular?grupoID=<%=g.getId()%>&cursoId=<%=model.getCurrent().getId()%>&exitoso=1" class = "btn btn-default" role ="button"> Matricularme </a>
+                        <a href="/Sistema-Web-CursosLibres/presentation/Grupos/matricular?grupoID=<%=g.getId()%>&cursoId=<%=model.getCurrent().getId()%>" class = "btn btn-default" role ="button"> Matricularme </a>
                     </td>
                     <%}%>
                 </tr>

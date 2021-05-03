@@ -1,4 +1,5 @@
 package cursosLibres.logic;
+import cursosLibres.data.AdminDao;
 import cursosLibres.data.CursoDao;
 import cursosLibres.data.EstudianteDao;
 import cursosLibres.data.GrupoDao;
@@ -26,13 +27,11 @@ public class Service {
 
     private UsuarioDao usuarioDao;
     private ProfesorDao profesorDao;
-
-    //* Cursos y Grupos 
-
     private CursoDao cursoDao;
     private GrupoDao grupoDao;
     private MatriculaDao matriculaDao;
     private EstudianteDao estudianteDao;
+    private AdminDao adminDao;
 
     public Service(){
 
@@ -44,7 +43,7 @@ public class Service {
         grupoDao = new GrupoDao();
         matriculaDao = new MatriculaDao();
         estudianteDao = new EstudianteDao();
-
+        adminDao = new AdminDao();
 
     }
 
@@ -163,5 +162,10 @@ public class Service {
     
     public List<Matricula> findByEstudiante(Estudiante e){
         return matriculaDao.findByEstudiante(e);
+    }
+    
+    // ---------- ADMINISTRADORES -------------
+    public Administrador getAdmin(String id) throws Exception{
+        return adminDao.read(id);
     }
 }

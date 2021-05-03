@@ -33,7 +33,8 @@
                   <%}%>
                  <% if (usuario!=null){ %>  <!-- Si hay un usuario logeado, puede hacer logout -->                 
                 <li class="nav-item">
-                  <a class="nav-link active"  href="#">User:<%=usuario.getCedula()%></a>
+                    <%String nombre = (String) session.getAttribute("nombreUsuario");%>
+                  <a class="nav-link disabled"  href="#"><%=nombre%></a>
                 </li>
                 
                 <li class="nav-item">
