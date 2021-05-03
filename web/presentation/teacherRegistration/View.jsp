@@ -19,7 +19,7 @@
     <%List<Profesor> profesores = model.getProfesores();%>
     <% Map<String, String> errores = (Map<String, String>) request.getAttribute("errores"); %>
     <% Map<String, String[]> form = (errores == null) ? this.getForm(model) : request.getParameterMap();%>
-    <!-- Main Content -->
+
     <div class="container-fluid">
         <div class="row main-content bg-success text-center">
             <div class="col-md-4 text-center company_info">
@@ -151,4 +151,3 @@
 
 
 %>  
-<%--values.put("correoProFld", new String[]{model.getProfesor().getCorreo()});--%>

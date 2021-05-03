@@ -6,7 +6,6 @@
 package cursosLibres.data;
 
 import cursosLibres.logic.Estudiante;
-import cursosLibres.logic.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,28 +47,11 @@ public class EstudianteDao {
         stm.setInt(1, Integer.parseInt(e.getId()));
         stm.setString(2, e.getNombre());
         stm.setInt(3, Integer.parseInt(e.getTelefono()));
-        stm.setInt(4, Integer.parseInt(e.getId()) );
+        stm.setInt(4, Integer.parseInt(e.getId()));
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("Estudiante ya existe");
         }
     }
-//    public int numero_cuenta(String id) throws Exception{
-//        String sql = "select * from Estudiantes where id=?";
-//        PreparedStatement stm = Database.instance().prepareStatement(sql);
-//        stm.setInt(1, Integer.valueOf(id));
-//        ResultSet rs = Database.instance().executeQuery(stm);
-//        int numero;
-//        if (rs.next()) {
-//            numero = rs.getInt("idLogin");
-//            return numero;
-//        } else {
-//            throw new Exception("Estudiante no Existe");
-//        }
-//    
-//    
-//    }
-    
-    
-    
+
 }

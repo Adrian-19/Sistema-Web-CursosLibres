@@ -27,7 +27,7 @@ import javax.servlet.http.Part;
  * @author ESCINF
  */
 @WebServlet(name = "ControllerRegCursos", urlPatterns = {"/presentation/RegistrarCursos/show", "/presentation/RegistrarCursos/register", "/presentation/RegistrarCursos/image"})
-@MultipartConfig(location="C:\\")
+@MultipartConfig(location="C:/Users/emanuelle/Desktop/ima")
 
 public class Controller extends HttpServlet {
 
@@ -155,19 +155,13 @@ public class Controller extends HttpServlet {
 
     private void updateModelRegister(HttpServletRequest request) throws IOException, ServletException {
         Model model = (Model) request.getAttribute("model");
-        
-//        
-        String nombre = request.getParameter("nombreCurso"); 
-        String tematica = request.getParameter("inputTematica"); 
-//        
-
         model.getCurrentCurso().setNombre(request.getParameter("nombreCurso"));
         model.getCurrentCurso().setTematica(request.getParameter("inputTematica")); 
         model.getCurrentCurso().setCosto(Integer.parseInt(request.getParameter("inputCosto")));
         model.getCurrentCurso().setEstado(request.getParameter("estado"));
 
-//        final Part image; 
-//        image = request.getPart("logoFile"); 
+        final Part image; 
+        image = request.getPart("logoFile"); 
         
         
     }
@@ -189,10 +183,7 @@ public class Controller extends HttpServlet {
             c.setEstado(estado);
             
             service.addCurso(c); 
-
-//            c.setId(service.getCursoNom("inputNombre").getId()); //recpera id de la BD
-            
- // --------------------------            
+          
             final Part image; 
             image = request.getPart("logoFile"); 
             image.write(service.getCursoNom(c.getNombre()).getId()); //nombre del logo = id de la BD
@@ -213,12 +204,12 @@ public class Controller extends HttpServlet {
             String codigo = request.getParameter("cursoId");
             
 //            //crear el directorio
-            File directorio = new File("C:\\CursosLibres");
+            File directorio = new File("C:/Users/emanuelle/Desktop/ima");
             if (!directorio.exists()) {
                 directorio.mkdirs(); 
             } 
 //            // then ... crear el path 
-            Path path = FileSystems.getDefault().getPath("C:\\CursosLibres", codigo);
+            Path path = FileSystems.getDefault().getPath("C:/Users/emanuelle/Desktop/ima", codigo);
             try (OutputStream out = response.getOutputStream()) {
                 Files.copy(path, out);
                 out.flush();

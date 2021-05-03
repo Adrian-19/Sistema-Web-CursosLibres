@@ -27,28 +27,28 @@
                 <div class="container-fluid">
                     <div class="row justify-content-md-center">
                         <div class="col-md-auto">
-                             <h1 class="text-primary">Iniciar sesión</h1>
+                            <h1 class="text-primary">Iniciar sesión</h1>
                         </div>
                     </div>                 
                     <div class="row justify-content-md-center">
                         <div class="col-md-auto">
                             <form method="post" name="Inicio" action="/Sistema-Web-CursosLibres/presentation/login/login" class="form-group">
-                            <div class="row">
-                                <input type="number" name="cedulaFld" value="<%=form.get("cedulaFld")[0]%>" title="<%=title("cedulaFld", errores)%>" class="form_input fieldCedu <%=erroneo("cedulaFld", errores)%>" placeholder="ID">
-                            </div>
-                            <div class="row">
-                                <input type="password" name="claveFld" value="<%=form.get("claveFld")[0]%>"  title="<%=title("claveFld", errores)%>" class="form_input <%=erroneo("claveFld", errores)%>" placeholder="Contraseña">
-                            </div>
-                            <div class="row">
-                                <input type="submit" value="INICIO" class="btn btnRL">
-                            </div>
-                        </form>
+                                <div class="row">
+                                    <input type="number" name="cedulaFld" value="<%=form.get("cedulaFld")[0]%>" title="<%=title("cedulaFld", errores)%>" class="form_input fieldCedu <%=erroneo("cedulaFld", errores)%>" placeholder="ID">
+                                </div>
+                                <div class="row">
+                                    <input type="password" name="claveFld" value="<%=form.get("claveFld")[0]%>"  title="<%=title("claveFld", errores)%>" class="form_input <%=erroneo("claveFld", errores)%>" placeholder="Contraseña">
+                                </div>
+                                <div class="row">
+                                    <input type="submit" value="INICIO" class="btn btnRL">
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="row justify-content-md-center">
                         <div class="col-md-auto">
-                                  <p>¿No tienes cuenta? <a href="/Sistema-Web-CursosLibres/presentation/login/showRegister">Regístrate aquí</a></p>
-                    
+                            <p>¿No tienes cuenta? <a href="/Sistema-Web-CursosLibres/presentation/login/showRegister">Regístrate aquí</a></p>
+
                         </div>
                     </div> 
                 </div>

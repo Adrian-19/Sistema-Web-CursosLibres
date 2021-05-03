@@ -278,12 +278,10 @@ public class Controller extends HttpServlet {
             service.add(nuevo, correo);
             session.setAttribute("usuario", nuevo);
             service.addEstudiante(estudianteNue);
-<<<<<<< HEAD
-            return "/presentation/login/ViewContraseña.jsp";
-=======
+
             session.setAttribute("nombreUsuario", estudianteNue.getNombre());
-            return "/presentation/VerCursos/show";
->>>>>>> a0485d655385a6bf01c39e3d589029dea767d3b2
+            
+            return "/presentation/login/ViewContraseña.jsp";
 
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();

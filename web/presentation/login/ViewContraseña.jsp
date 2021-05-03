@@ -27,7 +27,7 @@
                     <div class="row pb-4 pt-2">
                         <h1 class="text-primary">Te has registrado en CursosLibres</h1>
                     </div>
-                    
+
                     <div class="row">
                         <p class="fs-4"> Gracias por elegir CursosLibres para sus estudios. CursosLibres tiene muchos cursos sobre distintas temáticas a los cuales se puede inscribir.</p>
 
