@@ -56,8 +56,8 @@ public class Controller extends HttpServlet {
             m.setIdEstudiante(model.getEstudiante().getId());
             m.setIdGrupo(grupoId);
             service.add(m);
-            String URL = "/presentation/Grupos/show?cursoId="+request.getParameter("cursoId")+"&exitoso=1";
-            model.setMatriculaExitosa(1);
+            String URL = "/presentation/Grupos/show?cursoId="+request.getParameter("cursoId");
+            session.setAttribute("exitoso", 1);
             return URL;
         }
         catch(Exception e){
@@ -96,9 +96,6 @@ public class Controller extends HttpServlet {
                 else{
                     model.setMatriculado(1);
                 }
-            }
-            if(request.getAttribute("exitoso")!=null){
-                model.setMatriculaExitosa(1);
             }
             model.setListaGrupos(lista);
             return "/presentation/Grupos/View.jsp";
