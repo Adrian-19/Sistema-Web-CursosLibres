@@ -7,6 +7,7 @@
 <head>
        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@ include file="/presentation/Head.jsp" %>
+        <link rel="stylesheet" href = "/Sistema-Web-CursosLibres/css/registros.css">
       
 	<title>Login Page</title>
 </head>
@@ -29,7 +30,7 @@
 					<div class="row">
 						<form method="post" name="Inicio" action="/Sistema-Web-CursosLibres/presentation/login/register" class="form-group">
 							<div class="row">
-								<input type="text" name="cedulaFld" value="<%=form.get("cedulaFld")[0]%>" title="<%=title("cedulaFld",errores)%>" class="form_input <%=erroneo("cedulaFld",errores)%>" placeholder="ID">
+								<input type="number" name="cedulaFld" value="<%=form.get("cedulaFld")[0]%>" title="<%=title("cedulaFld",errores)%>" class="form_input <%=erroneo("cedulaFld",errores)%>" placeholder="ID">
 							</div>
 							<div class="row">
 								<input type="password" name="claveFld" value="<%=form.get("claveFld")[0]%>"  title="<%=title("claveFld",errores)%>" class="form_input <%=erroneo("claveFld",errores)%>" placeholder="Contraseña">
@@ -38,10 +39,10 @@
 							    <input type="text" name="nombreFld" value="<%=form.get("nombreFld")[0]%>"  title="<%=title("nombreFld",errores)%>" class="form_input <%=erroneo("nombreFld",errores)%>" placeholder="Nombre">
 							</div>
                                                         <div class="row">
-								<input type="text" name="telefonoFld" value="<%=form.get("telefonoFld")[0]%>"  title="<%=title("telefonoFld",errores)%>" class="form_input <%=erroneo("telefonoFld",errores)%>" placeholder="Telefono">
+                                                            <input type="tel" pattern="[0-9]{8}" name="telefonoFld" value="<%=form.get("telefonoFld")[0]%>"  title="<%=title("telefonoFld",errores)%>" class="form_input <%=erroneo("telefonoFld",errores)%>" placeholder="Telefono">
 							</div>
                                                         <div class="row">
-								<input type="text" name="correoFld" value="<%=form.get("correoFld")[0]%>"  title="<%=title("correoFld",errores)%>" class="form_input <%=erroneo("correoFld",errores)%>" placeholder="Correo">
+								<input type="email" name="correoFld" value="<%=form.get("correoFld")[0]%>"  title="<%=title("correoFld",errores)%>" class="form_input <%=erroneo("correoFld",errores)%>" placeholder="Correo">
 							</div>
 
                                                         

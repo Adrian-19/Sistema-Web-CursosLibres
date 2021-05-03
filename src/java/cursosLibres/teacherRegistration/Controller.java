@@ -133,7 +133,10 @@ public class Controller extends HttpServlet {
 
         model.getProfesor().setId(request.getParameter("cedulaProFld"));
         model.getProfesor().setNombre(request.getParameter("nombreProFld"));
-        model.getProfesor().setTelefono(request.getParameter("telefonoProFld"));
+        String telefono =request.getParameter("telefonoProFld");
+        telefono = telefono.replaceAll(" ","");
+        telefono = telefono.replaceAll("-","");
+        model.getProfesor().setTelefono(telefono);
         model.getProfesor().setEspecialidad(request.getParameter("especProFld"));
         model.getProfesor().setCorreo(request.getParameter("correoProFld"));
 
@@ -142,43 +145,39 @@ public class Controller extends HttpServlet {
     private String registerAction(HttpServletRequest request) {
 
         Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
         HttpSession session = request.getSession(true);
+
+        String cedula = model.getUprofesor().getCedula();
+        String clave = model.getUprofesor().getClave();
+        Usuario nuevo = new Usuario(cedula, clave, 1);
+
+        String telefono = model.getProfesor().getTelefono();
+        String nombre = model.getProfesor().getNombre();
+        String espec = model.getProfesor().getEspecialidad();
+        String correo = model.getProfesor().getCorreo();
+        Profesor nueProfesor = new Profesor(cedula, nombre, telefono, espec, correo);
+
         try {
+            service.add(nuevo, correo);
+            service.addProfesor(nueProfesor);
 
-            if (!domainModel.existeUsuario(model.getUprofesor().getCedula())) {
-                String cedula = model.getUprofesor().getCedula();
-                String clave = model.getUprofesor().getClave();
-                Usuario nuevo = new Usuario(cedula, clave, 1);
-                domainModel.agregarUsuario(nuevo);
-                String telefono = model.getProfesor().getTelefono();
-                String nombre = model.getProfesor().getNombre();
-                String espec = model.getProfesor().getEspecialidad();
-                String correo = model.getProfesor().getCorreo();
-                Profesor nueProfesor = new Profesor(cedula, nombre, telefono, espec, correo);
-                domainModel.agregarProfesor(nueProfesor);
-
-                List<Profesor> list = domainModel.teachersFind();
-                model.setProfesores(list);
-                session.setAttribute("profesor", domainModel.usuarioFind(cedula, clave));
-                return "/presentation/teacherRegistration/show";
-            } else {
-                List<Profesor> list = domainModel.teachersFind();
-                model.setProfesores(list);
-                Map<String, String> errores = new HashMap<>();
-                request.setAttribute("errores", errores);
-                errores.put("cedulaProFld", "Usuario ya existe ");
-                return "/presentation/teacherRegistration/View.jsp";
-            }
 
         } catch (Exception ex) {
-
+            List<Profesor> list = (List<Profesor>) session.getAttribute("profesores");
+            model.setProfesores(list);
             Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
-            errores.put("cedulaProFld", "Usuario o clave incorrectos");
-            errores.put("claveProFld", "Usuario o clave incorrectos");
-            return "/presentation/Error.jsp";
+            errores.put("cedulaProFld", "Este Profesor ya existe ");
+            return "/presentation/teacherRegistration/View.jsp";
         }
+        
+        List<Profesor> list = (List<Profesor>) session.getAttribute("profesores");
+        list.add(nueProfesor);
+        session.setAttribute("profesores",list);
+        model.setProfesores(list);
+          
+        return "/presentation/teacherRegistration/show";
     }
 
     public String showRegister(HttpServletRequest request) {
@@ -187,21 +186,29 @@ public class Controller extends HttpServlet {
 
     public String showActionRegister(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
-        try {
-            List<Profesor> list = domainModel.teachersFind();
-            model.setProfesores(list);
-            model.getUprofesor().setCedula("");
-            model.getUprofesor().setClave("");
-            model.getProfesor().setId("");
-            model.getProfesor().setNombre("");
-            model.getProfesor().setTelefono("");
-            model.getProfesor().setEspecialidad("");
-            model.getProfesor().setCorreo("");
-
-        } catch (Exception ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+        
+        HttpSession session = request.getSession(true);
+        List<Profesor> list = service.getListaProfesores();
+        for(Profesor p: list){
+            try {
+                Usuario u = service.getUsuario(Integer.parseInt(p.getId()));
+                p.setCorreo(u.getCorreo());
+            } catch (Exception ex) {
+              
+            }
         }
+        session.setAttribute("profesores",list);
+  
+        model.setProfesores(list);
+        model.getUprofesor().setCedula("");
+        model.getUprofesor().setClave("");
+        model.getProfesor().setId("");
+        model.getProfesor().setNombre("");
+        model.getProfesor().setTelefono("");
+        model.getProfesor().setEspecialidad("");
+        model.getProfesor().setCorreo("");
+
         return "/presentation/teacherRegistration/View.jsp";
     }
 
@@ -225,29 +232,27 @@ public class Controller extends HttpServlet {
     private String searchAction(HttpServletRequest request) {
 
         Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+         HttpSession session = request.getSession(true);
         try {
-
-            if (domainModel.existeProfesor(model.getCodigoBusqueda())) {
-
-                Profesor profesor = domainModel.profesorFind(model.getCodigoBusqueda());
-                List<Profesor> list = new ArrayList();
-                list.add(profesor);
-                model.setProfesores(list);
-                model.getUprofesor().setCedula("");
-                model.getUprofesor().setClave("");
-                return "/presentation/teacherRegistration/View.jsp";
-            } else {
-                List<Profesor> list = domainModel.teachersFind();
-                //List<Profesor> list = new ArrayList();
-                model.setProfesores(list);
-                model.getUprofesor().setCedula("");
-                model.getUprofesor().setClave("");
-                return "/presentation/teacherRegistration/View.jsp";
-            }
+            Profesor profesor = service.getProfesor(model.getCodigoBusqueda());
+            List<Profesor> list = new ArrayList();
+            Usuario u = service.getUsuario(Integer.parseInt(profesor.getId()));
+                profesor.setCorreo(u.getCorreo());
+            
+            list.add(profesor);
+            model.setProfesores(list);
+            model.getUprofesor().setCedula("");
+            model.getUprofesor().setClave("");
+            return "/presentation/teacherRegistration/View.jsp";
 
         } catch (Exception ex) {
-            return "/presentation/Error.jsp";
+            List<Profesor> list = (List<Profesor>) session.getAttribute("profesores");
+            model.setProfesores(list);
+            
+            model.getUprofesor().setCedula("");
+            model.getUprofesor().setClave("");
+            return "/presentation/teacherRegistration/View.jsp";
         }
     }
 

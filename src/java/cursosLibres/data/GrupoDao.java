@@ -85,6 +85,7 @@ public class GrupoDao {
             return from(rs);
         }
         else{
+//            return null; // ---- revisar 
             throw new Exception ("Grupo no Existe");
         }
     }
@@ -96,10 +97,29 @@ public class GrupoDao {
             g.setId(String.valueOf(rs.getInt("id")));
             g.setHorario(rs.getString("horario"));
             g.setProfesor(profe.read(String.valueOf(rs.getInt("idProfesor"))));
+            g.setCodigoCurso(rs.getInt("codigoCurso"));
             System.out.println(g.getId() + " " +g.getHorario() + " " + g.getProfesor().getId());
             return g;
         }catch(Exception ex){
             return null;
         }
     }
+    
+<<<<<<< HEAD
+=======
+    public List<Grupo> findAll(){
+        List<Grupo> grupos = new ArrayList<>(); 
+        String sql = "select * from grupos"; 
+        
+        try{
+            PreparedStatement stm = Database.instance().prepareStatement(sql); 
+            ResultSet rs = Database.instance().executeQuery(stm); 
+            while(rs.next()){ grupos.add(from(rs)); }
+        } catch (SQLException ex) { }
+        
+        return grupos; 
+    }
+    
+
+>>>>>>> dd763621b7488850fc717b120f2e3c2875c9233c
 }

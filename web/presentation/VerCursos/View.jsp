@@ -71,6 +71,7 @@
                                    <%if(model.getUsuario() != null && model.getUsuario().getTipo() == 0){ %>
                                         <td>
                                          <a href="/Sistema-Web-CursosLibres/presentation/AbrirGrupos/show?cursoId=<%=c.getId()%>"> Abrir grupos </a> 
+                                         
                                         </td>
 
                                    <%}%>

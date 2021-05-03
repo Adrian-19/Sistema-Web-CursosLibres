@@ -17,12 +17,14 @@ public class Grupo {
     String horario;
     Profesor profesor;
     List<Estudiante> estudianteList;
+    int codigoCurso;
 
     public Grupo(String id, String horario, Profesor profesor, List<Estudiante> estudianteList) {
         this.id = id;
         this.horario = horario;
         this.profesor = profesor;
         this.estudianteList = estudianteList;
+        this.codigoCurso = -1;
     }
     
     public Grupo() {
@@ -30,6 +32,7 @@ public class Grupo {
         this.horario = "";
         this.profesor = new Profesor();
         this.estudianteList = new ArrayList<>();
+        this.codigoCurso = -1;
     }
     
     public String getId() {
@@ -63,6 +66,15 @@ public class Grupo {
     public void setEstudianteList(List<Estudiante> estudianteList) {
         this.estudianteList = estudianteList;
     }
+
+    public int getCodigoCurso() {
+        return codigoCurso;
+    }
+
+    public void setCodigoCurso(int codigoCurso) {
+        this.codigoCurso = codigoCurso;
+    }
+    
     
     
     

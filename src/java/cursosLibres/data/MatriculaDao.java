@@ -83,4 +83,20 @@ public class MatriculaDao {
             return null;
         }
     }
+    
+    public List<Matricula> findByEstudiante(String id){
+        List<Matricula> r = new ArrayList<>();
+        String sql = "select * from matriculas where idEstudiante=?";
+        try {        
+            PreparedStatement stm = Database.instance().prepareStatement(sql);
+            stm.setInt(1, Integer.valueOf(id));   
+            ResultSet rs =  Database.instance().executeQuery(stm); 
+            while (rs.next()) {
+                r.add(from(rs));
+            }
+        } catch (SQLException ex) { }
+        return r;
+    } 
+    
+    
 }

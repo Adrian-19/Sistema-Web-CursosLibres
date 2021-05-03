@@ -18,9 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
-@WebServlet(name = "loginController", urlPatterns = {"/presentation/login/show", "/presentation/login/login", "/presentation/login/logout", "/presentation/login/register","/presentation/login/showRegister"})
+@WebServlet(name = "loginController", urlPatterns = {"/presentation/login/show", "/presentation/login/login", "/presentation/login/logout", "/presentation/login/register", "/presentation/login/showRegister"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request,
@@ -88,15 +86,32 @@ public class Controller extends HttpServlet {
     public String loginAction(HttpServletRequest request) {
 
         Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
-        //cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+//        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
         HttpSession session = request.getSession(true);
         try {
-            Usuario real = domainModel.usuarioFind(model.getCurrent().getCedula(), model.getCurrent().getClave());
-            System.out.println("Real: " + real.getCedula() + " | " + real.getClave());
-            //service.add(real);
+//            Usuario real = domainModel.usuarioFind(model.getCurrent().getCedula(), model.getCurrent().getClave());
 
-            session.setAttribute("usuario", real);
+            Usuario usu = service.getUsuario(Integer.parseInt(model.getCurrent().getCedula()));
+
+            if (usu.getClave().equals(model.current.getClave())) {
+
+                Usuario real = new Usuario();
+                real.setCedula(usu.getCedula());
+                real.setClave(usu.getClave());
+                real.setTipo(usu.getTipo());
+                real.setCorreo(usu.getCorreo());
+
+                session.setAttribute("usuario", real);
+
+            } else {
+                Map<String, String> errores = new HashMap<>();
+                request.setAttribute("errores", errores);
+                errores.put("claveFld", "clave incorrecta");
+                return "/presentation/login/View2.jsp";
+
+            }
+
 //            String viewUrl = "";
 //            switch (real.getTipo()) { // Para que es esto?
 //                case 2:
@@ -113,8 +128,7 @@ public class Controller extends HttpServlet {
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
-            errores.put("cedulaFld", "Usuario o clave incorrectos");
-            errores.put("claveFld", "Usuario o clave incorrectos");
+            errores.put("cedulaFld", "Usuario no existe");
             return "/presentation/login/View2.jsp";
         }
 
@@ -126,6 +140,14 @@ public class Controller extends HttpServlet {
 
     public String logoutAction(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if(usuario.getTipo()== 0 ){
+        session.removeAttribute("profesores");
+        
+        
+        }
+        
+        
         session.removeAttribute("usuario");
         session.invalidate();
         return "/presentation/VerCursos/show";
@@ -217,55 +239,54 @@ public class Controller extends HttpServlet {
 
         return errores;
     }
-        void updateModelRegister(HttpServletRequest request) {
+
+    void updateModelRegister(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
 
         model.getCurrent().setCedula(request.getParameter("cedulaFld"));
         model.getCurrent().setClave(request.getParameter("claveFld"));
-        
+
         model.getEstudiante().setId(request.getParameter("cedulaFld"));
         model.getEstudiante().setCorreo(request.getParameter("correoFld"));
         model.getEstudiante().setNombre(request.getParameter("nombreFld"));
-        model.getEstudiante().setTelefono(request.getParameter("telefonoFld"));
+        
+        String telefono = request.getParameter("telefonoProFld");
+        telefono = telefono.replaceAll(" ","");
+        telefono = telefono.replaceAll("-","");
+        model.getEstudiante().setTelefono(telefono);
     }
 
     private String registerAction(HttpServletRequest request) {
-   
+
         Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();//cambiar por service
+
         HttpSession session = request.getSession(true);
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+
+        String cedula = model.getCurrent().getCedula();
+        String clave = model.getCurrent().getClave();
+        Usuario nuevo = new Usuario(cedula, clave, 2);
+        String telefono = model.getEstudiante().getTelefono();
+        String nombre = model.getEstudiante().getNombre();
+        String correo = model.getEstudiante().getCorreo();
+        Estudiante estudianteNue = new Estudiante(cedula, nombre, telefono, correo, new ArrayList<>());
+        nuevo.setCorreo(correo);
+
         try {
-            if(!domainModel.existeUsuario(model.getCurrent().getCedula())){
-            String cedula =   model.getCurrent().getCedula();
-            String clave = model.getCurrent().getClave(); 
-            Usuario nuevo = new Usuario(cedula,clave,2);
-            String telefono = model.getEstudiante().getTelefono();
-            String nombre = model.getEstudiante().getNombre();
-            String correo = model.getEstudiante().getCorreo();
-            Estudiante estudianteNue = new Estudiante(cedula,nombre,telefono,correo,new ArrayList<>());
-            
-            
-            domainModel.agregarEstudiante(estudianteNue);
-            cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
-            service.add(nuevo);
-            domainModel.agregarUsuario(nuevo);           //
-            session.setAttribute("usuario", domainModel.usuarioFind(cedula,clave));
-            return "/presentation/VerCursos/View.jsp";
-            }else{
-            Map<String, String> errores = new HashMap<>();
-            request.setAttribute("errores", errores);
-            errores.put("cedulaFld", "Este Usuario ya existe ");
-            return "/presentation/login/viewRegister.jsp";
-            }
-            
+            service.add(nuevo, correo);
+            session.setAttribute("usuario", nuevo);
+            service.addEstudiante(estudianteNue);
+            return "/presentation/VerCursos/show";
+
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
-            errores.put("cedulaFld", "Usuario o clave incorrectos");
-            errores.put("claveFld", "Usuario o clave incorrectos");
+            errores.put("cedulaFld", "Este Usuario ya existe");
             return "/presentation/login/viewRegister.jsp";
         }
+
     }
+
     public String showRegister(HttpServletRequest request) {
         return this.showActionRegister(request);
     }
@@ -278,4 +299,3 @@ public class Controller extends HttpServlet {
     }
 
 }
-

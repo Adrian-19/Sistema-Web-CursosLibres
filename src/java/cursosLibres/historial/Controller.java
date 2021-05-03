@@ -11,13 +11,17 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import cursosLibres.logic.Curso;
 import cursosLibres.logic.Usuario;
 import cursosLibres.logic.Estudiante;
+import cursosLibres.logic.Grupo;
 import cursosLibres.logic.Matricula;
 import java.awt.Font;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -93,28 +97,60 @@ public class Controller extends HttpServlet {
 
     public String showActionRecords(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+        
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        try {
-            Estudiante estudiante = domainModel.estudianteFind(usuario.getCedula());
-            model.setEstudiante(estudiante);
-            model.setHistorial(estudiante.getHistorial());
-        } catch (Exception ex) {
-            return "/presentation/Error.jsp";
+        
+        List<Matricula> matriculas = service.findByEstudiante(usuario.getCedula()); 
+        
+        for(Matricula m :matriculas ){
+            try {
+                Grupo g = service.getGrupo(m.getIdGrupo());
+                String id = String.valueOf(g.getCodigoCurso());
+                Curso c = service.getCurso(id);
+                m.setIdCurso(c.getId());
+                m.setNombreCurso(c.getNombre());
+            } catch (Exception ex) {  
+            }
         }
+        
+        Estudiante estudiante = new Estudiante();
+        try {
+            estudiante = service.getEstudiante(usuario.getCedula());
+        } catch (Exception ex) {
+        }
+        
+        estudiante.setCorreo(usuario.getCorreo());
+        
+        model.setEstudiante(estudiante);
+        model.setHistorial(matriculas);
+        session.setAttribute("matriculas", matriculas);
+
         return "/presentation/Historial/View.jsp";
     }
 
     private String print(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+        
+        Estudiante estudiante = new Estudiante();
+        try {
+            estudiante = service.getEstudiante(usuario.getCedula());
+        } catch (Exception ex) {
+        }
+        
+        estudiante.setCorreo(usuario.getCorreo());
+        
+        
+        //Model model = (Model) request.getAttribute("model");
+        
+        
 
         try {
-            Estudiante estudiante = domainModel.estudianteFind(usuario.getCedula());
-            List<Matricula> historial = estudiante.getHistorial();
+            List<Matricula> historial =(List<Matricula>) session.getAttribute("matriculas");
 
             Document document = new Document();
 
@@ -216,6 +252,9 @@ public class Controller extends HttpServlet {
             document.add(table);
 
             document.close();
+            
+            session.removeAttribute("matriculas");
+            session.invalidate();
 
             response.setContentType("application/pdf");
             response.addHeader("Content-disposition", "inline");

@@ -6,8 +6,10 @@
 <!DOCTYPE html>
 <head>
        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       
         <%@ include file="/presentation/Head.jsp" %>
-      
+        <link rel="stylesheet" href = "/Sistema-Web-CursosLibres/css/registros.css">
+        
 	<title>Login Page</title>
 </head>
 <body>
@@ -29,7 +31,7 @@
 					<div class="row">
 						<form method="post" name="Inicio" action="/Sistema-Web-CursosLibres/presentation/login/login" class="form-group">
 							<div class="row">
-								<input type="text" name="cedulaFld" value="<%=form.get("cedulaFld")[0]%>" title="<%=title("cedulaFld",errores)%>" class="form_input <%=erroneo("cedulaFld",errores)%>" placeholder="ID">
+								<input type="number" name="cedulaFld" value="<%=form.get("cedulaFld")[0]%>" title="<%=title("cedulaFld",errores)%>" class="form_input fieldCedu <%=erroneo("cedulaFld",errores)%>" placeholder="ID">
 							</div>
 							<div class="row">
 								<input type="password" name="claveFld" value="<%=form.get("claveFld")[0]%>"  title="<%=title("claveFld",errores)%>" class="form_input <%=erroneo("claveFld",errores)%>" placeholder="Contraseña">
