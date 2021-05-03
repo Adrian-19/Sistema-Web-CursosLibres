@@ -102,20 +102,15 @@ public class Service {
         return grupoDao.read(id);
     }
     
-<<<<<<< HEAD
+
     public void addGrupo(Grupo g, Curso c) throws Exception{
         grupoDao.create(g, c);
-=======
+    }
+
     public List<Grupo> getGruposByCurso(Curso c) throws Exception{
         return grupoDao.findByCurso(c);
     }
-    
-    public boolean existeGrupo(){
-        
-        return true; 
->>>>>>> 67a6c2101f16c5ca2cd0d1f06317aeb336f9f023
-    }
-    
+
     public List<Grupo> getListaGrupos() {
        return grupoDao.findAll();   
     }
