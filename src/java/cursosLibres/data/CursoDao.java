@@ -92,4 +92,18 @@ public class CursoDao {
         
         return cursos; 
     }
+
+    public List<Curso> getLikeCursos(String nom) throws SQLException {
+        List<Curso> cursos = new ArrayList<>(); 
+        String sql = "select * from cursos where nombre like '%"+nom+"%'"; 
+
+        PreparedStatement stm = Database.instance().prepareStatement(sql); 
+        ResultSet rs = Database.instance().executeQuery(stm); 
+        while(rs.next()){ cursos.add(from(rs)); }       
+
+        return cursos; 
+    }
+    
+    
+
 }

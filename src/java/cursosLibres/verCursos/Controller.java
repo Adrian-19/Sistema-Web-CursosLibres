@@ -6,10 +6,13 @@
 package cursosLibres.verCursos;
 
 import cursosLibres.logic.Curso;
+import cursosLibres.logic.Usuario;
 import cursosLibres.verCursos.Model; 
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import javax.servlet.ServletException;
@@ -18,13 +21,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 
 
 /**
  *
  * @author DS
  */
-@WebServlet(name = "ControllerC", urlPatterns = {"/presentation/VerCursos/show"})
+@WebServlet(name = "ControllerC", urlPatterns = {"/presentation/VerCursos/buscar", "/presentation/VerCursos/show" })
 public class Controller extends HttpServlet {
 
     /**
@@ -36,17 +40,24 @@ public class Controller extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private boolean ban = false; 
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         request.setAttribute("model", new Model());
         
         String viewUrl = "";
-        //la página de guardar un nuevo grupo tiene como acciones guardar y mostrar *
+
         switch (request.getServletPath()) {
              case "/presentation/VerCursos/show": 
                 viewUrl = this.show(request); //se llama al método show para mostrar
                 break;
+             case "/presentation/VerCursos/buscar":
+                 viewUrl = this.search(request); //se llama al método show para mostrar
+                break;
+                 
+                 
         }
         
         request.getRequestDispatcher(viewUrl).forward( request, response); 
@@ -97,20 +108,67 @@ public class Controller extends HttpServlet {
        return this.showAction(request); //llama al método de abajo
 
     }
+    
     private String showAction(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model"); 
         cursosLibres.logic.Service service = cursosLibres.logic.Service.instance(); 
-        
-        try {
-            List<Curso> list = service.getListaCursos(); 
-            model.setListaCursos(list);
-            
-        } catch(Exception e){
-           Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
 
+        try{
+            List<Curso> list = service.getListaCursos(); 
+            model.setListaCursos(list);             
+
+            HttpSession session = request.getSession(true);
+            Usuario usuario = (Usuario) session.getAttribute("usuario");
+            model.setUsuario(usuario);
+
+        } catch(Exception e){
+            return "/presentation/Error.jsp";
         }
         
         return "/presentation/VerCursos/View.jsp";
     }
+
+    private String search(HttpServletRequest request) {
+        
+        try {
+            this.updateModelSearch(request); 
+            return this.searchAction(request); 
+              
+        } catch (Exception e){
+            return "/presentation/Error.jsp"; 
+        }
+    }
+
+    private void updateModelSearch(HttpServletRequest request) {
+        Model model = (Model) request.getAttribute("model"); 
+        model.setStringBusqueda(request.getParameter("busqCursos")); 
+        System.out.println(model.getStringBusqueda()); //
+    }
+    
+    private String searchAction(HttpServletRequest request){
+        
+        Model model = (Model) request.getAttribute("model"); 
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance(); 
+        
+
+        try{
+            String nom = model.getStringBusqueda(); 
+            List<Curso> busquedaCursos =  service.getLikeCursos(nom); 
+            model.setListaCursos(busquedaCursos);           
+
+            HttpSession session = request.getSession(true);
+            Usuario usuario = (Usuario) session.getAttribute("usuario");
+            model.setUsuario(usuario);
+
+        } catch(Exception e){
+            return "/presentation/Error.jsp";
+        }
+        
+        return "/presentation/VerCursos/View.jsp";        
+        
+    }
+    
+    
+
 
 }

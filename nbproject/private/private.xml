@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Grupo.java</file>
             <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/login/Model.java</file>
             <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/logic/Estudiante.java</file>
@@ -41,6 +42,13 @@
             <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/index.html</file>
             <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/src/java/cursosLibres/login/Controller.java</file>
             <file>file:/C:/Users/emanuelle/Desktop/Proyecto%201/Sistema-Web-CursosLibres/web/presentation/teacherRegistration/View.jsp</file>
+=======
+            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/abrirGrupos/Controller.java</file>
+            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/verCursos/Controller.java</file>
+            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/web/presentation/VerCursos/View.jsp</file>
+            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/src/java/cursosLibres/abrirGrupos/Model.java</file>
+            <file>file:/C:/Users/ESCINF/Desktop/Proyecto%201%20-%20PrograIV/Sistema-Web-CursosLibres/web/presentation/AbrirGrupos/View.jsp</file>
+>>>>>>> dd763621b7488850fc717b120f2e3c2875c9233c
         </group>
     </open-files>
 </project-private>

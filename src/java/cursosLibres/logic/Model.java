@@ -88,9 +88,9 @@ public class Model {
         
         cursoList = new ArrayList<>();
         
-        cursoList.add(new Curso("111","Pintura en Tela", 1500, "logo", "arte", grupoListA, "En oferta"));
+        cursoList.add(new Curso("1","Pintura en Tela", 1500, "logo", "arte", grupoListA, "En oferta"));
         
-        cursoList.add(new Curso("222","Programacion", 3500, "logo", "mate", grupoListB, "En oferta"));
+        cursoList.add(new Curso("2","Programacion", 3500, "logo", "mate", grupoListB, "En oferta"));
     }
 
     public void agregarUsuario(Usuario usuario) {
@@ -231,7 +231,7 @@ public class Model {
        
         public Curso cursoFind(String curso){
             for(Curso c : cursoList){
-                if(c.getNombre().equals(curso)){
+                if(c.getId().equals(curso)){
                     return c;
                 }
             }
@@ -255,6 +255,7 @@ public class Model {
     }
     
     //verifica que el profesor exista / retorna al profesor si lo encuentra
+
     public Profesor profesorFindd(String cedula)  throws Exception { //
         for(Profesor p : profesorList){
             if(p.getId() == cedula){
@@ -264,8 +265,8 @@ public class Model {
             }
         }
         return null;
- 
-    }  
+    }
+
 //    public Profesor profesorFind(String cedula) throws Exception {
 //        for(Profesor p : profesorList){
 //            if(p.getId() == cedula){
@@ -276,6 +277,7 @@ public class Model {
 //        }
 //        return null;
 //    }    
+
     
     //retorna una lista de grupos de un curso
     public List<Grupo> gruposFind(String id) throws Exception {

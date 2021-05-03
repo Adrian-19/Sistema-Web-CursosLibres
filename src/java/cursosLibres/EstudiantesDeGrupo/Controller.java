@@ -6,12 +6,12 @@
 package cursosLibres.EstudiantesDeGrupo;
 
 import cursosLibres.logic.Estudiante;
-import cursosLibres.logic.Grupo;
 import cursosLibres.logic.Matricula;
-import cursosLibres.logic.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author adria
  */
-@WebServlet(name = "EstudiantesDeGrupoController", urlPatterns = {"/presentation/EstudiantesDeGrupo/show"})
+@WebServlet(name = "EstudiantesDeGrupoController", urlPatterns = {"/presentation/EstudiantesDeGrupo/show", "/presentation/EstudiantesDeGrupo/calificar"})
 public class Controller extends HttpServlet {
 
     /**
@@ -38,15 +38,16 @@ public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         request.setAttribute("model", new Model());
         String viewUrl="";     
         switch (request.getServletPath()) {
           case "/presentation/EstudiantesDeGrupo/show":
               viewUrl = this.show(request);
               break;
-        } 
-        
+          case "/presentation/EstudiantesDeGrupo/calificar":
+              viewUrl = this.calificar(request);
+              break;
+        }
         request.getRequestDispatcher(viewUrl).forward( request, response); 
     }
     
@@ -68,6 +69,75 @@ public class Controller extends HttpServlet {
             model.setEstudiantes(estudiantes);
             return "/presentation/EstudiantesDeGrupo/View.jsp";
         }catch(Exception ex){
+            return "";
+        }
+    }
+    
+    public String calificar(HttpServletRequest request){
+        try{
+            Map<String, String> errores = this.validarCalificacion(request);
+            if(errores.isEmpty()){
+                this.updateModel(request);
+                return this.calificarAction(request);
+            }
+            else{
+                request.setAttribute("errores", errores);
+                return "/presentation/EstudiantesDeGrupo/View.jsp";
+            }
+        }catch (Exception e) {
+            return "/presentation/Error.jsp";
+        }
+    }
+    
+    Map<String, String> validarCalificacion(HttpServletRequest request){
+        Map<String, String> errores = new HashMap<>();
+        if(request.getParameter("calificarFld").isEmpty()){
+            errores.put("calificarFld", "Calificacion requerida");
+            return errores;
+        }
+        double nota = Double.valueOf(request.getParameter("calificarFld"));
+        if(nota<0){
+            errores.put("calificarFld", "Nota invalida");
+        }
+        return errores;
+    }
+    
+    void updateModel(HttpServletRequest request){
+        Model model = (Model) request.getAttribute("model");
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+        
+        String estudianteID = request.getParameter("estudianteID");
+        String grupoID = request.getParameter("grupoID");
+        try{
+            model.setGrupo(service.getGrupo(grupoID));
+            List<Matricula> matriculas = service.findByGrupo(model.getGrupo());
+            model.setListaMatriculas(matriculas);
+            List<Estudiante> estudiantes = new ArrayList<>();
+            for(Matricula m : matriculas){
+                estudiantes.add(service.getEstudiante(m.getIdEstudiante()));
+            }
+            model.setEstudiantes(estudiantes);
+            for(Matricula m : model.getListaMatriculas()){
+                if(m.getIdEstudiante().equals(estudianteID)){
+                    if(m.getIdGrupo().equals(grupoID)) {
+                        m.setNota(Double.valueOf(request.getParameter("calificarFld")));
+                        model.setMatricula(m);
+                        break;
+                    } 
+                }
+            }
+        }catch (Exception e){
+            
+        }
+    }
+    
+    private String calificarAction(HttpServletRequest request){
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+        Model model = (Model) request.getAttribute("model");
+        try{
+            service.updateNota(model.getMatricula());
+            return "/presentation/EstudiantesDeGrupo/View.jsp";
+        }catch (Exception e){
             return "";
         }
     }

@@ -6,6 +6,7 @@
 package cursosLibres.verCursos;
 
 import cursosLibres.logic.Curso;
+import cursosLibres.logic.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import java.util.List;
 public class Model {
     List<Curso> cursos; 
     Curso currentCurso; 
+    Usuario user; 
+    String stringBusqueda; 
     
     public Model(){
         this.reset(); 
@@ -25,6 +28,8 @@ public class Model {
         List<Curso> rows = new ArrayList<>(); 
         this.setListaCursos(rows); 
         setCurrentCurso(new Curso()); 
+        setUsuario(new Usuario());
+        setStringBusqueda(""); 
         
     }
     
@@ -45,4 +50,24 @@ public class Model {
     public void setCurrentCurso(Curso c){
         currentCurso = c; 
     }
+    
+    public void setUsuario(Usuario u){
+        user =u; 
+    }
+    
+    public Usuario getUsuario(){
+        return user; 
+    }
+    
+    //Busqueda
+
+    public void setStringBusqueda(String stringBusqueda) {
+        this.stringBusqueda = stringBusqueda;
+    }
+
+    public String getStringBusqueda() {
+        return stringBusqueda;
+    }
+
+    
 }

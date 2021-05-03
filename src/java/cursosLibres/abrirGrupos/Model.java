@@ -21,9 +21,7 @@ public class Model {
 
     Grupo currentGrupo; 
     String cursoId; //? 
-    List<Curso> listaCursos;  //para asociarlo a un curso 
 
-    
     public Model(){
         this.reset(); 
     }
@@ -54,13 +52,6 @@ public class Model {
     public void setIdCurso(String s){
         cursoId= s; 
     }
-    
-    //lista cursos 
-    public List<Curso> getCursos(){
-        return listaCursos; 
-    }
-    
-    public void setListaCursos(List<Curso> c){
-        listaCursos = c; 
-    }
+
+
 }

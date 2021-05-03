@@ -5,13 +5,10 @@
  */
 package cursosLibres.grupos;
 
-import cursosLibres.logic.Estudiante;
 import cursosLibres.logic.Grupo;
 import cursosLibres.logic.Matricula;
 import cursosLibres.logic.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,17 +45,23 @@ public class Controller extends HttpServlet {
             Model model = (Model) request.getAttribute("model");
             HttpSession session = request.getSession(true);
             Usuario usuario = (Usuario) session.getAttribute("usuario");
-            cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
             if(usuario==null){
-                throw new Exception();
+                return "/presentation/login/show";
             }
-            model.setEstudiante(domainModel.estudianteFind(usuario.getCedula()));
-            //this.verificar(model.getEstudiante(), request);
-            return "";
+            cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+            
+            model.setEstudiante(service.getEstudiante(usuario.getCedula()));
+            String grupoId = request.getParameter("grupoID");
+            Matricula m = new Matricula();
+            m.setIdEstudiante(model.getEstudiante().getId());
+            m.setIdGrupo(grupoId);
+            service.add(m);
+            String URL = "/presentation/Grupos/show?cursoId="+request.getParameter("cursoId");
+            System.out.println(URL);
+            return URL;
         }
         catch(Exception e){
-            System.out.println("no hay un usuario logeado! tirando excepcion...");
-            return "/presentation/login/View2.jsp";
+            return "";
         }
     }
     
@@ -69,37 +72,36 @@ public class Controller extends HttpServlet {
     
     public String showAction(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
         try{
             HttpSession session = request.getSession(true);
             Usuario usuario = (Usuario) session.getAttribute("usuario");
-            model.setCurrent(domainModel.cursoFind(request.getParameter("nombreCurso")));
-            model.setListaGrupos(model.getCurrent().getGrupoList());
+            model.setCurrent(service.getCurso(request.getParameter("cursoId")));
+            List<Grupo> lista = service.getGruposByCurso(model.getCurrent());
+            
             if(usuario != null){
-                Estudiante e = domainModel.estudianteFind(usuario.getCedula());
-                if(e == null){return "/presentation/Grupos/View.jsp";}
-                model.setListaGrupos(this.listaFinal(e, request));
+                // si usuario es estudiante
+                if(usuario.getTipo() == 2){
+                    model.setEstudiante(service.getEstudiante(usuario.getCedula()));
+                    List<Matricula> matriculas = service.findByEstudiante(model.getEstudiante());
+                    for(Matricula m : matriculas){
+                        for(Grupo g : lista){
+                            if(m.getIdGrupo().equals(g.getId())){
+                                model.setMatriculado(1);
+                                break;
+                            }
+                        } 
+                    }
+                }
+                else{
+                    model.setMatriculado(1);
+                }
             }
+            model.setListaGrupos(lista);
             return "/presentation/Grupos/View.jsp";
         }catch(Exception ex){
             return "";
         }
-    }
-    
-    // Elimina los grupos en los que ya el estudiante esta matriculado
-    public List<Grupo> listaFinal(Estudiante est, HttpServletRequest request){
-        Model model = (Model) request.getAttribute("model");
-        List<Grupo> listaFin =  model.getListaGrupos();
-        for(Matricula m : est.getHistorial()){
-            String grupo = m.getIdGrupo();
-            for(Grupo a : listaFin){
-                if(a.getId().equals(grupo)){
-                    listaFin.remove(a);
-                    break;
-                }
-            }
-        }
-        return listaFin;
     }
 
     

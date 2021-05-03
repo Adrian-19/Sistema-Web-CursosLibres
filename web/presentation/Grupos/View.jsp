@@ -32,9 +32,11 @@
             <table class = "table table-primary table-striped table-hover">
                 <tr>
                     <th>ID</th>
-                    <th>Profesor</th>
+                    <th>Profesor(a)</th>
                     <th>Horario</th>
+                    <% if(model.getMatriculado() != 1){%>
                     <th> </th>
+                    <%}%>
                 </tr>
                 <% for(Grupo g : grupos) {%> <!-- Recorrer lista de grupos del curso seleccionado -->
                 <tr>
@@ -42,7 +44,9 @@
                     <td><%=g.getProfesor().getNombre()%></td> 
                     <td><%=g.getHorario()%></td>
                     <td>
-                        <a href="/Sistema-Web-CursosLibres/presentation/Grupos/matricular?grupoID=<%=g.getId()%>" class = "btn btn-default" role ="button"> Matricularme </a>
+                        <% if(model.getMatriculado() != 1){%>
+                            <a href="/Sistema-Web-CursosLibres/presentation/Grupos/matricular?grupoID=<%=g.getId()%>&cursoId=<%=model.getCurrent().getId()%>" class = "btn btn-default" role ="button"> Matricularme </a>
+                        <%}%>
                     </td>
                 </tr>
                 <%}%>

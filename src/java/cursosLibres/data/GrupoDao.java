@@ -61,6 +61,20 @@ public class GrupoDao {
         return hm;
     }
     
+    public List<Grupo> findByCurso(Curso c) throws Exception{
+        List<Grupo> r = new ArrayList<>();
+        String sql = "select * from Grupos where codigoCurso=?";
+        try{
+            PreparedStatement stm = Database.instance().prepareStatement(sql);
+            stm.setInt(1, Integer.valueOf(c.getId()));
+            ResultSet rs =  Database.instance().executeQuery(stm); 
+            while (rs.next()) {
+                r.add(from(rs));
+            }
+        }catch (SQLException ex) {}
+        return r;
+    }
+    
     public Grupo read(String id) throws Exception{
         String sql = "select * from Grupos where id=?";
         PreparedStatement stm = Database.instance().prepareStatement(sql);
@@ -70,6 +84,7 @@ public class GrupoDao {
             return from(rs);
         }
         else{
+//            return null; // ---- revisar 
             throw new Exception ("Grupo no Existe");
         }
     }
@@ -89,4 +104,21 @@ public class GrupoDao {
         }
     }
     
+<<<<<<< HEAD
+=======
+    public List<Grupo> findAll(){
+        List<Grupo> grupos = new ArrayList<>(); 
+        String sql = "select * from grupos"; 
+        
+        try{
+            PreparedStatement stm = Database.instance().prepareStatement(sql); 
+            ResultSet rs = Database.instance().executeQuery(stm); 
+            while(rs.next()){ grupos.add(from(rs)); }
+        } catch (SQLException ex) { }
+        
+        return grupos; 
+    }
+    
+
+>>>>>>> dd763621b7488850fc717b120f2e3c2875c9233c
 }

@@ -8,19 +8,21 @@
 <%@page import="java.util.List"%>
 <%@page import="cursosLibres.verCursos.Model"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
+
 <!DOCTYPE html>
-<html> 
+ 
     <head>
          <%@ include file="/presentation/Head.jsp" %>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title> Cursos </title>
     </head>
-    <body >
+    
         <%@ include file="/presentation/Header.jsp" %>
         <% Model model = (Model) request.getAttribute("model"); %>
         <%List<Curso> cursos = model.getListaCursos();%>
-
         
         
         <div  class="jumbotron bg-transparent" >
@@ -28,11 +30,17 @@
                 <h1>Descubra nuestros cursos</h1>
                 
                 <%-- Search bar --%>
-                <div class="input-group mb-3 p-4 bg-transparent main-content">
-                  <input type="text" class="form-control" placeholder="Buscar cursos" aria-label="Buscar cursos" aria-describedby="button-addon2">
-                  <button class="btn btn-outline-primary" type="button" id="button-addon2">Search</button>
-                </div>
+                
                
+                <div class="p-4 bg-transparent main-content">
+                   <form action="/Sistema-Web-CursosLibres/presentation/VerCursos/buscar"  method="post" class="form-inline">
+                   <input type="text" class="form-control" placeholder="Buscar cursos" name="busqCursos"  id="busqCursos">
+                   <button type="submit" class=" btn-outline-primary" >Search</button>                       
+                   </form>
+                   
+
+                </div>
+
 
             </div>
         </div>
@@ -43,10 +51,10 @@
         <div class="container main-content">
             
             <div class="row">
-                <%for (Curso c: cursos){ %>
+                <%for (Curso c: model.getListaCursos()){ %>
                     <div class="container card">
                         <div class="main-content">
-                          <img src="/Tanteando/images/logo.jpg" class="card-img-top" alt="...">  
+                          <img src="/Sistema-Web-CursosLibres/images/logo.jpg" class="card-img-top" alt="...">  
                         </div>
                         
                           <table class="container p-4 m-5">
@@ -57,9 +65,17 @@
                                    <td> <%=c.getNombre() %> </td> 
                                    <%--revisar referencia --%>
                                    <td>
-                                        <a href="/Sistema-Web-CursosLibres/presentation/Grupos/show?nombreCurso=<%=c.getNombre()%>"> Ver grupos </a>
+                                    <a href="/Sistema-Web-CursosLibres/presentation/Grupos/show?cursoId=<%=c.getId()%>"> Ver grupos </a> 
                                    </td>
-                                   <th> <%c.getTematica(); %> </th> 
+                                   
+                                   <%if(model.getUsuario() != null && model.getUsuario().getTipo() == 0){ %>
+                                        <td>
+                                         <a href="/Sistema-Web-CursosLibres/presentation/AbrirGrupos/show?cursoId=<%=c.getId()%>"> Abrir grupos </a> 
+                                         
+                                        </td>
+
+                                   <%}%>
+                                   
                                   </tr>                              
                               </tbody>                        
                           </table>                            
@@ -73,6 +89,3 @@
     
         </div><!-- fin -->
         
- 
-    </body>
-</html>
