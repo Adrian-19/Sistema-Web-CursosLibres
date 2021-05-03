@@ -6,6 +6,8 @@
 
 package cursosLibres.abrirGrupos; 
 
+import cursosLibres.logic.Curso;
+import cursosLibres.logic.Grupo;
 import cursosLibres.logic.Profesor;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -102,10 +104,17 @@ public class Controller extends HttpServlet {
        
     public String showAction(HttpServletRequest request) { //muestra todo vacío
         Model model = (Model) request.getAttribute("model");
+        HttpSession session = request.getSession(true); // sesión 
+        
         model.getCurrentGrupo().setId("");
         model.getCurrentGrupo().setHorario("");
         model.getCurrentGrupo().setProfesor(null); 
         model.getCurrentGrupo().setEstudianteList(null);
+        
+        model.setIdCurso(request.getParameter("cursoId"));
+        session.setAttribute("cursoId", model.getIdCurso());
+        
+        
         return "/presentation/AbrirGrupos/View.jsp";
     }
      
@@ -122,7 +131,7 @@ public class Controller extends HttpServlet {
                 return this.registerAction(request);  
             } else {
                 request.setAttribute("errores", errores); 
-                return "/presentation/AbrirGrupos/View.jsp"; 
+                return "/presentation/AbrirGrupos/show"; 
             }
         } catch (Exception e) {
             return "/presentation/Error.jsp"; //??
@@ -131,32 +140,44 @@ public class Controller extends HttpServlet {
     }
     
    
-     Map<String, String> validarRegistro(HttpServletRequest request) {
+     Map<String, String> validarRegistro(HttpServletRequest request) throws Exception {
          Map<String, String> errores = new HashMap<>();
+         cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+         HttpSession session = request.getSession(true); // sesión 
 
+         //Validación para el profesor:
+            //** Si el espacio está vacío
          if (request.getParameter("idProfesor").isEmpty()) {
             errores.put("idProfesor", "Dato requerido"); 
         }
-         
+            //** si el profesor no existe
+        if(service.readProfesor(request.getParameter("idProfesor")) == null){
+            errores.put("idProfesor", "El profesor no está registrado"); 
+        }
+        
+//        Validación para la hora: 
+//            ** validar espacios vacíos
         if (request.getParameter("inputHorarioInic").isEmpty()) {
-            errores.put("errorHora", "Dato requerido"); //como poner esto para ints? 
+            errores.put("errorHora", "Dato requerido");
         }
         if (request.getParameter("inputHorarioFin").isEmpty()) {
-            errores.put("errorHora", "Dato requerido"); //como poner esto para ints? 
+            errores.put("errorHora", "Dato requerido");  
         }
-        
-        //calculando la hora del curso
-        int horaInic = Integer.parseInt(request.getParameter("inputHorarioInic")) ; 
-        int horaFin = Integer.parseInt(request.getParameter("inputHorarioFin")) ; 
-       
-        if(horaFin <= horaInic){
-            errores.put("errorHora", "La hora del curso no está correcta.");         }
-        //
-        
-        if(request.getParameter("nombreCurso").isEmpty() || request.getParameter("nombreCurso").equals("Seleccionar")){
-            errores.put("nombreCurso", "Seleccionar"); 
-        }
-        
+    
+//            //** validar que la hora de finalización no sea menor a la hora de inicio
+//        int horaInic = Integer.parseInt(request.getParameter("inputHorarioInic")) ; 
+//        int horaFin = Integer.parseInt(request.getParameter("inputHorarioFin")) ; 
+//        if(horaFin <= horaInic){
+//            errores.put("errorHora", "La hora del curso no está correcta.");         
+//        }
+//        
+//        //Obtener cursoId de la sesión o del request?? °°°°°
+//
+//        //Validación para el id del curso 
+//        if(service.getCurso((String) session.getAttribute("cursoId")) == null){
+//            errores.put(request.getParameter("cursoId"), "El curso no existe"); // revisar, este se pasa por método get
+//        }
+
         return errores; 
          
      }
@@ -165,45 +186,63 @@ public class Controller extends HttpServlet {
     void updateModelRegister(HttpServletRequest request) {
         Model model = (Model)request.getAttribute("model"); 
         
-        //ID
-        // en la base de datos?
+        //ID = auto increment
         
-        //Hora
+        //Horario
         String inic = request.getParameter("inputHorarioInic"); 
         String fin = request.getParameter("inputHorarioFin"); 
-        model.getCurrentGrupo().setHorario(inic + " - " + fin);
+        model.getCurrentGrupo().setHorario(inic + " - " + fin); //un solo string
         
-        //Profesor
+        //Profesor. Solo actualiza la cédula 
         model.getCurrentGrupo().getProfesor().setId(request.getParameter("idProfesor"));
         
-        //lista de estudiantes ?
-        model.getCurrentGrupo().setEstudianteList(new ArrayList<>() );
+        //lista de estudiantes - se debe de actualizar ? Se actualiza cada vez que se inscribe alguien
+        
+        //codigo ? 
+        model.setIdCurso(request.getParameter("cursoId"));
         
     }
 
     
     private String registerAction(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        cursosLibres.logic.Service domainModel = cursosLibres.logic.Service.instance(); 
-        //cursosLibres.logic.Model domainModel = cursosLibres.logic.Model.instance();
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance(); 
         HttpSession session = request.getSession(true); // sesión 
         
-        String id = "";
+
+        String idCurso = (String) session.getAttribute("cursoId"); 
+
         
         try {
-            //Programar: si no existe el grupo en ese curso, entonces agregarlo
-            if(!domainModel.existeGrupo()){
+                //Crear horario: 
+                String inic = request.getParameter("inputHorarioInic"); 
+                String fin = request.getParameter("inputHorarioFin"); 
+                String horario = inic + " - " + fin; 
                 
-            }
+                //Buscar profesor en la base de datos para gardarlo
+                Profesor prof = service.readProfesor(request.getParameter("idProfesor")); 
+                
+
+                // Guardar en la base de datos
+                
+                //Crear grupo
+                Grupo g = new Grupo(); 
+                g.setHorario(horario);
+                g.setProfesor(prof);
+                g.setEstudianteList(new ArrayList<>());  
+                //id ?? 
+
+                Curso c = service.getCurso(idCurso); 
+                
+                service.addGrupo(g, c);
+                
+                return "/presentation/AbrirGrupos/show"; 
+            
             
         } catch (Exception e){
-            
+            return "/presentation/Error.jsp"; 
         }
-        
-        
-        return null;
-    }
 
-    
+    }
 
 }

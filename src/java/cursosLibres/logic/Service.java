@@ -56,8 +56,8 @@ public class Service {
        return cursoDao.findAll();   
     }
     
-    public boolean existeCurso(String stringBusqueda) throws Exception {
-        if (cursoDao.read(stringBusqueda) != null) {
+    public boolean existeCurso(String stringBusquedaNombre) throws Exception {
+        if (cursoDao.read(stringBusquedaNombre) != null) {
             return true;
 
         } else {
@@ -85,6 +85,10 @@ public class Service {
         return profesorDao.read(u.getCedula());
     }
     
+    public Profesor readProfesor (String id) throws Exception{
+        return profesorDao.read(id); 
+    }
+    
     // ------------ ESTUDIANTES -------------
     
     public Estudiante getEstudiante(String id) throws Exception{
@@ -100,13 +104,13 @@ public class Service {
         return grupoDao.read(id);
     }
     
-    public boolean existeGrupo(){
-        
-        return true; 
+    public void addGrupo(Grupo g, Curso c) throws Exception{
+        grupoDao.create(g, c);
     }
-
     
-    
+    public List<Grupo> getListaGrupos() {
+       return grupoDao.findAll();   
+    }
     // ---------- MATRICULAS -------------
     public List<Matricula> findByGrupo(Grupo g){
         return matriculaDao.findByGrupo(g.getId());

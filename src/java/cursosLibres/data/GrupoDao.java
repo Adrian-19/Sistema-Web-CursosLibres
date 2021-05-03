@@ -70,6 +70,7 @@ public class GrupoDao {
             return from(rs);
         }
         else{
+//            return null; // ---- revisar 
             throw new Exception ("Grupo no Existe");
         }
     }
@@ -87,4 +88,19 @@ public class GrupoDao {
             return null;
         }
     }
+    
+    public List<Grupo> findAll(){
+        List<Grupo> grupos = new ArrayList<>(); 
+        String sql = "select * from grupos"; 
+        
+        try{
+            PreparedStatement stm = Database.instance().prepareStatement(sql); 
+            ResultSet rs = Database.instance().executeQuery(stm); 
+            while(rs.next()){ grupos.add(from(rs)); }
+        } catch (SQLException ex) { }
+        
+        return grupos; 
+    }
+    
+
 }
