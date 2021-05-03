@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "loginController", urlPatterns = {"/presentation/login/show", "/presentation/login/login", "/presentation/login/logout", "/presentation/login/register", "/presentation/login/showRegister"})
+@WebServlet(name = "loginController", urlPatterns = {"/presentation/login/show", "/presentation/login/login", "/presentation/login/logout", "/presentation/login/register", "/presentation/login/showRegister", "/presentation/login/showClave"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request,
@@ -44,7 +45,6 @@ public class Controller extends HttpServlet {
             case "/presentation/login/showRegister":
                 viewUrl = this.showRegister(request);
                 break;
-
         }
         request.getRequestDispatcher(viewUrl).forward(request, response);
     }
@@ -210,9 +210,9 @@ public class Controller extends HttpServlet {
         if (request.getParameter("cedulaFld").isEmpty()) {
             errores.put("cedulaFld", "Cedula requerida");
         }
-        if (request.getParameter("claveFld").isEmpty()) {
-            errores.put("claveFld", "Clave requerida");
-        }
+//        if (request.getParameter("claveFld").isEmpty()) {
+//            errores.put("claveFld", "Clave requerida");
+//        }
         if (request.getParameter("correoFld").isEmpty()) {
             errores.put("correoFld", "Correo requerido");
         }
@@ -230,7 +230,7 @@ public class Controller extends HttpServlet {
         Model model = (Model) request.getAttribute("model");
 
         model.getCurrent().setCedula(request.getParameter("cedulaFld"));
-        model.getCurrent().setClave(request.getParameter("claveFld"));
+        model.getCurrent().setClave(cadenaAleatoria(4));
 
         model.getEstudiante().setId(request.getParameter("cedulaFld"));
         model.getEstudiante().setCorreo(request.getParameter("correoFld"));
@@ -262,7 +262,7 @@ public class Controller extends HttpServlet {
             service.add(nuevo, correo);
             session.setAttribute("usuario", nuevo);
             service.addEstudiante(estudianteNue);
-            return "/presentation/VerCursos/show";
+            return "/presentation/login/ViewContraseña.jsp";
 
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();
@@ -283,5 +283,19 @@ public class Controller extends HttpServlet {
         model.getCurrent().setClave("");
         return "/presentation/login/viewRegister.jsp";
     }
+    
+    private String cadenaAleatoria(int longitud) {
+       
+        String posibilidades = "abcdefghijklmnopqrstuvwxyz1234567890";
+        String cadena = "";
+        for (int x = 0; x < longitud; x++) {
+            int indiceAleatorio = ThreadLocalRandom.current().nextInt(0, posibilidades.length());;
+            char caracterAleatorio = posibilidades.charAt(indiceAleatorio);
+            cadena += caracterAleatorio;
+        }
+        return cadena;
+    }
 
 }
+
+

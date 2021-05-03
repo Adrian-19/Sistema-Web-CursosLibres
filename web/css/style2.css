@@ -32,9 +32,6 @@ and open the template in the editor.
     color: #fff;
 }
 
-.row > h2{
-    color:#0066ff;
-}
 .login_form{
     background-color: #fff;
     border-top-right-radius:20px;

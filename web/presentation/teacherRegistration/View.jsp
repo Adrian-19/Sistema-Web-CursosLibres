@@ -25,65 +25,69 @@
             <div class="col-md-4 text-center company_info">
                 <h4 class="company_title">Cursos Libres</h4>
             </div>
-            <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+            <div class="col-md-8 col-xs-12 col-sm-12 login_form">
                 <div class="container-fluid">
-                    <div class="row">
-                        <h2>Registrar Profesor</h2>
+
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-auto">
+                            <h1 class="text-primary">Registrar Profesor</h1>
+                        </div>
                     </div>
-                    <div class="row">
-                        <form method="post" name="RegistroPro" action="/Sistema-Web-CursosLibres/presentation/teacherRegistration/register" class="form-group">
-                            <div class="row">
-                                <input type="number" name="cedulaProFld" value="<%=form.get("cedulaProFld")[0]%>" title="<%=title("cedulaProFld", errores)%>" class="form_input <%=erroneo("cedulaProFld", errores)%>" placeholder="ID">
-                            </div>
-                            <div class="row">
-                                <input type="password" name="claveProFld" value="<%=form.get("claveProFld")[0]%>"  title="<%=title("claveProFld", errores)%>" class="form_input <%=erroneo("claveProFld", errores)%>" placeholder="Contraseña">
-                            </div>
-                            <div class="row">
-                                <input type="text" name="nombreProFld" value="<%=form.get("nombreProFld")[0]%>"  title="<%=title("nombreProFld", errores)%>" class="form_input <%=erroneo("nombreProFld", errores)%>" placeholder="Nombre">
-                            </div>
-                            <div class="row">
-                                <input type="tel" pattern="[0-9]{8}" name="telefonoProFld" value="<%=form.get("telefonoProFld")[0]%>"  title="<%=title("telefonoProFld", errores)%>" class="form_input <%=erroneo("telefonoProFld", errores)%>" placeholder="Telefono (11112222)">
-                            </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-auto">
+                            <form method="post" name="RegistroPro" action="/Sistema-Web-CursosLibres/presentation/teacherRegistration/register" class="form-group">
+                                <div class="row">
+                                    <input type="number" name="cedulaProFld" value="<%=form.get("cedulaProFld")[0]%>" title="<%=title("cedulaProFld", errores)%>" class="form_input <%=erroneo("cedulaProFld", errores)%>" placeholder="ID">
+                                </div>
+                                <div class="row">
+                                    <input type="password" name="claveProFld" value="<%=form.get("claveProFld")[0]%>"  title="<%=title("claveProFld", errores)%>" class="form_input <%=erroneo("claveProFld", errores)%>" placeholder="Contraseña">
+                                </div>
+                                <div class="row">
+                                    <input type="text" name="nombreProFld" value="<%=form.get("nombreProFld")[0]%>"  title="<%=title("nombreProFld", errores)%>" class="form_input <%=erroneo("nombreProFld", errores)%>" placeholder="Nombre">
+                                </div>
+                                <div class="row">
+                                    <input type="tel" pattern="[0-9]{8}" name="telefonoProFld" value="<%=form.get("telefonoProFld")[0]%>"  title="<%=title("telefonoProFld", errores)%>" class="form_input <%=erroneo("telefonoProFld", errores)%>" placeholder="Telefono (11112222)">
+                                </div>
 
-                            <div class="row">
-                                <input type="email" name="correoProFld" value="<%=form.get("correoProFld")[0]%>"  title="<%=title("correoProFld", errores)%>" class="form_input <%=erroneo("correoProFld", errores)%>" placeholder="Correo">
-                            </div>
+                                <div class="row">
+                                    <input type="email" name="correoProFld" value="<%=form.get("correoProFld")[0]%>"  title="<%=title("correoProFld", errores)%>" class="form_input <%=erroneo("correoProFld", errores)%>" placeholder="Correo">
+                                </div>
 
-                            <div class="row">
-                                <input type="text" name="especProFld" value="<%=form.get("especProFld")[0]%>"  title="<%=title("especProFld", errores)%>" class="form_input <%=erroneo("especProFld", errores)%>" placeholder="Especialidades">
-                            </div>
+                                <div class="row">
+                                    <input type="text" name="especProFld" value="<%=form.get("especProFld")[0]%>"  title="<%=title("especProFld", errores)%>" class="form_input <%=erroneo("especProFld", errores)%>" placeholder="Especialidades">
+                                </div>
 
 
-                            <div class="row">
-                                <input type="submit" value="Registrar" class="btn btnRL">
-                            </div>
-                        </form>
+                                <div class="row">
+                                    <input type="submit" value="Registrar" class="btn btnRL">
+                                </div>
+                            </form>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
     <div class="text-center">
-        
-        
+
+
         <div class="container">
             <form method="post" name="BusquedaPro" action="/Sistema-Web-CursosLibres/presentation/teacherRegistration/search">
-            <div class = "row">
-                 <div class = "col-sm-8"><h2>Lista de profesores</h2> </div>
-                <div class="col-md-auto search">
-                    
+                <div class = "row">
+                    <div class = "col-sm-8"><h2>Lista de profesores</h2> </div>
+                    <div class="col-md-auto search">
+
                         <input type="text" name="busProFld" class="form-control input-sm" placeholder="Buscar Profesor" />
                         <button type="submit" class="boton_profesor btn btn-primary btn-sm">Buscar</button>
-                        
-                    
-                  
+
+
+
+                    </div>
                 </div>
-            </div>
             </form>
         </div>
-                   
-       
+
+
         <div class="containerTabPro  text-center">
             <table class="table table-hover table-primary table-striped">
                 <thead>
@@ -96,7 +100,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% if(!profesores.isEmpty()){ for (Profesor p : profesores) {%>
+                    <% if (!profesores.isEmpty()) {
+                            for (Profesor p : profesores) {%>
                     <tr >
                         <th scope="row"><%=p.getId()%></th>
                         <td><%=p.getNombre()%></td>
@@ -105,7 +110,7 @@
                         <td><%=p.getCorreo()%></td>
                     </tr>            
                     <%}
-                     }
+                        }
                     %>
 
                 </tbody>
