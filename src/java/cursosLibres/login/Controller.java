@@ -5,8 +5,10 @@
  */
 package cursosLibres.login;
 
+import cursosLibres.logic.Administrador;
 import cursosLibres.logic.Usuario;
 import cursosLibres.logic.Estudiante;
+import cursosLibres.logic.Profesor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -103,6 +105,20 @@ public class Controller extends HttpServlet {
                 real.setCorreo(usu.getCorreo());
 
                 session.setAttribute("usuario", real);
+                switch(real.getTipo()){
+                    case 0:
+                        Administrador admin = service.getAdmin(real.getCedula());
+                        session.setAttribute("nombreUsuario", admin.getNombre());
+                        break;
+                    case 1:
+                        Profesor p = service.get(real);
+                        session.setAttribute("nombreUsuario", p.getNombre());
+                        break;
+                    case 2:
+                        Estudiante e = service.getEstudiante(real.getCedula());
+                        session.setAttribute("nombreUsuario", e.getNombre());
+                        break;
+                }
 
             } else {
                 Map<String, String> errores = new HashMap<>();
@@ -262,7 +278,12 @@ public class Controller extends HttpServlet {
             service.add(nuevo, correo);
             session.setAttribute("usuario", nuevo);
             service.addEstudiante(estudianteNue);
+<<<<<<< HEAD
             return "/presentation/login/ViewContraseña.jsp";
+=======
+            session.setAttribute("nombreUsuario", estudianteNue.getNombre());
+            return "/presentation/VerCursos/show";
+>>>>>>> a0485d655385a6bf01c39e3d589029dea767d3b2
 
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();

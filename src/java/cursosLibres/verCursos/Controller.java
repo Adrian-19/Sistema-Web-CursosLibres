@@ -5,10 +5,10 @@
  */
 package cursosLibres.verCursos;
 
+
 import cursosLibres.logic.Curso;
 import cursosLibres.logic.Usuario;
 import cursosLibres.verCursos.Model; 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.Normalizer;
@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
+
 
 
 /**
@@ -120,6 +121,7 @@ public class Controller extends HttpServlet {
             HttpSession session = request.getSession(true);
             Usuario usuario = (Usuario) session.getAttribute("usuario");
             model.setUsuario(usuario);
+            
 
         } catch(Exception e){
             return "/presentation/Error.jsp";

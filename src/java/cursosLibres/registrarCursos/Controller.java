@@ -5,19 +5,30 @@
  */
 package cursosLibres.registrarCursos;
 
+import cursosLibres.logic.Curso;
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.OutputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author ESCINF
  */
-@WebServlet(name = "ControllerRegCursos", urlPatterns = {"/presentation/RegistrarCursos/show"})
+@WebServlet(name = "ControllerRegCursos", urlPatterns = {"/presentation/RegistrarCursos/show", "/presentation/RegistrarCursos/register", "/presentation/RegistrarCursos/image"})
+@MultipartConfig(location="C:\\")
+
 public class Controller extends HttpServlet {
 
     /**
@@ -41,6 +52,12 @@ public class Controller extends HttpServlet {
              case "/presentation/RegistrarCursos/show": 
                 viewUrl = this.show(request); //se llama al método show para mostrar
                 break;
+             case "/presentation/RegistrarCursos/register" :
+                viewUrl = this.register(request); 
+                break; 
+             case "/presentation/RegistrarCursos/image": 
+                 viewUrl = this.image(request, response); 
+                break; 
         }
         
         request.getRequestDispatcher(viewUrl).forward( request, response); 
@@ -100,7 +117,120 @@ public class Controller extends HttpServlet {
         model.getCurrentCurso().setNombre("");
         model.getCurrentCurso().setTematica("");
         
+        //
+        Curso curso = new Curso();
+        request.setAttribute("curso", curso);
+        
         return "/presentation/RegistrarCursos/View.jsp"; 
+    }
+
+    
+    //** Desarrollo de registrar curso:
+    
+    private String register(HttpServletRequest request) {
+       try {
+           Map<String, String> errores = this.validarRegistro(request); 
+           if(errores.isEmpty()){
+               this.updateModelRegister(request); 
+               return this.registerAction(request); 
+           } else{
+               request.setAttribute("errores", errores);
+               return "/presentation/RegistrarCursos/show"; 
+           }
+       }catch(Exception e){
+           return "/presentation/Error.jsp";
+       }
+        
+    }
+
+    private Map<String, String> validarRegistro(HttpServletRequest request) {
+        
+        Map<String, String> errores = new HashMap<>();
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+        
+        //validaciones aquí
+        
+        return errores;
+    }
+
+    private void updateModelRegister(HttpServletRequest request) throws IOException, ServletException {
+        Model model = (Model) request.getAttribute("model");
+        
+//        
+        String nombre = request.getParameter("nombreCurso"); 
+        String tematica = request.getParameter("inputTematica"); 
+//        
+
+        model.getCurrentCurso().setNombre(request.getParameter("nombreCurso"));
+        model.getCurrentCurso().setTematica(request.getParameter("inputTematica")); 
+        model.getCurrentCurso().setCosto(Integer.parseInt(request.getParameter("inputCosto")));
+        model.getCurrentCurso().setEstado(request.getParameter("estado"));
+
+//        final Part image; 
+//        image = request.getPart("logoFile"); 
+        
+        
+    }
+
+    private String registerAction(HttpServletRequest request) {
+        Model model = (Model) request.getAttribute("model");
+        cursosLibres.logic.Service service = cursosLibres.logic.Service.instance(); 
+        
+        try {
+            String nombre = request.getParameter("nombreCurso"); 
+            String tematica = request.getParameter("inputTematica"); 
+            int costo = Integer.parseInt(request.getParameter("inputCosto")); 
+            String estado = request.getParameter("estado"); 
+
+            Curso c = new Curso();
+            c.setNombre(nombre);
+            c.setCosto(costo);
+            c.setTematica(tematica);
+            c.setEstado(estado);
+            
+            service.addCurso(c); 
+
+//            c.setId(service.getCursoNom("inputNombre").getId()); //recpera id de la BD
+            
+ // --------------------------            
+            final Part image; 
+            image = request.getPart("logoFile"); 
+            image.write(service.getCursoNom(c.getNombre()).getId()); //nombre del logo = id de la BD
+            
+            
+            return "/presentation/RegistrarCursos/show"; 
+            
+        } catch (Exception e){
+            return "/presentation/Error.jsp"; 
+        }
+        
+    }
+
+    private String image(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
+            
+            String codigo = request.getParameter("cursoId");
+            
+//            //crear el directorio
+            File directorio = new File("C:\\CursosLibres");
+            if (!directorio.exists()) {
+                directorio.mkdirs(); 
+            } 
+//            // then ... crear el path 
+            Path path = FileSystems.getDefault().getPath("C:\\CursosLibres", codigo);
+            try (OutputStream out = response.getOutputStream()) {
+                Files.copy(path, out);
+                out.flush();
+            } catch (IOException e) {
+                // handle exception
+            }            
+            
+            return null;
+ 
+        } catch (Exception ex) {
+             return null;
+        }
     }
 
 }

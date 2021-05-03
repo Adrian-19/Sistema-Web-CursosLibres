@@ -54,7 +54,7 @@
                 <%for (Curso c: model.getListaCursos()){ %>
                     <div class="container card">
                         <div class="main-content">
-                          <img src="/Sistema-Web-CursosLibres/images/logo.jpg" class="card-img-top" alt="...">  
+                          <img src="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/image?cursoId=<%=c.getId()%>" class="card-img-top" alt="...">  
                         </div>
                         
                           <table class="container p-4 m-5">
