@@ -145,22 +145,12 @@ public class Service {
        return matriculaDao.findByGrupo(g.getId());
     }
     
-<<<<<<< HEAD
-    
-=======
     public List<Matricula> findByEstudiante(String cedula) {
         return matriculaDao.findByEstudiante(cedula);
     }
 
 
 
-<<<<<<< HEAD
-=======
-    public List<Grupo> getListaGrupos() {
-       return grupoDao.findAll();   
-    }
->>>>>>> 8df894fb08aebd7d7139f12101984f6c579330b3
->>>>>>> bd66f3d645a442ad5db4c445d89bf101a2c4064f
     // ---------- MATRICULAS -------------
     public void add(Matricula m) throws Exception{
         matriculaDao.create(m);
@@ -175,4 +165,3 @@ public class Service {
         return matriculaDao.findByEstudiante(e);
     }
 }
-
