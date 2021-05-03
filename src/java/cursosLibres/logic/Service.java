@@ -89,6 +89,10 @@ public class Service {
     public List<Curso> getLikeCursos(String nom) throws SQLException {
         return cursoDao.getLikeCursos(nom);
     }
+    
+    public void addCurso(Curso c) throws Exception {
+        cursoDao.create(c);
+    }
 
     // ------------ PROFESORES -------------
     public Profesor get(Usuario u) throws Exception {
@@ -164,4 +168,6 @@ public class Service {
     public List<Matricula> findByEstudiante(Estudiante e){
         return matriculaDao.findByEstudiante(e);
     }
+
+
 }

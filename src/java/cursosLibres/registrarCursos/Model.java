@@ -9,7 +9,7 @@ import cursosLibres.logic.Curso;
 
 /**
  *
- * @author ESCINF
+ * @author DS
  */
 public class Model {
     Curso currentCurso; 

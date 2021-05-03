@@ -134,7 +134,7 @@ public class Controller extends HttpServlet {
                 return "/presentation/AbrirGrupos/show"; 
             }
         } catch (Exception e) {
-            return "/presentation/Error.jsp"; //??
+            return "/presentation/Error.jsp"; 
         }
  
     }
@@ -222,9 +222,7 @@ public class Controller extends HttpServlet {
                 //Buscar profesor en la base de datos para gardarlo
                 Profesor prof = service.readProfesor(request.getParameter("idProfesor")); 
                 
-
-                // Guardar en la base de datos
-                
+                // Guardar en la base de datos:
                 //Crear grupo
                 Grupo g = new Grupo(); 
                 g.setHorario(horario);

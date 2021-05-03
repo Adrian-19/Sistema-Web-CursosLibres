@@ -41,7 +41,7 @@ public class Database {
             String port="3306";
             String user="root";
 
-            String password= "Root";
+            String password= "root";
 
             String database = "cursoslibres";
             String URL_conexion="jdbc:mysql://"+ server+":"+port+"/"+
