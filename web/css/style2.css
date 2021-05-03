@@ -78,7 +78,7 @@ form{
     color:#fff;
 }
 
-input[type=text].is-invalid,input[type=password].is-invalid{
+input[type=text].is-invalid,input[type=password].is-invalid,input[type=number].is-invalid,input[type=email].is-invalid,input[type=tel].is-invalid{
     border-color: #dc3545;
 
 }
@@ -126,3 +126,4 @@ input[type=text].is-invalid,input[type=password].is-invalid{
     top: 5px;
     border-radius:1px;
 }
+

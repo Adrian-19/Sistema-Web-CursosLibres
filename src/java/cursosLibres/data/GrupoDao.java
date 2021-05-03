@@ -81,10 +81,12 @@ public class GrupoDao {
             g.setId(String.valueOf(rs.getInt("id")));
             g.setHorario(rs.getString("horario"));
             g.setProfesor(profe.read(String.valueOf(rs.getInt("idProfesor"))));
+            g.setCodigoCurso(rs.getInt("codigoCurso"));
             System.out.println(g.getId() + " " +g.getHorario() + " " + g.getProfesor().getId());
             return g;
         }catch(Exception ex){
             return null;
         }
     }
+    
 }

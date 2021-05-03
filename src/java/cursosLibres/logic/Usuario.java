@@ -13,6 +13,7 @@ public class Usuario  implements java.io.Serializable {
      private String cedula;
      private String clave;
      private Integer tipo;
+     private String correo;
 
     public Usuario() {
     }
@@ -50,6 +51,16 @@ public class Usuario  implements java.io.Serializable {
     public void setTipo(Integer tipo) {
         this.tipo = tipo;
     }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+    
+    
 
 
 
