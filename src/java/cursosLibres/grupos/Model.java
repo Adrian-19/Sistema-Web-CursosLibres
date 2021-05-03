@@ -20,12 +20,14 @@ public class Model {
     List<Grupo> listaGrupos;
     Estudiante estudiante;
     int matriculado;
+    int matriculaExitosa;
     
-    public Model(Curso current, List<Grupo> listaGrupos, Estudiante estudiante, int matriculado) {
+    public Model(Curso current, List<Grupo> listaGrupos, Estudiante estudiante, int matriculado, int matriculaExitosa) {
         this.current = current;
         this.listaGrupos = listaGrupos;
         this.estudiante = estudiante;
         this.matriculado = matriculado;
+        this.matriculaExitosa = matriculaExitosa;
     }
 
     public Model(){
@@ -33,6 +35,7 @@ public class Model {
         this.listaGrupos = new ArrayList<>();
         this.estudiante = new Estudiante();
         this.matriculado = 0;
+        this.matriculaExitosa = 0;
     }
     
     public Curso getCurrent() {
@@ -65,6 +68,14 @@ public class Model {
 
     public void setMatriculado(int matriculado) {
         this.matriculado = matriculado;
+    }
+
+    public int getMatriculaExitosa() {
+        return matriculaExitosa;
+    }
+
+    public void setMatriculaExitosa(int matriculaExitosa) {
+        this.matriculaExitosa = matriculaExitosa;
     }
     
     

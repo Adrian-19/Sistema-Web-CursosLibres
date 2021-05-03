@@ -51,6 +51,7 @@ public class GrupoDao {
                     hm.put(c.getNombre(), actual);
                 }
                 else{
+                    actual = new ArrayList<>();
                     actual.add(from(rs));
                     hm.put(c.getNombre(), actual);
                 }
