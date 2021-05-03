@@ -235,7 +235,7 @@ public class Controller extends HttpServlet {
         cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
          HttpSession session = request.getSession(true);
         try {
-            Profesor profesor = service.getProfesor(model.getCodigoBusqueda());
+            Profesor profesor = service.readProfesor(model.getCodigoBusqueda());
             List<Profesor> list = new ArrayList();
             Usuario u = service.getUsuario(Integer.parseInt(profesor.getId()));
                 profesor.setCorreo(u.getCorreo());

@@ -104,8 +104,7 @@ public class GrupoDao {
         }
     }
     
-<<<<<<< HEAD
-=======
+
     public List<Grupo> findAll(){
         List<Grupo> grupos = new ArrayList<>(); 
         String sql = "select * from grupos"; 
@@ -120,5 +119,4 @@ public class GrupoDao {
     }
     
 
->>>>>>> dd763621b7488850fc717b120f2e3c2875c9233c
 }

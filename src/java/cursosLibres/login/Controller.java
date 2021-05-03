@@ -112,18 +112,6 @@ public class Controller extends HttpServlet {
 
             }
 
-//            String viewUrl = "";
-//            switch (real.getTipo()) { // Para que es esto?
-//                case 2:
-//                    viewUrl = "/presentation/Index.jsp";
-//                    break;
-//                case 1:
-//                    viewUrl = "/presentation/Index.jsp";
-//                    break;
-//                case 0:
-//                    viewUrl = "/presentation/Index.jsp";
-//                break;
-//            }
             return "/presentation/VerCursos/show";
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();
@@ -204,7 +192,7 @@ public class Controller extends HttpServlet {
     }// </editor-fold>
 
     private String register(HttpServletRequest request) {
-        try {
+      
             Map<String, String> errores = this.validarRegistro(request);
             if (errores.isEmpty()) {
                 this.updateModelRegister(request);
@@ -213,9 +201,7 @@ public class Controller extends HttpServlet {
                 request.setAttribute("errores", errores);
                 return "/presentation/login/viewRegister.jsp";
             }
-        } catch (Exception e) {
-            return "/presentation/Error.jsp";
-        }
+
 
     }
 
@@ -250,7 +236,7 @@ public class Controller extends HttpServlet {
         model.getEstudiante().setCorreo(request.getParameter("correoFld"));
         model.getEstudiante().setNombre(request.getParameter("nombreFld"));
         
-        String telefono = request.getParameter("telefonoProFld");
+        String telefono = request.getParameter("telefonoFld");
         telefono = telefono.replaceAll(" ","");
         telefono = telefono.replaceAll("-","");
         model.getEstudiante().setTelefono(telefono);
