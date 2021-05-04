@@ -28,7 +28,7 @@ import javax.servlet.http.Part;
  */
 
 @WebServlet(name = "ControllerRegCursos", urlPatterns = {"/presentation/RegistrarCursos/show", "/presentation/RegistrarCursos/register", "/presentation/RegistrarCursos/image"})
-@MultipartConfig(location="C:/Users/emanuelle/Desktop/ima")
+@MultipartConfig(location= "C:\\CursosLibres")
 
 
 public class Controller extends HttpServlet {
@@ -119,9 +119,9 @@ public class Controller extends HttpServlet {
         model.getCurrentCurso().setNombre("");
         model.getCurrentCurso().setTematica("");
         
-        //
-        Curso curso = new Curso();
-        request.setAttribute("curso", curso);
+//        //
+//        Curso curso = new Curso();
+//        request.setAttribute("curso", curso);
         
         return "/presentation/RegistrarCursos/View.jsp"; 
     }
@@ -133,10 +133,11 @@ public class Controller extends HttpServlet {
        try {
            Map<String, String> errores = this.validarRegistro(request); 
            if(errores.isEmpty()){
-               this.updateModelRegister(request); 
+               this.updateModelRegister(request);  
+               
                return this.registerAction(request); 
            } else{
-               request.setAttribute("errores", errores);
+               request.setAttribute("errores", errores);   
                return "/presentation/RegistrarCursos/show"; 
            }
        }catch(Exception e){
@@ -221,12 +222,12 @@ public class Controller extends HttpServlet {
             String codigo = request.getParameter("cursoId");
             
 //            //crear el directorio
-            File directorio = new File("C:/Users/emanuelle/Desktop/ima");
+            File directorio = new File("C:\\CursosLibres");
             if (!directorio.exists()) {
                 directorio.mkdirs(); 
             } 
 //            // then ... crear el path 
-            Path path = FileSystems.getDefault().getPath("C:/Users/emanuelle/Desktop/ima", codigo);
+            Path path = FileSystems.getDefault().getPath("C:\\CursosLibres", codigo);
             try (OutputStream out = response.getOutputStream()) {
                 Files.copy(path, out);
                 out.flush();

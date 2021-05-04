@@ -114,7 +114,7 @@ public class Controller extends HttpServlet {
         model.setIdCurso(request.getParameter("cursoId"));
         session.setAttribute("cursoId", model.getIdCurso());
         
-        
+  
         return "/presentation/AbrirGrupos/View.jsp";
     }
      
@@ -225,7 +225,8 @@ public class Controller extends HttpServlet {
                 
                 service.addGrupo(g, c);
                 
-                return "/presentation/AbrirGrupos/show"; 
+
+                return "/presentation/AbrirGrupos/View.jsp"; 
             
             
         } catch (Exception e){

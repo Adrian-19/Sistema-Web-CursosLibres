@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `CursosLibres`.`Cursos` (
   `nombre` VARCHAR(45) NOT NULL,
   `tematica` VARCHAR(45) NOT NULL,
   `costo` INT NOT NULL,
-  `estado` VARCHAR(10) NOT NULL,
+  `estado` VARCHAR(15) NOT NULL,
   PRIMARY KEY (`codigo`))
 ENGINE = InnoDB;
 

@@ -9,6 +9,7 @@ package cursosLibres.verCursos;
 import cursosLibres.logic.Curso;
 import cursosLibres.logic.Usuario;
 import cursosLibres.verCursos.Model; 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.Normalizer;
@@ -41,7 +42,6 @@ public class Controller extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private boolean ban = false; 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -115,12 +115,21 @@ public class Controller extends HttpServlet {
         cursosLibres.logic.Service service = cursosLibres.logic.Service.instance(); 
 
         try{
-            List<Curso> list = service.getListaCursos(); 
+            List<Curso> list = service.getListaCursosEnOferta(); 
             model.setListaCursos(list);             
 
             HttpSession session = request.getSession(true);
             Usuario usuario = (Usuario) session.getAttribute("usuario");
             model.setUsuario(usuario);
+            
+            boolean busqueda = false; 
+            request.setAttribute("busqueda", busqueda);
+            
+            //crear directorio
+            File directorio = new File("C:\\CursosLibres");
+            if (!directorio.exists()) {
+                directorio.mkdirs(); 
+            } 
             
 
         } catch(Exception e){
@@ -144,7 +153,6 @@ public class Controller extends HttpServlet {
     private void updateModelSearch(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model"); 
         model.setStringBusqueda(request.getParameter("busqCursos")); 
-        System.out.println(model.getStringBusqueda()); //
     }
     
     private String searchAction(HttpServletRequest request){
@@ -155,12 +163,17 @@ public class Controller extends HttpServlet {
 
         try{
             String nom = model.getStringBusqueda(); 
+            if(nom.isEmpty() || nom == null){
+                return "/presentation/VerCursos/show";  
+            }
             List<Curso> busquedaCursos =  service.getLikeCursos(nom); 
             model.setListaCursos(busquedaCursos);           
 
             HttpSession session = request.getSession(true);
             Usuario usuario = (Usuario) session.getAttribute("usuario");
             model.setUsuario(usuario);
+            boolean busqueda = true; 
+            request.setAttribute("busqueda", busqueda);
 
         } catch(Exception e){
             return "/presentation/Error.jsp";

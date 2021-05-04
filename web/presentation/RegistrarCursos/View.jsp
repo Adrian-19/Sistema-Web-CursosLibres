@@ -8,14 +8,19 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html>
     <head>
         <%@ include file="/presentation/Head.jsp" %>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registro de cursos</title>
     </head>
+    
     <body>
+        
         <%@ include file="/presentation/Header.jsp" %>
         <% Model model = (Model) request.getAttribute("model"); %>
          <% Map<String, String> errores = (Map<String, String>) request.getAttribute("errores"); %>
@@ -25,10 +30,11 @@
             <div class="text-center" class = "container" >
                 <h1>Registro de cursos </h1>
             </div>
+
         </div>
 
         <div  class="container main-content bg-dark">
-             <form method="POST" name="RegistroCursos" action="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/register"  class="container row g-3 text-white form-horizontal m-4">
+             <form method="POST" enctype="multipart/form-data" name="RegistroCursos" action="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/register"  class="container row g-3 text-white form-horizontal m-4">
 
 
               <div class="form-group col-md-6 text-center" class="form-group">

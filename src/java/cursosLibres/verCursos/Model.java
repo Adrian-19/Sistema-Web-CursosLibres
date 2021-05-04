@@ -19,6 +19,7 @@ public class Model {
     Curso currentCurso; 
     Usuario user; 
     String stringBusqueda; 
+    boolean busqueda; 
     
     public Model(){
         this.reset(); 
@@ -67,6 +68,14 @@ public class Model {
 
     public String getStringBusqueda() {
         return stringBusqueda;
+    }
+
+    public void setBusqueda(boolean busqueda) {
+        this.busqueda = busqueda;
+    }
+
+    public boolean isBusqueda() {
+        return busqueda;
     }
 
     

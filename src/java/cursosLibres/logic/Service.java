@@ -90,6 +90,10 @@ public class Service {
     public void addCurso(Curso c) throws Exception {
         cursoDao.create(c);
     }
+    
+    public List<Curso> getListaCursosEnOferta() throws SQLException {
+        return cursoDao.getCursosOfertados(); 
+    }
 
     // ------------ PROFESORES -------------
     public Profesor get(Usuario u) throws Exception {
@@ -168,5 +172,7 @@ public class Service {
     public Administrador getAdmin(String id) throws Exception{
         return adminDao.read(id);
     }
+
+
 
 }

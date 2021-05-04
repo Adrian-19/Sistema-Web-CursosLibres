@@ -103,6 +103,17 @@ public class CursoDao {
 
         return cursos; 
     }
+
+    public List<Curso> getCursosOfertados() throws SQLException {
+        List<Curso> cursos = new ArrayList<>(); 
+        String sql = "select * from cursos where estado='En oferta' "; 
+
+        PreparedStatement stm = Database.instance().prepareStatement(sql); 
+        ResultSet rs = Database.instance().executeQuery(stm); 
+        while(rs.next()){ cursos.add(from(rs)); }       
+
+        return cursos;         
+    }
     
     
 

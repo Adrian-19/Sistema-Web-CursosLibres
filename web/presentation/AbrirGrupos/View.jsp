@@ -28,6 +28,7 @@
         <!-- Main Content --> 
         <div  class="jumbotron bg-transparent text-center" >
             <h1>Abrir un nuevo grupo </h1>
+
         </div>
 
         <div class="container main-content bg-dark text-center p-4">

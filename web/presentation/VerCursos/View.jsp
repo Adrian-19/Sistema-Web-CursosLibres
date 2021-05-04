@@ -12,7 +12,7 @@
 
 
 <!DOCTYPE html>
- 
+<html>
     <head>
          <%@ include file="/presentation/Head.jsp" %>
 
@@ -20,6 +20,7 @@
         <title> Cursos </title>
     </head>
     
+    <body>
         <%@ include file="/presentation/Header.jsp" %>
         <% Model model = (Model) request.getAttribute("model"); %>
         <%List<Curso> cursos = model.getListaCursos();%>
@@ -37,7 +38,13 @@
                    <input type="text" class="form-control" placeholder="Buscar cursos" name="busqCursos"  id="busqCursos">
                    <button type="submit" class=" btn-outline-primary" >Search</button>                       
                    </form>
-                   
+                    
+                    <% if((Boolean) request.getAttribute("busqueda") == true ) { %>
+                    <form action="/Sistema-Web-CursosLibres/presentation/VerCursos/show"  method="post" class="form-inline">
+                    <button type="submit" class=" btn-outline-primary" >Mostrar cursos en oferta</button>
+                       
+                    </form>
+                    <%}%>
 
                 </div>
 
@@ -45,13 +52,13 @@
             </div>
         </div>
         
-        <br>  
         
         <!<!-- curso 1 -->
         <div class="container main-content">
             
             <div class="row">
                 <%for (Curso c: model.getListaCursos()){ %>
+                    
                     <div class="container card">
                         <div class="main-content">
                           <img src="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/image?cursoId=<%=c.getId()%>" class="card-img-top" alt="...">  
@@ -63,7 +70,7 @@
                                    <th scope="row"> <% c.getNombre(); %> </th>   
                                    <td> <%=c.getId()%> </td> 
                                    <td> <%=c.getNombre() %> </td> 
-                                   <%--revisar referencia --%>
+                                   
                                    <td>
                                     <a href="/Sistema-Web-CursosLibres/presentation/Grupos/show?cursoId=<%=c.getId()%>"> Ver grupos </a> 
                                    </td>
@@ -73,9 +80,8 @@
                                          <a href="/Sistema-Web-CursosLibres/presentation/AbrirGrupos/show?cursoId=<%=c.getId()%>"> Abrir grupos </a> 
                                          
                                         </td>
-
+                  
                                    <%}%>
-                                   
                                   </tr>                              
                               </tbody>                        
                           </table>                            
@@ -88,4 +94,5 @@
             <br>
     
         </div><!-- fin -->
-        
+     </body>    
+</html>
