@@ -127,7 +127,14 @@ public class Controller extends HttpServlet {
                 return "/presentation/login/View2.jsp";
 
             }
-
+            String estado = (String) session.getAttribute("loginDesdeMatricula");
+            if(estado == "1"){
+                String cursoId = (String) session.getAttribute("loginDesdeMatriculaCurso");
+                String grupoId = (String) session.getAttribute("loginDesdeMatriculaGrupo");
+                String URL = "/presentation/Grupos/matricular?grupoID="+grupoId+"&cursoId="+cursoId;
+                session.setAttribute("loginDesdeMatricula", "0");
+                return URL;
+            }
             return "/presentation/VerCursos/show";
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();
