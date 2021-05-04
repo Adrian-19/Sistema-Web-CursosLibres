@@ -28,7 +28,7 @@
         </div>
 
         <div  class="container main-content bg-dark">
-             <form method="post" enctype="multipart/form-data" name="RegistroCursos" action="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/register"  class="container row g-3 text-white form-horizontal m-4">
+             <form method="POST" name="RegistroCursos" action="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/register"  class="container row g-3 text-white form-horizontal m-4">
 
 
               <div class="form-group col-md-6 text-center" class="form-group">
@@ -49,13 +49,12 @@
                 <label class="form-label">Costo</label>
                 <input type="text" class="form-control" name="inputCosto" id="inputCosto" value="<%=form.get("inputCosto")[0]%>"  title="<%=title("inputCosto", errores)%>"  class="form_input <%=erroneo("inputCosto", errores)%>" >
               </div>
-
-
-                 <div class="form-group col-md-12" class="form-group">
+              
+                <div class="form-group col-md-12" class="form-group">
                   <label for="LogoFile">Logo del curso</label>
                   <input type="file" class="form-control-file" name="logoFile" id="logoFile">
                 </div>    
-                 
+              
                  <!-- Estado -->
                 <div class="form-group col-md-2 text-center" class="form-group">
                     <br>
@@ -66,10 +65,7 @@
                         <option value="En oferta">En oferta</option>
                         <option value="Deshabilitado">Deshabilitado</option>
                       </select>
-                </div>
-
-
-
+                </div>         
               <div class="form-group col-12 text-center" class="form-group">
                   <br><br>
                 <button type="submit" class="btn btn-primary">Guardar</button>

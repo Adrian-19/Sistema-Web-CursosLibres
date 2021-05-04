@@ -26,7 +26,7 @@ import javax.servlet.http.Part;
  *
  * @author ESCINF
  */
-@WebServlet(name = "ControllerRegCursos", urlPatterns = {"/presentation/RegistrarCursos/show", "/presentation/RegistrarCursos/register", "/presentation/RegistrarCursos/image"})
+@WebServlet(name = "ControllerRegCursos", urlPatterns = {"/presentation/RegistrarCursos/show", "/presentation/RegistrarCursos/register", "/presentation/RegistrarCursos/image", "/presentation/RegistrarCursos/guardarImagen"})
 @MultipartConfig(location="C:\\")
 
 public class Controller extends HttpServlet {
@@ -148,26 +148,35 @@ public class Controller extends HttpServlet {
         Map<String, String> errores = new HashMap<>();
         cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();
         
-        //validaciones aquí
-        
+        //Validación nombre
+        if(request.getParameter("nombreCurso").isEmpty()){
+            errores.put("nombreCurso", "Nombre del curso vacío"); 
+        }
+        //Validación temática
+        if(request.getParameter("inputTematica").isEmpty()){
+            errores.put("inputTematica", "Espacio vacío"); 
+        }
+        //Validación costo
+        if(request.getParameter("inputCosto").isEmpty()){
+            errores.put("inputCosto", "Espacio vacío"); 
+        }
+        //Validación estado
+        if(request.getParameter("estado").isEmpty()){
+            errores.put("estado", "Espacio vacío"); 
+        }
         return errores;
     }
 
     private void updateModelRegister(HttpServletRequest request) throws IOException, ServletException {
         Model model = (Model) request.getAttribute("model");
         
-//        
-        String nombre = request.getParameter("nombreCurso"); 
-        String tematica = request.getParameter("inputTematica"); 
-//        
-
         model.getCurrentCurso().setNombre(request.getParameter("nombreCurso"));
         model.getCurrentCurso().setTematica(request.getParameter("inputTematica")); 
         model.getCurrentCurso().setCosto(Integer.parseInt(request.getParameter("inputCosto")));
         model.getCurrentCurso().setEstado(request.getParameter("estado"));
 
-//        final Part image; 
-//        image = request.getPart("logoFile"); 
+        final Part image; 
+        image = request.getPart("logoFile"); 
         
         
     }
@@ -190,9 +199,7 @@ public class Controller extends HttpServlet {
             
             service.addCurso(c); 
 
-//            c.setId(service.getCursoNom("inputNombre").getId()); //recpera id de la BD
-            
- // --------------------------            
+           
             final Part image; 
             image = request.getPart("logoFile"); 
             image.write(service.getCursoNom(c.getNombre()).getId()); //nombre del logo = id de la BD

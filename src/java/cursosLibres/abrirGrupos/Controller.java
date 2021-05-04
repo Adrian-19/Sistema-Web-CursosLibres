@@ -131,10 +131,10 @@ public class Controller extends HttpServlet {
                 return this.registerAction(request);  
             } else {
                 request.setAttribute("errores", errores); 
-                return "/presentation/AbrirGrupos/show"; 
+                return "/presentation/AbrirGrupos/View.jsp"; 
             }
         } catch (Exception e) {
-            return "/presentation/Error.jsp"; 
+            return "/presentation/AbrirGrupos/show"; 
         }
  
     }
@@ -163,20 +163,11 @@ public class Controller extends HttpServlet {
         if (request.getParameter("inputHorarioFin").isEmpty()) {
             errores.put("errorHora", "Dato requerido");  
         }
-    
-//            //** validar que la hora de finalización no sea menor a la hora de inicio
-//        int horaInic = Integer.parseInt(request.getParameter("inputHorarioInic")) ; 
-//        int horaFin = Integer.parseInt(request.getParameter("inputHorarioFin")) ; 
-//        if(horaFin <= horaInic){
-//            errores.put("errorHora", "La hora del curso no está correcta.");         
-//        }
-//        
-//        //Obtener cursoId de la sesión o del request?? °°°°°
-//
-//        //Validación para el id del curso 
-//        if(service.getCurso((String) session.getAttribute("cursoId")) == null){
-//            errores.put(request.getParameter("cursoId"), "El curso no existe"); // revisar, este se pasa por método get
-//        }
+
+        //Validación para el id del curso 
+        if(service.getCurso((String) session.getAttribute("cursoId")) == null){
+            errores.put(request.getParameter("cursoId"), "El curso no existe"); // revisar, este se pasa por método get
+        }
 
         return errores; 
          

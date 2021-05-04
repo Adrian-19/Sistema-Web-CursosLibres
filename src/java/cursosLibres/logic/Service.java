@@ -167,14 +167,11 @@ public class Service {
     public List<Matricula> findByEstudiante(Estudiante e){
         return matriculaDao.findByEstudiante(e);
     }
-<<<<<<< HEAD
 
-
-=======
     
     // ---------- ADMINISTRADORES -------------
     public Administrador getAdmin(String id) throws Exception{
         return adminDao.read(id);
     }
->>>>>>> f369bcd1da4aa0a0cb37cf973189da4df93ff418
+
 }
