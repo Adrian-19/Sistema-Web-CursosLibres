@@ -24,15 +24,13 @@ import javax.servlet.http.Part;
 
 /**
  *
- * @author ESCINF
+ * @author DS
  */
 
 @WebServlet(name = "ControllerRegCursos", urlPatterns = {"/presentation/RegistrarCursos/show", "/presentation/RegistrarCursos/register", "/presentation/RegistrarCursos/image"})
-<<<<<<< HEAD
+
 @MultipartConfig(location= "C:\\CursosLibres")
-=======
-@MultipartConfig(location="C:/AAA/images")
->>>>>>> b8c0d84f2e445db9b3dad47bc6a424dfa4f02855
+
 
 
 public class Controller extends HttpServlet {
@@ -222,20 +220,16 @@ public class Controller extends HttpServlet {
             String codigo = request.getParameter("cursoId");
             
 //            //crear el directorio
-<<<<<<< HEAD
+
             File directorio = new File("C:\\CursosLibres");
-=======
-            File directorio = new File("C:/AAA/images");
->>>>>>> b8c0d84f2e445db9b3dad47bc6a424dfa4f02855
+
             if (!directorio.exists()) {
                 directorio.mkdirs(); 
             } 
 //            // then ... crear el path 
-<<<<<<< HEAD
+
             Path path = FileSystems.getDefault().getPath("C:\\CursosLibres", codigo);
-=======
-            Path path = FileSystems.getDefault().getPath("C:/AAA/images", codigo);
->>>>>>> b8c0d84f2e445db9b3dad47bc6a424dfa4f02855
+
             try (OutputStream out = response.getOutputStream()) {
                 Files.copy(path, out);
                 out.flush();
