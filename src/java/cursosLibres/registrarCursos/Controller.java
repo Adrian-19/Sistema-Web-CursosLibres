@@ -26,13 +26,10 @@ import javax.servlet.http.Part;
  *
  * @author ESCINF
  */
-<<<<<<< HEAD
-@WebServlet(name = "ControllerRegCursos", urlPatterns = {"/presentation/RegistrarCursos/show", "/presentation/RegistrarCursos/register", "/presentation/RegistrarCursos/image", "/presentation/RegistrarCursos/guardarImagen"})
-@MultipartConfig(location="C:\\")
-=======
+
 @WebServlet(name = "ControllerRegCursos", urlPatterns = {"/presentation/RegistrarCursos/show", "/presentation/RegistrarCursos/register", "/presentation/RegistrarCursos/image"})
 @MultipartConfig(location="C:/Users/emanuelle/Desktop/ima")
->>>>>>> a366a2a9a9d4a8f96356fe6f51d024834b0e48fa
+
 
 public class Controller extends HttpServlet {
 
@@ -174,10 +171,7 @@ public class Controller extends HttpServlet {
 
     private void updateModelRegister(HttpServletRequest request) throws IOException, ServletException {
         Model model = (Model) request.getAttribute("model");
-<<<<<<< HEAD
-        
-=======
->>>>>>> a366a2a9a9d4a8f96356fe6f51d024834b0e48fa
+
         model.getCurrentCurso().setNombre(request.getParameter("nombreCurso"));
         model.getCurrentCurso().setTematica(request.getParameter("inputTematica")); 
         model.getCurrentCurso().setCosto(Integer.parseInt(request.getParameter("inputCosto")));
@@ -206,12 +200,7 @@ public class Controller extends HttpServlet {
             c.setEstado(estado);
             
             service.addCurso(c); 
-<<<<<<< HEAD
 
-           
-=======
-          
->>>>>>> a366a2a9a9d4a8f96356fe6f51d024834b0e48fa
             final Part image; 
             image = request.getPart("logoFile"); 
             image.write(service.getCursoNom(c.getNombre()).getId()); //nombre del logo = id de la BD
