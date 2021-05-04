@@ -51,7 +51,6 @@
                       <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/show">Registrar Cursos</a></li>
                       <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/VerCursos/show">Ver cursos</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                   </li>
                 <% } %>
@@ -84,21 +83,6 @@
                   </li>  
                   <%}%>
 
-                  <!-- Dropdown adicional... Se utilizara para algo en especifico? -->
-                  <!--
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Otras opciones
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                     <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/teacherRegistration/View.jsp">Registrar Profesor</a></li> 
-                     <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/View.jsp">Registrar Cursos</a></li>
-
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="/Sistema-Web-CursosLibres/presentation/Grupos/View.jsp">Ver Grupos</a></li>
-                    </ul>
-                  </li>
-                -->
                 </ul>
               </div>
             </div>

@@ -7,6 +7,7 @@ package cursosLibres.EstudiantesDeGrupo;
 
 import cursosLibres.logic.Estudiante;
 import cursosLibres.logic.Matricula;
+import cursosLibres.logic.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,7 +65,10 @@ public class Controller extends HttpServlet {
             model.setListaMatriculas(matriculas);
             List<Estudiante> estudiantes = new ArrayList<>();
             for(Matricula m : matriculas){
-                estudiantes.add(service.getEstudiante(m.getIdEstudiante()));
+                Estudiante e = service.getEstudiante(m.getIdEstudiante());
+                Usuario u = service.getUsuario(Integer.valueOf(e.getId()));
+                e.setCorreo(u.getCorreo());
+                estudiantes.add(e);
             }
             model.setEstudiantes(estudiantes);
             return "/presentation/EstudiantesDeGrupo/View.jsp";
@@ -114,7 +118,10 @@ public class Controller extends HttpServlet {
             model.setListaMatriculas(matriculas);
             List<Estudiante> estudiantes = new ArrayList<>();
             for(Matricula m : matriculas){
-                estudiantes.add(service.getEstudiante(m.getIdEstudiante()));
+                Estudiante e = service.getEstudiante(m.getIdEstudiante());
+                Usuario u = service.getUsuario(Integer.valueOf(e.getId()));
+                e.setCorreo(u.getCorreo());
+                estudiantes.add(e);
             }
             model.setEstudiantes(estudiantes);
             for(Matricula m : model.getListaMatriculas()){
