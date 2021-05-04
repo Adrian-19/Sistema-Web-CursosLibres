@@ -46,6 +46,9 @@ public class Controller extends HttpServlet {
             HttpSession session = request.getSession(true);
             Usuario usuario = (Usuario) session.getAttribute("usuario");
             if(usuario==null){
+                session.setAttribute("loginDesdeMatricula", "1");
+                session.setAttribute("loginDesdeMatriculaCurso", request.getParameter("cursoId"));
+                session.setAttribute("loginDesdeMatriculaGrupo", request.getParameter("grupoID"));
                 return "/presentation/login/show";
             }
             cursosLibres.logic.Service service = cursosLibres.logic.Service.instance();

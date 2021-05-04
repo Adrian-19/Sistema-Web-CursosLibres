@@ -28,7 +28,7 @@
         </div>
 
         <div  class="container main-content bg-dark">
-             <form method="POST" name="RegistroCursos" action="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/register"  class="container row g-3 text-white form-horizontal m-4">
+             <form method="POST" enctype="multipart/form-data" name="RegistroCursos" action="/Sistema-Web-CursosLibres/presentation/RegistrarCursos/register"  class="container row g-3 text-white form-horizontal m-4">
 
 
               <div class="form-group col-md-6 text-center" class="form-group">

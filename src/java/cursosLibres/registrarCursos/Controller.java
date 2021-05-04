@@ -28,7 +28,7 @@ import javax.servlet.http.Part;
  */
 
 @WebServlet(name = "ControllerRegCursos", urlPatterns = {"/presentation/RegistrarCursos/show", "/presentation/RegistrarCursos/register", "/presentation/RegistrarCursos/image"})
-@MultipartConfig(location="C:/Users/emanuelle/Desktop/ima")
+@MultipartConfig(location="C:/AAA/images")
 
 
 public class Controller extends HttpServlet {
@@ -176,10 +176,6 @@ public class Controller extends HttpServlet {
         model.getCurrentCurso().setTematica(request.getParameter("inputTematica")); 
         model.getCurrentCurso().setCosto(Integer.parseInt(request.getParameter("inputCosto")));
         model.getCurrentCurso().setEstado(request.getParameter("estado"));
-
-        final Part image; 
-        image = request.getPart("logoFile"); 
-        
         
     }
 
@@ -221,12 +217,12 @@ public class Controller extends HttpServlet {
             String codigo = request.getParameter("cursoId");
             
 //            //crear el directorio
-            File directorio = new File("C:/Users/emanuelle/Desktop/ima");
+            File directorio = new File("C:/AAA/images");
             if (!directorio.exists()) {
                 directorio.mkdirs(); 
             } 
 //            // then ... crear el path 
-            Path path = FileSystems.getDefault().getPath("C:/Users/emanuelle/Desktop/ima", codigo);
+            Path path = FileSystems.getDefault().getPath("C:/AAA/images", codigo);
             try (OutputStream out = response.getOutputStream()) {
                 Files.copy(path, out);
                 out.flush();
