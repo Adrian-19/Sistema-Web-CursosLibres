@@ -144,10 +144,6 @@ public class Controller extends HttpServlet {
         
         estudiante.setCorreo(usuario.getCorreo());
         
-        
-        //Model model = (Model) request.getAttribute("model");
-        
-        
 
         try {
             List<Matricula> historial =(List<Matricula>) session.getAttribute("matriculas");
@@ -234,11 +230,8 @@ public class Controller extends HttpServlet {
             titulo = new Paragraph("  ");
             document.add(titulo);
 
-            // Este codigo genera una tabla de 3 columnas
             PdfPTable table = new PdfPTable(3);
 
-            // addCell() agrega una celda a la tabla, el cambio de fila
-            // ocurre automaticamente al llenar la fila
             table.addCell("ID");
             table.addCell("Nombre");
             table.addCell("Nota");
@@ -248,7 +241,7 @@ public class Controller extends HttpServlet {
                 table.addCell(m.getNombreCurso());
                 table.addCell(String.valueOf(m.getNota()));
             }
-            // Agregamos la tabla al documento            
+                      
             document.add(table);
 
             document.close();

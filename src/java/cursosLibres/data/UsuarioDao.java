@@ -5,20 +5,18 @@
  */
 package cursosLibres.data;
 
-import cursosLibres.logic.Estudiante;
 import cursosLibres.logic.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 /**
  *
  * @author adria
  */
 public class UsuarioDao {
-    
-    // Talvez que al insertar un usuario en la tabla devuelve el id del usuario (auto incremental)
-    // Se tendra que modificar las variables de la clase Usuario para que calce con la tabla de Usuario
-    public void create(Usuario u) throws Exception{
+
+    public void create(Usuario u) throws Exception {
         String sql = "insert into logins(id ,clave, tipo, correo)"
                 + "values(?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sql);
@@ -27,11 +25,12 @@ public class UsuarioDao {
         stm.setInt(3, u.getTipo());
         stm.setString(4, "hola@gmail");
         int count = Database.instance().executeUpdate(stm);
-        if (count==0){
+        if (count == 0) {
             throw new Exception("Usuario ya existe");
         }
     }
-    public void create(Usuario u, String correo) throws Exception{
+
+    public void create(Usuario u, String correo) throws Exception {
         String sql = "insert into logins(id ,clave, tipo, correo)"
                 + "values(?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sql);
@@ -40,47 +39,24 @@ public class UsuarioDao {
         stm.setInt(3, u.getTipo());
         stm.setString(4, correo);
         int count = Database.instance().executeUpdate(stm);
-        if (count==0){
+        if (count == 0) {
             throw new Exception("Usuario ya existe");
         }
     }
-    
-    
-    
-    
-    
-//    public int numero_cuenta(String correo)throws Exception{
-//            String sql = "select * from logins where correo=?";
-//        PreparedStatement stm = Database.instance().prepareStatement(sql);
-//        stm.setString(1,correo );
-//        ResultSet rs =  Database.instance().executeQuery(stm);  
-//        int numero;
-//        if (rs.next()) {
-//            numero = rs.getInt("id");
-//            return numero;
-//        }
-//        else{
-//            throw new Exception ("Cuenta no Existe");
-//        }
-//    }
-    
 
-    
-    public Usuario read(int id) throws Exception{
-        String sql="select * from Logins where id=?";
+    public Usuario read(int id) throws Exception {
+        String sql = "select * from Logins where id=?";
         PreparedStatement stm = Database.instance().prepareStatement(sql);
         stm.setInt(1, id);
-        ResultSet rs =  Database.instance().executeQuery(stm);           
+        ResultSet rs = Database.instance().executeQuery(stm);
         if (rs.next()) {
             return from(rs);
-        }
-        else{
-            throw new Exception ("Usuario no Existe");
+        } else {
+            throw new Exception("Usuario no Existe");
         }
     }
-    
-    
-    public Usuario from (ResultSet rs){
+
+    public Usuario from(ResultSet rs) {
         try {
             Usuario r = new Usuario();
             r.setCedula(String.valueOf(rs.getInt("id")));
@@ -92,7 +68,7 @@ public class UsuarioDao {
             return null;
         }
     }
-    
-    public  void close(){
+
+    public void close() {
     }
 }

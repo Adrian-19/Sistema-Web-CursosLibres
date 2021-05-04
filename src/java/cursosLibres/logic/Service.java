@@ -51,9 +51,7 @@ public class Service {
     public void add(Usuario u, String c) throws Exception {
         usuarioDao.create(u, c);
     }
-//    public int numID(String correo) throws Exception{
-//    return usuarioDao.numero_cuenta(correo);
-//    }
+
 
     public Usuario getUsuario(int id) throws Exception {
         return usuarioDao.read(id);
@@ -123,10 +121,7 @@ public class Service {
         return estudianteDao.read(id);
     }
 
-//    public int numeroCuentaEst(String num) throws Exception{
-//      return estudianteDao.numero_cuenta(num);
-//    
-//    }
+
     // ------------ GRUPOS -------------
     public HashMap search(Profesor p) {
         return grupoDao.findByProfesor(p);
